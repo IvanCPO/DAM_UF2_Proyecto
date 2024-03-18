@@ -1,3 +1,0 @@
-# Build
-
-Entrega del ejecutable
