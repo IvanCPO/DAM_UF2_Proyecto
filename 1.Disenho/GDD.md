@@ -6,7 +6,8 @@
 - Concepto: Es un juego basado en pokemon, que tiene como objetivo acabar la universidad de Santiago de compostela
 - Género: RPG ( role-playing game )
 - Público: Mayores de 16 años
-- Plataforma: PC
+- Plataforma: Windows
+- URL GitHub: https://github.com/IvanCPO/DAM_UF2_Proyecto
 
 
 ## GAMEPLAY
