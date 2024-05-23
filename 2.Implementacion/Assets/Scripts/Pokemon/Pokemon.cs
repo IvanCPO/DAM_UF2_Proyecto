@@ -10,6 +10,15 @@ public class Pokemon
     public int HP { get; set;}
     public List<Move> Moves { get; set;}
 
+    //Introducir proximamente IVs...
+    
+    // private int IVhp;
+    // private int IVattack;
+    // private int IVdefense;
+    // private int IVSpA;
+    // private int IVSpD;
+    // private int IVspeed;
+
     public Pokemon (PokemonBase pokemon, int level){
         Base=pokemon;
         this.Level = level;
@@ -28,25 +37,27 @@ public class Pokemon
             }
             
         }
+        
+
     }
 
     public int Attack {
-        get{ return Mathf.FloorToInt((Base.Attack * Level) / 100f)+5; }
+        get{ return Mathf.FloorToInt(Base.Attack * (Level/100f) )+5; }
     }
     public int SpAttack {
-        get{ return Mathf.FloorToInt((Base.SpDefense * Level) / 100f)+5; }
+        get{ return Mathf.FloorToInt(Base.SpDefense * (Level/100f) )+5; }
     }
     public int Defense {
-        get{ return Mathf.FloorToInt((Base.Defense * Level) / 100f)+5; }
+        get{ return Mathf.FloorToInt(Base.Defense * (Level/100f) )+5; }
     }
     public int SpDefense {
-        get{ return Mathf.FloorToInt((Base.SpDefense * Level) / 100f)+5; }
+        get{ return Mathf.FloorToInt(Base.SpDefense * (Level/100f) )+5; }
     }
     public int Speed {
-        get{ return Mathf.FloorToInt((Base.Speed * Level) / 100f)+5; }
+        get{ return Mathf.FloorToInt(Base.Speed * (Level/100f) )+5; }
     }
     public int MaxHP {
-        get{ return Mathf.FloorToInt((Base.MaxHP * Level) / 100f)+10; }
+        get{ return Mathf.FloorToInt(Base.MaxHP * (Level/100f) )+level+10; }
     }
 
     public void Recuperate(){

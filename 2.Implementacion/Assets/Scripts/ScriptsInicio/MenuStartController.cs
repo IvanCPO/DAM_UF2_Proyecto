@@ -9,7 +9,6 @@ public class MenuStartController : MonoBehaviour
 {
     [SerializeField] AudioClip song;
     [SerializeField] GameObject firstPanel;
-    [SerializeField] GameObject secondPanel;
     private AudioSource reproductor;
 
     public void Start(){
@@ -17,6 +16,17 @@ public class MenuStartController : MonoBehaviour
     }
 
     public void StartGame()
+    {
+        if (SaveGameController.generateSaveController().ExistGame())
+        {
+            AudioSource audio = gameObject.GetComponent<AudioSource>();
+            audio.Stop();
+            ReproduceSong();
+            Invoke("StartSceneGame",1f);
+        }
+    }
+
+    public void NewGame()
     {
         AudioSource audio = gameObject.GetComponent<AudioSource>();
         audio.Stop();
@@ -30,33 +40,16 @@ public class MenuStartController : MonoBehaviour
         Invoke("QuitGame",1f);
     }
 
-    public void OptionsGame()
+    private void StartSceneGame()
     {
-        ReproduceSong();
-        Invoke("PutOptions",1f);
-    }
-
-    public void QuitOptions()
-    {
-        ReproduceSong();
-        Invoke("ReturnPrincipal",1f);
+        SceneManager.LoadScene(2);
     }
 
     private void InitializeSceneGame()
     {
+        StatusPlayer.getInstance().clearGame();
         SceneManager.LoadScene(1);
-    }
-
-    private void PutOptions()
-    {
-        firstPanel.SetActive(false);
-        secondPanel.SetActive(true);
-    }
-
-    private void ReturnPrincipal()
-    {
-        firstPanel.SetActive(true);
-        secondPanel.SetActive(false);
+        
     }
 
     private void QuitGame()

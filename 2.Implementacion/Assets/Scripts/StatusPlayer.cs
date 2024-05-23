@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 
+[System.Serializable]
 public class StatusPlayer
 {
     private static StatusPlayer instance;
@@ -13,16 +14,16 @@ public class StatusPlayer
     private String name;
     // TODO Para implementrae a futuro
     //private GameObject genero;
-    private String[] medallas;
+    private bool[] medallas;
     private String place;
     private Vector3 ubicationWorld;
 
     private StatusPlayer(){
         myTeam = new List<Pokemon>();
-        name = "Iván";
+        name = "";
         myPokemons = new List<Pokemon>();
-        medallas = new string[8];
-        place = "Casa Abuela";
+        medallas = new bool[3]{false,false,false};
+        place = "";
         ubicationWorld = new Vector3(5.5f,-34.7f,0f);
         Rival = null;
     }
@@ -33,6 +34,9 @@ public class StatusPlayer
             instance = new StatusPlayer();
         }
         return instance;
+    }
+    public void clearGame(){
+        instance = new StatusPlayer();
     }
 
     public string GetName(){
