@@ -30,6 +30,6 @@ public class OptionMoveController : MonoBehaviour
     }
 
     public void RemoveAPP(){
-        move.PP--;
+        move.UseMove();
     }
 }
