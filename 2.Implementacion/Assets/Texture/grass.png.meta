@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: fb81cd3392807b74ca8481c5aa64b6d8
+guid: 399897410e4d36f4894bbdfb6134637b
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 12
+  spritePixelsToUnits: 25
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -110,34 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BigTree
+      name: TallGrass
       rect:
         serializedVersion: 2
-        x: 0
-        y: 106
-        width: 198
-        height: 262
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5462b277c7bff9f4796eba3b9c078b6e
-      internalID: -579862209
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: abeto
-      rect:
-        serializedVersion: 2
-        x: 176
-        y: 384
+        x: 64
+        y: 96
         width: 32
-        height: 58
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -145,8 +124,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 36d8d044b823bb24089e30ee6d2ade23
-      internalID: 396654778
+      spriteID: f90b620f2ef823d489d92509cb9c8442
+      internalID: -1071313571
       vertices: []
       indices: 
       edges: []
@@ -162,8 +141,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      BigTree: -579862209
-      abeto: 396654778
+      TallGrass: -1071313571
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

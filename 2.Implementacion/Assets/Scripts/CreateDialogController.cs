@@ -85,7 +85,7 @@ public class CreateDialogController : MonoBehaviour
 
     private IEnumerator InsertTextDialog(String info){
         textDialog.text="";
-        Debug.Log(info);
+        // Debug.Log(info);
         foreach (char letter in info.ToCharArray())
         {
             textDialog.text+=letter;

@@ -718,6 +718,7 @@ GameObject:
   - component: {fileID: 4978913176472116109}
   - component: {fileID: 6951252135001844048}
   - component: {fileID: 5355992404051888578}
+  - component: {fileID: 4895725134148005010}
   m_Layer: 5
   m_Name: Pokemon
   m_TagString: Untagged
@@ -788,6 +789,23 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &4895725134148005010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6337860139356330801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b4b6d573137e44286160b3b4832b97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  namePokemon: {fileID: 959475562813720617}
+  levelPokemon: {fileID: 1559403375834213274}
+  hpCount: {fileID: 384494029938824083}
+  hpBar: {fileID: 3047378217945969976}
+  expBar: {fileID: 0}
 --- !u!1 &6896651821860728036
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,6 +7,7 @@ public class OptionsController : MonoBehaviour
     [SerializeField] AudioClip timbre;
     [SerializeField] GameObject initial;
     [SerializeField] GameObject fightOptions;
+    [SerializeField] TeamController teamController;
     private Pokemon pokemon;
     private AudioSource reproductor;
     private BattleSystem system;
@@ -26,6 +27,17 @@ public class OptionsController : MonoBehaviour
         Invoke("ChangeDialog", 0.8f);
         ReproducirTimbre();
     }
+
+    public void OpenTeam()
+    {
+        Invoke("OpenList", 0.8f);
+        ReproducirTimbre();
+    }
+
+    private void OpenList(){
+        teamController.OpenList();
+    }
+
 
     public void ChangeDialog()
     {

@@ -5,13 +5,11 @@ using UnityEngine;
 public class PokemonBase : ScriptableObject
 {
     private int pokedex_id;
-    private string name;
+    private string namePokemon;
     private string description;
     private int weight;
     private Sprite frontSprite;
     private Sprite backSprite;
-
-    
     private PokemonType type1;
     private PokemonType type2;
 
@@ -21,11 +19,14 @@ public class PokemonBase : ScriptableObject
     private int spAttack;
     private int spDefense;
     private int speed;
+
+    private int levelPokemon;
+    private PokemonBase evolution;
     private List<LearnableMove> learnableMoves;
 
-    public PokemonBase(int pokedex_id, string name, string description, int weight, PokemonType type1, PokemonType type2, int maxHP, int attack, int defense, int spAttack, int spDefense, int speed, byte[] frontSprite, byte[] backSprite){
+    public PokemonBase(int pokedex_id, string namePokemon, string description, int weight, PokemonType type1, PokemonType type2, int maxHP, int attack, int defense, int spAttack, int spDefense, int speed, byte[] frontSprite, byte[] backSprite, int levelPokemon, PokemonBase evolution){
         this.pokedex_id = pokedex_id;
-        this.name = name;
+        this.namePokemon = namePokemon;
         this.description = description;
         this.weight = weight;
         this.type1 = type1;
@@ -38,6 +39,8 @@ public class PokemonBase : ScriptableObject
         this.speed = speed;
         this.frontSprite = ConvertSprite(frontSprite);
         this.backSprite = ConvertSprite(backSprite);
+        this.levelPokemon = levelPokemon;
+        this.evolution = evolution;
     }
 
     private Sprite ConvertSprite(byte[] picture){
@@ -50,10 +53,13 @@ public class PokemonBase : ScriptableObject
         get{ return pokedex_id;}
     }
     public string Name {
-        get{ return name;}
+        get{ return namePokemon;}
     }
     public string Description {
-        get{ return name;}
+        get{ return description;}
+    }
+    public int Weight {
+        get{ return weight;}
     }
     public Sprite FrontSprite {
         get{ return frontSprite;}

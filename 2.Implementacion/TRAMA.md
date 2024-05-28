@@ -57,3 +57,11 @@ Objetivos:
 # IMPORTANTE
 ![alt text](<calculo Stats.png>)
 
+
+Método para obtener datos de la BBDD
+```cs
+connection = DDBBConector.GenerateConnection().GetConnection();
+        String query = "SELECT NAME FROM POKEMON WHERE POKEDEX_ID = 1";
+        String name = connection.CreateCommand(query).ExecuteScalar<String>();
+        Debug.Log("The pokemon that you search is "+name);
+```
