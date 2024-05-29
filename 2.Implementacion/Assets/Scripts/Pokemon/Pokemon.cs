@@ -32,19 +32,23 @@ public class Pokemon
         this.Exp = 0;
 
         // Spawn pokemon
-        foreach (var move in Base.LearnableMoves)
+        if (Base.LearnableMoves!=null)
         {
-
-            if (move.Level <= level)
+            foreach (var move in Base.LearnableMoves)
             {
-                if (Moves.Count==4)
-                {
-                    LearnerMove(move.Base);
-                }else
-                    Moves.Add(new Move(move.Base));
-            }
 
+                if (move.Level <= level)
+                {
+                    if (Moves.Count==4)
+                    {
+                        LearnerMove(move.Base);
+                    }else
+                        Moves.Add(new Move(move.Base));
+                }
+
+            }
         }
+        
 
         IVhp = GenerateIV();
         IVattack = GenerateIV();

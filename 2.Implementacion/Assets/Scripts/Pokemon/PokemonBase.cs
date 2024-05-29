@@ -26,8 +26,6 @@ public class PokemonBase : ScriptableObject
     private List<LearnableMove> learnableMoves;
 
     public static PokemonBase GetPokemonBase(int pokedex_id){
-        PokemonBase pokemon = null;
-
         var connection = DDBBConector.GenerateConnection().GetConnection();
         
         string query = "SELECT NAME FROM POKEMON WHERE POKEDEX_ID = "+pokedex_id;
@@ -40,8 +38,16 @@ public class PokemonBase : ScriptableObject
         var type = connection.CreateCommand(query).ExecuteScalar<int>();
         PokemonType type1 = PokemonTypeEnum.GetPokemonType(type);
         query = "SELECT SECOND_TYPE_ID FROM POKEMON WHERE POKEDEX_ID = "+pokedex_id;
-        type = connection.CreateCommand(query).ExecuteScalar<int>();
-        PokemonType type2 = PokemonTypeEnum.GetPokemonType(type);
+        int secondType;
+        try
+        {
+            secondType = connection.CreateCommand(query).ExecuteScalar<int>();
+        }
+        catch (System.Exception)
+        {
+            secondType = 0;
+        }
+        PokemonType type2 = PokemonTypeEnum.GetPokemonType(secondType);
         query = "SELECT HP FROM POKEMON WHERE POKEDEX_ID = "+pokedex_id;
         var hp = connection.CreateCommand(query).ExecuteScalar<int>();
         query = "SELECT ATTACK FROM POKEMON WHERE POKEDEX_ID = "+pokedex_id;
@@ -59,14 +65,25 @@ public class PokemonBase : ScriptableObject
         Debug.Log("The value of pokemon sprite: "+sprite_Front);
         query = "SELECT SPRITE_BACK FROM POKEMON WHERE POKEDEX_ID = "+pokedex_id;
         var sprite_Back = connection.CreateCommand(query).ExecuteScalar<byte[]>();
-        query = "SELECT LEVEL_EVOLUTION FROM POKEMON WHERE POKEDEX_ID = "+pokedex_id;
-        var levelEvolution= connection.CreateCommand(query).ExecuteScalar<int>();
-        query = "SELECT EVOLUTION_ID FROM POKEMON WHERE POKEDEX_ID = "+pokedex_id;
-        var evolutionId= connection.CreateCommand(query).ExecuteScalar<int>();
 
-        pokemon = new PokemonBase(pokedex_id,name,description,weight,type1,type2,hp,attack,defense,spAttack,spDefense,speed,sprite_Front,sprite_Back,levelEvolution,evolutionId);
-        
-        // Debug.Log("The value of this pokemon is: "+pokemon.Name);
+        PokemonBase pokemon;
+        // If is the last form/evolution and don´t have more info
+        try
+        {
+            query = "SELECT LEVEL_EVOLUTION FROM POKEMON WHERE POKEDEX_ID = "+pokedex_id;
+            var levelEvolution= connection.CreateCommand(query).ExecuteScalar<int>();
+            query = "SELECT EVOLUTION_ID FROM POKEMON WHERE POKEDEX_ID = "+pokedex_id;
+            var evolutionId= connection.CreateCommand(query).ExecuteScalar<int>();
+
+            pokemon = new PokemonBase(pokedex_id,name,description,weight,type1,type2,hp,attack,defense,spAttack,spDefense,speed,sprite_Front,sprite_Back,levelEvolution,evolutionId);
+            
+            // Debug.Log("The value of this pokemon is: "+pokemon.Name);
+        }
+        catch (System.Exception)
+        {
+            pokemon = new PokemonBase(pokedex_id,name,description,weight,type1,type2,hp,attack,defense,spAttack,spDefense,speed,sprite_Front,sprite_Back);
+            
+        }
         return pokemon;
     }
     public PokemonBase(int pokedex_id, string namePokemon, string description, int weight, PokemonType type1, PokemonType type2, int maxHP, int attack, int defense, int spAttack, int spDefense, int speed, byte[] frontSprite, byte[] backSprite, int levelPokemon, int evolutionId){
@@ -87,7 +104,23 @@ public class PokemonBase : ScriptableObject
         this.levelPokemon = levelPokemon;
         this.evolutionId = evolutionId;
     }
-
+    public PokemonBase(int pokedex_id, string namePokemon, string description, int weight, PokemonType type1, PokemonType type2, int maxHP, int attack, int defense, int spAttack, int spDefense, int speed, byte[] frontSprite, byte[] backSprite){
+        this.pokedex_id = pokedex_id;
+        this.namePokemon = namePokemon;
+        this.description = description;
+        this.weight = weight;
+        this.type1 = type1;
+        this.type2 = type2;
+        this.maxHP = maxHP;
+        this.attack = attack;
+        this.defense = defense;
+        this.spAttack = spAttack;
+        this.spDefense = spDefense;
+        this.speed = speed;
+        this.frontSprite = ConvertSprite(frontSprite);
+        this.backSprite = ConvertSprite(backSprite);
+    }
+    
     private Sprite ConvertSprite(byte[] picture){
         var tex = new Texture2D(1,1);
         tex.LoadImage(picture);

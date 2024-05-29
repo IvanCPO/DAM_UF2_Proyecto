@@ -56,12 +56,13 @@ class PokemonTypeEnum{
             case 18:
             type=PokemonType.Fairy;
             break;
-            default: type = PokemonType.Normal; break;
+            default: type = PokemonType.None; break;
         }
         return type;
     }
 }
 public enum PokemonType{
+    None,
     Normal,
     Fire,
     Water,
