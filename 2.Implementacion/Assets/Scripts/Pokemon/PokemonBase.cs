@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,10 +22,54 @@ public class PokemonBase : ScriptableObject
     private int speed;
 
     private int levelPokemon;
-    private PokemonBase evolution;
+    private int evolutionId;
     private List<LearnableMove> learnableMoves;
 
-    public PokemonBase(int pokedex_id, string namePokemon, string description, int weight, PokemonType type1, PokemonType type2, int maxHP, int attack, int defense, int spAttack, int spDefense, int speed, byte[] frontSprite, byte[] backSprite, int levelPokemon, PokemonBase evolution){
+    public static PokemonBase GetPokemonBase(int pokedex_id){
+        PokemonBase pokemon = null;
+
+        var connection = DDBBConector.GenerateConnection().GetConnection();
+        
+        string query = "SELECT NAME FROM POKEMON WHERE POKEDEX_ID = "+pokedex_id;
+        var name = connection.CreateCommand(query).ExecuteScalar<String>();
+        query = "SELECT WEIGHT FROM POKEMON WHERE POKEDEX_ID = "+pokedex_id;
+        var weight = connection.CreateCommand(query).ExecuteScalar<int>();
+        query = "SELECT DESCRIPTION FROM POKEMON WHERE POKEDEX_ID = "+pokedex_id;
+        var description = connection.CreateCommand(query).ExecuteScalar<String>();
+        query = "SELECT TYPE_ID FROM POKEMON WHERE POKEDEX_ID = "+pokedex_id;
+        var type = connection.CreateCommand(query).ExecuteScalar<int>();
+        PokemonType type1 = PokemonTypeEnum.GetPokemonType(type);
+        query = "SELECT SECOND_TYPE_ID FROM POKEMON WHERE POKEDEX_ID = "+pokedex_id;
+        type = connection.CreateCommand(query).ExecuteScalar<int>();
+        PokemonType type2 = PokemonTypeEnum.GetPokemonType(type);
+        query = "SELECT HP FROM POKEMON WHERE POKEDEX_ID = "+pokedex_id;
+        var hp = connection.CreateCommand(query).ExecuteScalar<int>();
+        query = "SELECT ATTACK FROM POKEMON WHERE POKEDEX_ID = "+pokedex_id;
+        var attack = connection.CreateCommand(query).ExecuteScalar<int>();
+        query = "SELECT DEFENSE FROM POKEMON WHERE POKEDEX_ID = "+pokedex_id;
+        var defense = connection.CreateCommand(query).ExecuteScalar<int>();
+        query = "SELECT SP_ATTACK FROM POKEMON WHERE POKEDEX_ID = "+pokedex_id;
+        var spAttack = connection.CreateCommand(query).ExecuteScalar<int>();
+        query = "SELECT SP_DEFENSE FROM POKEMON WHERE POKEDEX_ID = "+pokedex_id;
+        var spDefense = connection.CreateCommand(query).ExecuteScalar<int>();
+        query = "SELECT SPEED FROM POKEMON WHERE POKEDEX_ID = "+pokedex_id;
+        var speed= connection.CreateCommand(query).ExecuteScalar<int>();
+        query = "SELECT SPRITE_FRONT FROM POKEMON WHERE POKEDEX_ID = "+pokedex_id;
+        var sprite_Front = connection.CreateCommand(query).ExecuteScalar<byte[]>();
+        Debug.Log("The value of pokemon sprite: "+sprite_Front);
+        query = "SELECT SPRITE_BACK FROM POKEMON WHERE POKEDEX_ID = "+pokedex_id;
+        var sprite_Back = connection.CreateCommand(query).ExecuteScalar<byte[]>();
+        query = "SELECT LEVEL_EVOLUTION FROM POKEMON WHERE POKEDEX_ID = "+pokedex_id;
+        var levelEvolution= connection.CreateCommand(query).ExecuteScalar<int>();
+        query = "SELECT EVOLUTION_ID FROM POKEMON WHERE POKEDEX_ID = "+pokedex_id;
+        var evolutionId= connection.CreateCommand(query).ExecuteScalar<int>();
+
+        pokemon = new PokemonBase(pokedex_id,name,description,weight,type1,type2,hp,attack,defense,spAttack,spDefense,speed,sprite_Front,sprite_Back,levelEvolution,evolutionId);
+        
+        // Debug.Log("The value of this pokemon is: "+pokemon.Name);
+        return pokemon;
+    }
+    public PokemonBase(int pokedex_id, string namePokemon, string description, int weight, PokemonType type1, PokemonType type2, int maxHP, int attack, int defense, int spAttack, int spDefense, int speed, byte[] frontSprite, byte[] backSprite, int levelPokemon, int evolutionId){
         this.pokedex_id = pokedex_id;
         this.namePokemon = namePokemon;
         this.description = description;
@@ -40,7 +85,7 @@ public class PokemonBase : ScriptableObject
         this.frontSprite = ConvertSprite(frontSprite);
         this.backSprite = ConvertSprite(backSprite);
         this.levelPokemon = levelPokemon;
-        this.evolution = evolution;
+        this.evolutionId = evolutionId;
     }
 
     private Sprite ConvertSprite(byte[] picture){

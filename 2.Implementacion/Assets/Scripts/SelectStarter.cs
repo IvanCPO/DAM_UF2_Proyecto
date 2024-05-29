@@ -19,13 +19,9 @@ public class SelectStarter : MonoBehaviour
     void Start()
     {
         status = StatusPlayer.getInstance();
-        var connection = DDBBConector.GenerateConnection().GetConnection();
-        String query = "SELECT * FROM POKEMON WHERE POKEDEX_ID = 1";
-        firstPokemon = connection.CreateCommand(query).ExecuteScalar<PokemonBase>();
-        query = "SELECT * FROM POKEMON WHERE POKEDEX_ID = 4";
-        secondPokemon = connection.CreateCommand(query).ExecuteScalar<PokemonBase>();
-        query = "SELECT * FROM POKEMON WHERE POKEDEX_ID = 7";
-        thirdPokemon = connection.CreateCommand(query).ExecuteScalar<PokemonBase>();
+        firstPokemon = PokemonBase.GetPokemonBase(1);
+        secondPokemon = PokemonBase.GetPokemonBase(4);
+        thirdPokemon = PokemonBase.GetPokemonBase(7);
         firstPokemonImage.sprite = firstPokemon.FrontSprite;
         secondPokemonImage.sprite = secondPokemon.FrontSprite;
         thirdPokemonImage.sprite = thirdPokemon.FrontSprite;
