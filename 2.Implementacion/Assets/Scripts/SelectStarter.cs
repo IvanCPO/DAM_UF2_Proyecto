@@ -9,9 +9,6 @@ public class SelectStarter : MonoBehaviour
     [SerializeField] Image firstPokemonImage;
     [SerializeField] Image secondPokemonImage;
     [SerializeField] Image thirdPokemonImage;
-    // [SerializeField] PokemonBase firstPokemon;
-    // [SerializeField] PokemonBase secondPokemon;
-    // [SerializeField] PokemonBase thirdPokemon;
     private PokemonBase firstPokemon;
     private PokemonBase secondPokemon;
     private PokemonBase thirdPokemon;

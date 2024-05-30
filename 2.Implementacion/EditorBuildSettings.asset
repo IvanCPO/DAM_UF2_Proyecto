@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Start.unity
+    guid: 1a781d8f7c2f1ab43856d0e8d883cc36
+  - enabled: 1
+    path: Assets/Scenes/PrepareteGame.unity
+    guid: 792da8dc93156a44ab157e5b73d950a5
+  - enabled: 1
+    path: Assets/Scenes/AbuHouse.unity
+    guid: 55d90e9542c1d624e8cd239010b75e45
+  - enabled: 1
+    path: Assets/Scenes/Scene World.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/Combat.unity
+    guid: bca3fcc2cfd111c41975073ee542c89d
+  - enabled: 1
+    path: Assets/Scenes/Laboratorio Milanes.unity
+    guid: 48dac7ca8eacffe4abd3f1c09319133d
+  - enabled: 1
+    path: Assets/Scenes/Credits.unity
+    guid: c4dbb2375b7c67f4aa1567054337a844
+  m_configObjects: {}

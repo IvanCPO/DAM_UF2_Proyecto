@@ -76277,7 +76277,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dddb4867825e3ae4d80432786b89017c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rival: {fileID: 11400000, guid: 02cc69434a8153b4c8633bb8b38023b3, type: 2}
+  rival: 10
   levelr: 6
 --- !u!1001 &1578244714
 PrefabInstance:

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GenerateListPokemon : MonoBehaviour
 {
-    [SerializeField] PokemonBase rival;
+    [SerializeField] int rival;
     [SerializeField] int levelr;
     StatusPlayer player;
     private void Start(){
@@ -18,7 +18,7 @@ public class GenerateListPokemon : MonoBehaviour
             if(player.GetTeam().Count>0){
                 // Cambia a la escena especificada
                 Debug.Log("obtuviste un pokemon!!!!");
-                player.Rival = new Pokemon(rival,levelr);
+                player.Rival = new Pokemon(PokemonBase.GetPokemonBase(rival),levelr);
             }
         }
     }
