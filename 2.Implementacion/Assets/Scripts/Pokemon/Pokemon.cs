@@ -22,11 +22,22 @@ public class Pokemon
 
 
     public Pokemon (PokemonBase pokemon, int level){
+
+        random = new System.Random();
+        
         Base=pokemon;
         this.Level = level;
+        
+        //Generate IVs
+        IVhp = GenerateIV();
+        IVattack = GenerateIV();
+        IVdefense = GenerateIV();
+        IVSpA = GenerateIV();
+        IVSpD = GenerateIV();
+        IVspeed = GenerateIV();
+
         HP = MaxHP;
         Moves = new List<Move>();
-        random = new System.Random();
 
         this.MaxExp = CalcExp();
         this.Exp = 0;
@@ -48,14 +59,6 @@ public class Pokemon
 
             }
         }
-        
-
-        IVhp = GenerateIV();
-        IVattack = GenerateIV();
-        IVdefense = GenerateIV();
-        IVSpA = GenerateIV();
-        IVSpD = GenerateIV();
-        IVspeed = GenerateIV();
 
     }
 
@@ -132,5 +135,9 @@ public class Pokemon
             return true;
         }
         return false;
+    }
+
+    public void addMove(MoveBase move){
+        Moves.Add(new Move(move));
     }
 }

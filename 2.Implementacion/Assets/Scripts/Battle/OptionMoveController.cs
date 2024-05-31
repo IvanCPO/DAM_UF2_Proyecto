@@ -7,23 +7,15 @@ public class OptionMoveController : MonoBehaviour
 {  
     [SerializeField] Text nameMove;
     [SerializeField] Text ppMove;
+    [SerializeField] PictureTypeController type;
     private Move move;
 
-    private void Update(){
-        ppMove.text = "PP "+move.PP+"/"+move.Base.PP;
-        if (move.PP==0)
-        {
-            gameObject.SetActive(false);
-        }
-        else
-        {
-            gameObject.SetActive(true);
-        }
-    }
     public void SetDataMove(Move move){
         if(move != null){
             this.move = move;
             nameMove.text = move.Base.Name;
+            ppMove.text = "PP "+move.PP+"/"+move.Base.PP;
+            type.UpdatePictureType(move.Base.Type);
         }else{
             gameObject.SetActive(false);
         }
@@ -31,5 +23,6 @@ public class OptionMoveController : MonoBehaviour
 
     public void RemoveAPP(){
         move.PP--;
+        ppMove.text = "PP "+move.PP+"/"+move.Base.PP;
     }
 }

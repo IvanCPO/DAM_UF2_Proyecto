@@ -20,16 +20,22 @@ public class DataPokemonController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (pokemon == null)
+        if (pokemon!=null)
         {
+            namePokemon.text = pokemon.Base.Name;
+            levelPokemon.text = "Lvl. "+pokemon.Level;
+            hpCount.text = "HP "+pokemon.HP+"/"+pokemon.MaxHP;
+        }else
+        {
+            Debug.Log("El pokemon no existe.");
             gameObject.SetActive(false);
-        }
-        else{
-            gameObject.SetActive(true);
         }
     }
 
     public void AddPokemon(Pokemon pokemon){
-        this.pokemon = pokemon;
+        if (pokemon!=null)
+        {
+            this.pokemon = pokemon;
+        }
     }
 }

@@ -1,0 +1,30 @@
+fileFormatVersion: 2
+guid: 0f5e84faab6da36439f28055153203ba
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - normal: {fileID: 28716533, guid: 89037a41f00ef034083516e82efdeb5f, type: 3}
+  - Fire: {fileID: 2078167274, guid: 89037a41f00ef034083516e82efdeb5f, type: 3}
+  - Water: {fileID: 1034371236, guid: 89037a41f00ef034083516e82efdeb5f, type: 3}
+  - Electric: {fileID: 1771988146, guid: 89037a41f00ef034083516e82efdeb5f, type: 3}
+  - Grass: {fileID: -33034914, guid: 89037a41f00ef034083516e82efdeb5f, type: 3}
+  - Ice: {fileID: -2056089474, guid: 89037a41f00ef034083516e82efdeb5f, type: 3}
+  - Fighting: {fileID: -1916296318, guid: 89037a41f00ef034083516e82efdeb5f, type: 3}
+  - Poison: {fileID: -1179934620, guid: 89037a41f00ef034083516e82efdeb5f, type: 3}
+  - Ground: {fileID: 1573122676, guid: 89037a41f00ef034083516e82efdeb5f, type: 3}
+  - Flying: {fileID: 1581641574, guid: 89037a41f00ef034083516e82efdeb5f, type: 3}
+  - Psychic: {fileID: -1935527708, guid: 89037a41f00ef034083516e82efdeb5f, type: 3}
+  - Bug: {fileID: 369999080, guid: 89037a41f00ef034083516e82efdeb5f, type: 3}
+  - Rock: {fileID: 1264965845, guid: 89037a41f00ef034083516e82efdeb5f, type: 3}
+  - Ghost: {fileID: 816759730, guid: 89037a41f00ef034083516e82efdeb5f, type: 3}
+  - Dragon: {fileID: -679003938, guid: 89037a41f00ef034083516e82efdeb5f, type: 3}
+  - Dark: {fileID: -1505542339, guid: 89037a41f00ef034083516e82efdeb5f, type: 3}
+  - Steel: {fileID: -1358290505, guid: 89037a41f00ef034083516e82efdeb5f, type: 3}
+  - Fairy: {fileID: 1671558462, guid: 89037a41f00ef034083516e82efdeb5f, type: 3}
+  - None: {fileID: 21300000, guid: b17a7fb74d5292942b0e46a149d20ab7, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
