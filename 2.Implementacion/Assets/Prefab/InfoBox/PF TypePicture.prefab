@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8855211145403132265}
   - component: {fileID: 8349575812023845530}
   - component: {fileID: 6260632880804497915}
-  - component: {fileID: 2556774136127398259}
+  - component: {fileID: 3106117931674354286}
   m_Layer: 5
   m_Name: PF TypePicture
   m_TagString: Untagged
@@ -105,7 +105,7 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 5, y: 7}
   m_UseGraphicAlpha: 1
---- !u!114 &2556774136127398259
+--- !u!114 &3106117931674354286
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -114,7 +114,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4304714291995569073}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 234968098eaa61140b44b3c0dc4eef9b, type: 3}
+  m_Script: {fileID: 11500000, guid: 0f5e84faab6da36439f28055153203ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   normal: {fileID: 28716533, guid: 89037a41f00ef034083516e82efdeb5f, type: 3}
