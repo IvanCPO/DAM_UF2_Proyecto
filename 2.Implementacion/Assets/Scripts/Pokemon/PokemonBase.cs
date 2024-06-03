@@ -1,13 +1,18 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
+using System.Data.Common;
+
+
 
 public class PokemonBase : ScriptableObject
 {
     private int pokedex_id;
     private string namePokemon;
     private string description;
+    
     private int weight;
     private Sprite frontSprite;
     private Sprite backSprite;
@@ -84,7 +89,23 @@ public class PokemonBase : ScriptableObject
             pokemon = new PokemonBase(pokedex_id,name,description,weight,type1,type2,hp,attack,defense,spAttack,spDefense,speed,sprite_Front,sprite_Back);
             
         }
+        pokemon.learnableMoves = GetLearnables(pokedex_id, connection);
         return pokemon;
+    }
+
+    public static List<LearnableMove> GetLearnables(int pokedex_id, SQLiteConnection connection){
+        // String query = "SELECT TOP 1 LEVEL_UP FROM MOVELEARNER WHERE POKEMON_ID="+pokedex_id;
+        // int level = connection.CreateCommand(query).ExecuteScalar<int>();
+        // Debug.Log("EL POKEMON "+pokedex_id+" tiene el movimiento al nivel = "+level);
+
+        String query = "SELECT LEVEL_UP FROM MOVELEARNER WHERE POKEMON_ID="+pokedex_id;
+        List<int> move = connection.CreateCommand(query).ExecuteQuery<int>();
+        Debug.Log("El ancho de la lista de movimientos de "+pokedex_id+" es de : "+move.Count);
+        for (int i = 0; i < move.Count; i++)
+        {
+            Debug.Log("EL POKEMON "+pokedex_id+" tiene el movimiento al nivel = "+move[i]);
+        }
+        return null;
     }
     public PokemonBase(int pokedex_id, string namePokemon, string description, int weight, PokemonType type1, PokemonType type2, int maxHP, int attack, int defense, int spAttack, int spDefense, int speed, byte[] frontSprite, byte[] backSprite, int levelPokemon, int evolutionId){
         this.pokedex_id = pokedex_id;

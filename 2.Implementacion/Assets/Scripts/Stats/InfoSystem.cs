@@ -7,7 +7,7 @@ public class InfoSystem : MonoBehaviour, InterfaceData
     [SerializeField] AvatarDataController avatar;
     [SerializeField] InserterStats stats;
     [SerializeField] BattleMoves moves;
-    [SerializeField] GameObject moveInfo;
+    [SerializeField] InfoTextController moveInfo;
     private Pokemon pokemon;
 
     public void InsertDataPokemon(Pokemon pokemon)
@@ -18,10 +18,11 @@ public class InfoSystem : MonoBehaviour, InterfaceData
         moves.SetMoves(pokemon);
     }
     public void CloseInfo(){
+        moveInfo.CloseText();
         gameObject.SetActive(false);
     }
     public void CheckMoveInfo(int move){
-        
+        moveInfo.InsertDataMove(pokemon.Moves[move]);
     }
 
 }

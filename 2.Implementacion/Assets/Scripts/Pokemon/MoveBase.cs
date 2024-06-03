@@ -6,12 +6,13 @@ using UnityEngine;
 public class MoveBase : ScriptableObject
 {
     [SerializeField] string name;
-    [TextArea]
     [SerializeField] string description;
     [SerializeField] PokemonType type;
     [SerializeField] int power;
     [SerializeField] int accuracy;
     [SerializeField] int pp;
+    ClassDamage classDamage;
+
     
     public string Name{
         get{ return name; }
@@ -35,6 +36,10 @@ public class MoveBase : ScriptableObject
 
     public int PP{
         get{ return pp; }
+    }
+    
+    public ClassDamage GetClassDamage{
+        get{ return classDamage; }
     }
 
 }

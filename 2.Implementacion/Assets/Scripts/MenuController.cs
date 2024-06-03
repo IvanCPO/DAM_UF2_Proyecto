@@ -6,6 +6,7 @@ public class MenuController : MonoBehaviour
 {
     [SerializeField] GameObject buttonmenu;
     [SerializeField] GameObject menu;
+    [SerializeField] GameObject pokemonList;
     
     public void AbrirMenu(){
         //Debug.Log("TEST");
@@ -18,5 +19,8 @@ public class MenuController : MonoBehaviour
         Time.timeScale = 1f;
         buttonmenu.SetActive(true);
         menu.SetActive(false);
+    }
+    public void OpenList(){
+        pokemonList.GetComponent<TeamController>().OpenList();
     }
 }

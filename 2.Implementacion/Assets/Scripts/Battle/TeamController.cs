@@ -35,6 +35,14 @@ public class TeamController : MonoBehaviour
         }
     }
     
+    public void CloseInfo(){
+        if (statsPanel.active)
+        {
+            CloseInfoTextMove();
+            statsPanel.SetActive(false);
+        }
+    }
+    
     public void OpenInfoMenu(int pokemon){
         confirmPanel.SetActive(true);
         pokemonConfirmIndex = pokemon;
@@ -47,6 +55,9 @@ public class TeamController : MonoBehaviour
     }
     private void SetPokemonStats(){
         statsPanel.GetComponent<InfoSystem>().InsertDataPokemon(status.GetTeam()[pokemonConfirmIndex]);
+    }
+    private void CloseInfoTextMove(){
+        statsPanel.GetComponent<InfoSystem>().CloseInfo();
     }
 
     private void SetPokemonBasicData(){
