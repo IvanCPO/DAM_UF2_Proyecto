@@ -89,6 +89,7 @@ public class OptionsController : MonoBehaviour
 
     public void Atack(int option){
         hitsController.MovePlayer= hitsController.Player.Moves[option-1];
+        
         ReproducirTimbre();
         Invoke("Fight",1f);
     }

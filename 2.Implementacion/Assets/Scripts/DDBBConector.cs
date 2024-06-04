@@ -1,4 +1,6 @@
 using System;
+using System.Data;
+using System.Data.Common;
 using System.IO;
 using Mono.Data.Sqlite;
 using UnityEngine;
@@ -24,7 +26,7 @@ public class DDBBConector
         return connector;
     }
 
-    public SqliteConnection GetConnection(){
+    public IDbConnection GetConnection(){
 
         if (!File.Exists(urlDDBB))
         {
@@ -34,8 +36,9 @@ public class DDBBConector
         {
             Debug.Log("Database file found at path: " + urlDDBB);
         }
+        IDbConnection connection = new SqliteConnection("Data Source="+urlDDBB);
         
-        return new SqliteConnection("Data Source="+urlDDBB+";Version=3;");
+        return connection;
     }
     
 }

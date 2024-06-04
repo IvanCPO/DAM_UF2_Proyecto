@@ -1,10 +1,9 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
-using System.Data.Common;
 using Mono.Data.Sqlite;
+using System.Data;
+
 
 
 
@@ -31,68 +30,66 @@ public class PokemonBase : ScriptableObject
     private int evolutionId;
     private List<LearnableMove> learnableMoves;
 
+    IDataReader reader;
+    
     public static PokemonBase GetPokemonBase(int pokedex_id){
         var connection = DDBBConector.GenerateConnection().GetConnection();
         connection.Open();
         string query;
+        string name;
+        int weight;
+        string description;
+        int type;
+        int hp;
+        int attack;
+        int defense;
+        int spAttack;
+        int spDefense;
+        int speed;
+        byte[] spriteFront;
+        byte[] spriteBack;
+
+        IDbCommand command = connection.CreateCommand();
         
-        query = "SELECT NAME FROM POKEMON WHERE POKEDEX_ID = @pokedex_id";
-        var name = ExecuteScalar<string>(connection, query, pokedex_id);
-
-        query = "SELECT WEIGHT FROM POKEMON WHERE POKEDEX_ID = @pokedex_id";
-        var weight = ExecuteScalar<int>(connection, query, pokedex_id);
-
-        query = "SELECT DESCRIPTION FROM POKEMON WHERE POKEDEX_ID = @pokedex_id";
-        var description = ExecuteScalar<string>(connection, query, pokedex_id);
-
-        query = "SELECT TYPE_ID FROM POKEMON WHERE POKEDEX_ID = @pokedex_id";
-        var type = ExecuteScalar<int>(connection, query, pokedex_id);
-        PokemonType type1 = PokemonTypeEnum.GetPokemonType(type);
-
-        query = "SELECT SECOND_TYPE_ID FROM POKEMON WHERE POKEDEX_ID = @pokedex_id";
+        query = "SELECT NAME, WEIGHT, DESCRIPTION, TYPE_ID, HP, ATTACK, DEFENSE, SP_ATTACK, SP_DEFENSE, SPEED, SPRITE_FRONT, SPRITE_BACK FROM POKEMON WHERE POKEDEX_ID = "+pokedex_id;
+        command.CommandText = query;
+        using (IDataReader reader = command.ExecuteReader())
+            {
+                reader.Read();
+                name = reader.GetString(0);
+                weight = reader.GetInt32(1);
+                description = reader.GetString(2);
+                type = reader.GetInt32(3);
+                hp = reader.GetInt32(4);
+                attack = reader.GetInt32(5);
+                defense = reader.GetInt32(6);
+                spAttack = reader.GetInt32(7);
+                spDefense = reader.GetInt32(8);
+                speed = reader.GetInt32(9);
+                spriteFront = (byte[])reader.GetValue(10);
+                spriteBack = (byte[])reader.GetValue(11);
+                reader.Close();
+            }
         int secondType;
         try
         {
-            secondType = ExecuteScalar<int>(connection, query, pokedex_id);
+            secondType = ExecuteScalarInt(command, query);
         }
         catch (Exception)
         {
             secondType = 0;
         }
+        PokemonType type1 = PokemonTypeEnum.GetPokemonType(type);
         PokemonType type2 = PokemonTypeEnum.GetPokemonType(secondType);
-
-        query = "SELECT HP FROM POKEMON WHERE POKEDEX_ID = @pokedex_id";
-        var hp = ExecuteScalar<int>(connection, query, pokedex_id);
-
-        query = "SELECT ATTACK FROM POKEMON WHERE POKEDEX_ID = @pokedex_id";
-        var attack = ExecuteScalar<int>(connection, query, pokedex_id);
-
-        query = "SELECT DEFENSE FROM POKEMON WHERE POKEDEX_ID = @pokedex_id";
-        var defense = ExecuteScalar<int>(connection, query, pokedex_id);
-
-        query = "SELECT SP_ATTACK FROM POKEMON WHERE POKEDEX_ID = @pokedex_id";
-        var spAttack = ExecuteScalar<int>(connection, query, pokedex_id);
-
-        query = "SELECT SP_DEFENSE FROM POKEMON WHERE POKEDEX_ID = @pokedex_id";
-        var spDefense = ExecuteScalar<int>(connection, query, pokedex_id);
-
-        query = "SELECT SPEED FROM POKEMON WHERE POKEDEX_ID = @pokedex_id";
-        var speed = ExecuteScalar<int>(connection, query, pokedex_id);
-
-        query = "SELECT SPRITE_FRONT FROM POKEMON WHERE POKEDEX_ID = @pokedex_id";
-        var spriteFront = ExecuteScalar<byte[]>(connection, query, pokedex_id);
-
-        query = "SELECT SPRITE_BACK FROM POKEMON WHERE POKEDEX_ID = @pokedex_id";
-        var spriteBack = ExecuteScalar<byte[]>(connection, query, pokedex_id);
 
         PokemonBase pokemon;
         try
         {
-            query = "SELECT LEVEL_EVOLUTION FROM POKEMON WHERE POKEDEX_ID = @pokedex_id";
-            var levelEvolution = ExecuteScalar<int>(connection, query, pokedex_id);
+            query = "SELECT LEVEL_EVOLUTION FROM POKEMON WHERE POKEDEX_ID = "+pokedex_id;
+            int levelEvolution = ExecuteScalarInt(command, query);
 
-            query = "SELECT EVOLUTION_ID FROM POKEMON WHERE POKEDEX_ID = @pokedex_id";
-            var evolutionId = ExecuteScalar<int>(connection, query, pokedex_id);
+            query = "SELECT EVOLUTION_ID FROM POKEMON WHERE POKEDEX_ID = "+pokedex_id;
+            int evolutionId = ExecuteScalarInt(command, query);
 
             pokemon = new PokemonBase(pokedex_id, name, description, weight, type1, type2, hp, attack, defense, spAttack, spDefense, speed, spriteFront, spriteBack, levelEvolution, evolutionId);
         }
@@ -100,76 +97,41 @@ public class PokemonBase : ScriptableObject
         {
             pokemon = new PokemonBase(pokedex_id, name, description, weight, type1, type2, hp, attack, defense, spAttack, spDefense, speed, spriteFront, spriteBack);
         }
+        
+        query = "SELECT MOVE_ID, LEVEL_UP FROM MOVELEARNER WHERE POKEMON_ID = "+pokedex_id;
+        command.CommandText = query;
+        pokemon.learnableMoves = GetLearnables(command);
         connection.Close();
         return pokemon;
     }
 
-    private static T ExecuteScalar<T>(SqliteConnection connection, string query, int pokedex_id)
+    private static int ExecuteScalarInt(IDbCommand command, string query)
     {
-
-        using (var command = new SqliteCommand(query, connection))
+        command.CommandText = query;
+        using (IDataReader reader = command.ExecuteReader())
         {
-            command.Parameters.AddWithValue("@pokedex_id", pokedex_id);
-            object result = command.ExecuteScalar();
-            return (result == DBNull.Value) ? default(T) : (T)result;
+            reader.Read();
+            int value = reader.GetInt32(0);
+            reader.Close();
+            return value;
         }
     }
 
-    // public static List<LearnableMove> GetLearnables(int pokedex_id, SqliteConnection connection){
-    //     // String query = "SELECT TOP 1 LEVEL_UP FROM MOVELEARNER WHERE POKEMON_ID="+pokedex_id;
-    //     // int level = connection.CreateCommand(query).ExecuteScalar<int>();
-    //     // Debug.Log("EL POKEMON "+pokedex_id+" tiene el movimiento al nivel = "+level);
+    private static List<LearnableMove> GetLearnables(IDbCommand command){
 
-    //     // String query = "SELECT LEVEL_UP FROM MOVELEARNER WHERE POKEMON_ID="+pokedex_id;
-    //     // List<int> move = connection.CreateCommand(query).ExecuteQuery<int>();
-    //     // Debug.Log("El ancho de la lista de movimientos de "+pokedex_id+" es de : "+move.Count);
-    //     // for (int i = 0; i < move.Count; i++)
-    //     // {
-    //     //     Debug.Log("EL POKEMON "+pokedex_id+" tiene el movimiento al nivel = "+move[i]);
-    //     // }
-    //     // return null;
-
-    //     string query = "SELECT LEVEL_UP FROM MOVELEARNER WHERE POKEMON_ID = @pokedex_id";
-        
-    //     // Crear un comando a partir de la consulta
-    //     using (var command = new SqliteCommand(query, connection))
-    //     {
-    //         // Añadir el parámetro a la consulta para evitar inyección SQL
-    //         command.Parameters.AddWithValue("@pokedex_id", pokedex_id);
-            
-    //         // Crear una lista para almacenar los movimientos aprendibles
-    //         List<LearnableMove> learnableMoves = new List<LearnableMove>();
-            
-    //         // Ejecutar la consulta y recuperar los resultados
-    //         using (var reader = command.ExecuteReader())
-    //         {
-    //             // Recorrer los resultados de la consulta
-    //             while (reader.Read())
-    //             {
-    //                 // Obtener el nivel del movimiento desde el resultado actual
-    //                 int levelUp = reader.GetInt32(0); // Suponiendo que el nivel está en la primera columna
-                    
-    //                 // Crear un nuevo LearnableMove y añadirlo a la lista
-    //                 LearnableMove move = new LearnableMove
-    //                 {
-    //                     Level = levelUp
-    //                     // Asignar otros campos según sea necesario
-    //                 };
-                    
-    //                 learnableMoves.Add(move);
-                    
-    //                 // Debug para verificar los valores
-    //                 Debug.Log("EL POKEMON " + pokedex_id + " tiene el movimiento al nivel = " + levelUp);
-    //             }
-    //         }
-            
-    //         // Mostrar la cantidad de movimientos encontrados
-    //         Debug.Log("El ancho de la lista de movimientos de " + pokedex_id + " es de : " + learnableMoves.Count);
-            
-    //         // Devolver la lista de movimientos aprendibles
-    //         return learnableMoves;
-    //     }
-    // }
+        List<LearnableMove> moves= new List<LearnableMove>();
+        // Crear un comando a partir de la consulta
+        using (IDataReader reader = command.ExecuteReader())
+        {
+            while(reader.Read()){
+                int idMove = reader.GetInt32(0);
+                int level = reader.GetInt32(1);
+                moves.Add(new LearnableMove(MoveBase.GetMoveBase(idMove),level));
+            }
+            reader.Close();
+        }
+        return moves;
+    }
     public PokemonBase(int pokedex_id, string namePokemon, string description, int weight, PokemonType type1, PokemonType type2, int maxHP, int attack, int defense, int spAttack, int spDefense, int speed, byte[] frontSprite, byte[] backSprite, int levelPokemon, int evolutionId){
         this.pokedex_id = pokedex_id;
         this.namePokemon = namePokemon;
@@ -270,7 +232,11 @@ public class LearnableMove{
     [SerializeField] MoveBase moveBase;
     [SerializeField] int level;
     
-    
+    public LearnableMove(MoveBase moveBase, int level){
+        this.moveBase = moveBase;
+        this.level = level;
+    }
+
     public MoveBase Base{
         get{ return moveBase;}
     }
