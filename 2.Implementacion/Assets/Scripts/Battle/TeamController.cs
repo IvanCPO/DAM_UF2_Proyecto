@@ -25,22 +25,21 @@ public class TeamController : MonoBehaviour
         Invoke("UpdatePokemons",0.0001f);
     }
     
-    public void CloseList(){
-        if (confirmPanel.active)
-        {
-            confirmPanel.SetActive(false);
-        }else
-        {
-            gameObject.SetActive(false);
-        }
-    }
-    
-    public void CloseInfo(){
+    public void Close(){
         if (statsPanel.active)
         {
             CloseInfoTextMove();
             statsPanel.SetActive(false);
+        }else{
+            if (confirmPanel.active)
+            {
+                confirmPanel.SetActive(false);
+            }else
+            {
+                gameObject.SetActive(false);
+            }
         }
+        
     }
     
     public void OpenInfoMenu(int pokemon){
