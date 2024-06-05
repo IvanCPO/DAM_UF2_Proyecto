@@ -1,11 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GenerateListPokemon : MonoBehaviour
 {
-    [SerializeField] int rival;
-    [SerializeField] int levelr;
+    [SerializeField] List<RivalTeam> rival;
     StatusPlayer player;
     private void Start(){
         player = StatusPlayer.getInstance();
@@ -17,9 +17,22 @@ public class GenerateListPokemon : MonoBehaviour
         {
             if(player.GetTeam().Count>0){
                 // Cambia a la escena especificada
-                Debug.Log("obtuviste un pokemon!!!!");
-                player.Rival = new Pokemon(PokemonBase.GetPokemonBase(rival),levelr);
+                Debug.Log("Que empiece el combate");
+                foreach (RivalTeam pokemon in rival)
+                {
+                    player.Rival.Add(pokemon.GeneratePokemon());
+                }
+                // player.Rival = new Pokemon(PokemonBase.GetPokemonBase(4),levelr);
             }
         }
+    }
+}
+[Serializable]
+class RivalTeam {
+    [SerializeField] int pokedexId;
+    [SerializeField] int level;
+
+    public Pokemon GeneratePokemon(){
+        return new Pokemon(PokemonBase.GetPokemonBase(pokedexId),level);
     }
 }

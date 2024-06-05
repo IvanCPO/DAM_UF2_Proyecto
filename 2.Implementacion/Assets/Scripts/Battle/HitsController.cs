@@ -28,6 +28,14 @@ public class HitsController
         return moveRival;
     }
     public Pokemon HitRival(){
+        foreach (Move move in Rival.Moves)
+        {
+            if (move.Base.Equals(moveRival.Base))
+            {
+                move.PP--;
+                break;
+            }
+        }
         Player.HP-=Hit(Rival,moveRival,Player);
         if (Player.HP<0)
         {
@@ -37,6 +45,14 @@ public class HitsController
     }
 
     public Pokemon HitPlayer(){
+        foreach (Move move in Player.Moves)
+        {
+            if (move.Base.Equals(MovePlayer.Base))
+            {
+                move.PP--;
+                break;
+            }
+        }
         Rival.HP-=Hit(Player,MovePlayer,Rival);
         if (Rival.HP<0)
         {

@@ -38,5 +38,6 @@ public class MenuController : MonoBehaviour
     }
     public void OpenAccount(){
         account.SetActive(true);
+        account.GetComponent<OptionAccountController>().SetDataPlayer();
     }
 }

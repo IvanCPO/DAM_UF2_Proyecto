@@ -1,8 +1,5 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Threading;
 using UnityEngine;
 
 [System.Serializable]
@@ -10,13 +7,13 @@ public class StatusPlayer
 {
     private static StatusPlayer instance;
     private List<Pokemon> myTeam;
-    public Pokemon Rival{get;set;}
+    public List<Pokemon> Rival{get;set;}
     private List<Pokemon> myPokemons;
-    private String name;
+    private string name;
     // TODO Para implementrae a futuro
     //private GameObject genero;
     private int money;
-    Stopwatch time;
+    private Stopwatch time;
     private bool[] medallas;
     private Vector3 ubicationWorld;
 
@@ -26,7 +23,7 @@ public class StatusPlayer
         myPokemons = new List<Pokemon>();
         medallas = new bool[3]{false,false,false};
         ubicationWorld = new Vector3(5.5f,-34.7f,0f);
-        Rival = null;
+        Rival = new List<Pokemon>();
         money = 0;
         time = new Stopwatch();
     }
@@ -38,7 +35,7 @@ public class StatusPlayer
         }
         return instance;
     }
-    public void clearGame(){
+    public void ClearGame(){
         instance = new StatusPlayer();
     }
 
@@ -55,8 +52,11 @@ public class StatusPlayer
         this.name = name;
         this.genero = prefab;
     } */
+    public bool[] Medallas{
+        get{return medallas;}
+    }
 
-    public void SaveUserPlayer(String name){
+    public void SaveUserPlayer(string name){
         this.name = name;
         
     }
@@ -95,5 +95,18 @@ public class StatusPlayer
         return count;
     }
 
+    public void ClearRival(){
+        Rival = new List<Pokemon>();
+    }
+
+    public int GetRivalHPTeam()
+    {
+        int count = 0;
+        foreach (Pokemon pokemon in Rival)
+        {
+            count+=pokemon.HP;
+        }
+        return count;
+    }
 
 }

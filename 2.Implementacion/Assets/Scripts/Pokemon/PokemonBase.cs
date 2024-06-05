@@ -7,7 +7,6 @@ using System.Data;
 
 
 
-// public class PokemonBase : ScriptableObject
 public class PokemonBase
 {
 
@@ -27,6 +26,7 @@ public class PokemonBase
     private int speed;
     private int levelPokemon;
     private int evolutionId;
+    private int expBase;
     private List<LearnableMove> learnableMoves;
 
 
@@ -148,6 +148,8 @@ public class PokemonBase
         this.backSprite = ConvertSprite(backSprite);
         this.levelPokemon = levelPokemon;
         this.evolutionId = evolutionId;
+        // Cambiar cuando implemente la informacion de la experiencia base
+        this.expBase = 143;
         learnableMoves = new List<LearnableMove>();
     }
     public PokemonBase(int pokedex_id, string namePokemon, string description, int weight, PokemonType type1, PokemonType type2, int maxHP, int attack, int defense, int spAttack, int spDefense, int speed, byte[] frontSprite, byte[] backSprite){
@@ -222,6 +224,9 @@ public class PokemonBase
     }
     public List<LearnableMove> LearnableMoves{
         get{ return learnableMoves; }
+    }
+    public int ExpBase {
+        get{ return speed;}
     }
 }
 

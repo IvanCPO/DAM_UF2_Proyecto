@@ -29,8 +29,14 @@ public class DialogCombat : MonoBehaviour
         border.text = dialog;
     }
 
-    public void StartGame(Pokemon rival){
-        String messageStart = "HA APARECIDO UN "+rival.Base.Name.ToUpper()+" SALVAJE!!!! A PELEAR...";
+    public void StartGame(List<Pokemon> rival){
+        string messageStart;
+        if (rival.Count==1)
+        {
+            messageStart = "HA APARECIDO UN "+rival[0].Base.Name.ToUpper()+" SALVAJE!!!! A PELEAR!!!";
+        }else{
+            messageStart = "El combate contra este rival comienza con "+rival[0].Base.Name.ToUpper()+". A PELEAR!!!";
+        }
         GenerateTextInfo(messageStart);
         Invoke("InitializeCombat",4f);
     }

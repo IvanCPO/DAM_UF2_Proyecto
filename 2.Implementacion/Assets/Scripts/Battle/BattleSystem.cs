@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -36,9 +37,12 @@ public class BattleSystem : MonoBehaviour
         if (!timeText)
         {
             int allTeamHP = TotalHPTeam();
-            if (rival.HP==0||allTeamHP==0)
+            int allRivalHP = playerStatus.GetRivalHPTeam();
+            if (allRivalHP==0||allTeamHP==0)
             {
                 FinishGame();
+                timeText=true;
+                timeAttack=false;
             }else{
                 if (invokeOptions)
                 {
@@ -101,7 +105,7 @@ public class BattleSystem : MonoBehaviour
     }
 
     private void HitPlayer(){
-        hitsController.HitPlayer();
+        pokemon = hitsController.HitPlayer();
         ChangeTurn();
     }
 
@@ -124,6 +128,7 @@ public class BattleSystem : MonoBehaviour
     }
 
     private void UpdateData(){
+        
         player.Setup(hitsController.Player);
         enemy.Setup(hitsController.Rival);
         playerLive.SetData(hitsController.Player);
@@ -134,8 +139,8 @@ public class BattleSystem : MonoBehaviour
     private void FinishGame(){
         if (rival.HP==0)
         {
+            pokemon.LevelUp(ObtenerExperience());
             messageCombat.GenerateTextPlayer("El pokemon a sido debilitado");
-            
         }
         else
         {
@@ -143,6 +148,12 @@ public class BattleSystem : MonoBehaviour
         }
         Invoke("ReturnWorld",5f);
     }
+
+    private int ObtenerExperience()
+    {
+        return Convert.ToInt32(rival.Base.ExpBase*rival.Level/5*Math.Pow((2*rival.Level+10d)/(rival.Level+pokemon.Level+10),2.5)+1);
+    }
+
     private int TotalHPTeam(){
         return playerStatus.GetTotalHPTeam();
     }
@@ -151,19 +162,20 @@ public class BattleSystem : MonoBehaviour
     {
         // JUEGO PREPARADO
         pokemon = playerStatus.FirstPokemon();
-        rival = playerStatus.Rival;
+        rival = playerStatus.Rival[0];
         player.Setup(pokemon);
         playerLive.SetData(pokemon);
         enemy.Setup(rival);
         enemyLive.SetData(rival);
         options.SetMoves(pokemon);
         
-        messageCombat.StartGame(rival);
+        messageCombat.StartGame(playerStatus.Rival);
         hitsController.Rival = rival;
         hitsController.Player = pokemon;
     }
 
     private void ReturnWorld(){
+        playerStatus.ClearRival();
         SceneManager.LoadScene(3);
     }
     public void FinishDialog(){

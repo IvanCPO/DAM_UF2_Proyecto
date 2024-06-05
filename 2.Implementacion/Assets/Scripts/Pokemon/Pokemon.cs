@@ -17,14 +17,13 @@ public class Pokemon
     private int IVSpA;
     private int IVSpD;
     private int IVspeed;
-    private int MaxExp;
     private int Exp;
 
 
     public Pokemon (PokemonBase pokemon, int level){
 
         random = new System.Random();
-        
+        Exp=0;
         Base=pokemon;
         this.Level = level;
         
@@ -38,9 +37,6 @@ public class Pokemon
 
         HP = MaxHP;
         Moves = new List<Move>();
-
-        this.MaxExp = CalcExp();
-        this.Exp = 0;
 
         // Spawn pokemon
         if (Base.LearnableMoves!=null)
@@ -60,11 +56,6 @@ public class Pokemon
             }
         }
 
-    }
-
-    private int CalcExp(){
-        var num = (Level+1) ^ 2 * 100;
-        return num;
     }
 
     private void LearnerMove(MoveBase move){
@@ -97,6 +88,9 @@ public class Pokemon
     public int Speed {
         get{ return Mathf.FloorToInt((Base.Speed+IVspeed) * (Level/100f) )+5; }
     }
+    public int MaxExp {
+        get{ return Convert.ToInt32((Base.ExpBase+Level)/5 * Math.Pow((2*Level+10)/(Level+10.0),2.0)*5+1); }
+    }
 
     public int IVHP{
         get{ return IVhp; }
@@ -127,11 +121,19 @@ public class Pokemon
     }
 
 
+    public int Expirience{
+        get{return Exp;}
+    }
     public bool LevelUp(int experience){
         Exp+=experience;
         if (Exp>=MaxExp)
         {
+            if (Exp>MaxExp)
+            {
+                Exp = Exp-MaxExp;
+            }
             Level++;
+            
             return true;
         }
         return false;

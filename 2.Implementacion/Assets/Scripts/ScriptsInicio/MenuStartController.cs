@@ -49,7 +49,7 @@ public class MenuStartController : MonoBehaviour
 
     private void InitializeSceneGame()
     {
-        StatusPlayer.getInstance().clearGame();
+        StatusPlayer.getInstance().ClearGame();
         SceneManager.LoadScene(1);
         
     }
