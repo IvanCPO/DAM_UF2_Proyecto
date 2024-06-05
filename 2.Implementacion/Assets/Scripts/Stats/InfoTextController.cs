@@ -24,6 +24,7 @@ public class InfoTextController : MonoBehaviour
         power.text = move.Base.Power.ToString();
         acierto.text = move.Base.Accuracy.ToString();
         typePicture.UpdatePictureType(move.Base.Type);
+        classDamage.UpdatePictureDamage(move);
         
     }
 

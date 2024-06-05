@@ -7,31 +7,30 @@ using System.Data;
 
 
 
-public class PokemonBase : ScriptableObject
+// public class PokemonBase : ScriptableObject
+public class PokemonBase
 {
+
     private int pokedex_id;
     private string namePokemon;
     private string description;
-    
     private int weight;
     private Sprite frontSprite;
     private Sprite backSprite;
     private PokemonType type1;
     private PokemonType type2;
-
     private int maxHP;
     private int attack;
     private int defense;
     private int spAttack;
     private int spDefense;
     private int speed;
-
     private int levelPokemon;
     private int evolutionId;
     private List<LearnableMove> learnableMoves;
 
-    IDataReader reader;
-    
+
+
     public static PokemonBase GetPokemonBase(int pokedex_id){
         var connection = DDBBConector.GenerateConnection().GetConnection();
         connection.Open();

@@ -12,6 +12,7 @@ public class OptionMoveController : MonoBehaviour
 
     public void SetDataMove(Move move){
         if(move != null){
+            gameObject.SetActive(true);
             this.move = move;
             nameMove.text = move.Base.Name;
             ppMove.text = "PP "+move.PP+"/"+move.Base.PP;

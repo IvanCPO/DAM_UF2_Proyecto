@@ -57,11 +57,8 @@ Objetivos:
 # IMPORTANTE
 ![alt text](<calculo Stats.png>)
 
+Experiencia Maxima
+![alt text](../1.Disenho/ExpMAX.png)
 
-Método para obtener datos de la BBDD
-```cs
-connection = DDBBConector.GenerateConnection().GetConnection();
-        String query = "SELECT NAME FROM POKEMON WHERE POKEDEX_ID = 1";
-        String name = connection.CreateCommand(query).ExecuteScalar<String>();
-        Debug.Log("The pokemon that you search is "+name);
-```
+Calculo de experiencia obtenida
+![alt text](../1.Disenho/ExpWIN.png)

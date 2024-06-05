@@ -35,6 +35,7 @@ public class DataPokemonController : MonoBehaviour
     public void AddPokemon(Pokemon pokemon){
         if (pokemon!=null)
         {
+            gameObject.SetActive(true);
             this.pokemon = pokemon;
         }
     }

@@ -92,6 +92,7 @@ public class OptionsController : MonoBehaviour
         
         ReproducirTimbre();
         Invoke("Fight",1f);
+        
     }
 
     private void Fight(){

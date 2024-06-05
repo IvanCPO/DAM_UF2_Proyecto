@@ -16,6 +16,15 @@ public class DDBBConector
         urlDDBB = Application.dataPath+"/DDBB/dbPokemon";
         userName = "";
         password = "";
+
+        if (!File.Exists(urlDDBB))
+        {
+            Debug.LogError("Database file not found at path: " + urlDDBB);
+        }
+        else
+        {
+            Debug.Log("Database file found at path: " + urlDDBB);
+        }
     }
 
     public static DDBBConector GenerateConnection(){
@@ -27,15 +36,6 @@ public class DDBBConector
     }
 
     public IDbConnection GetConnection(){
-
-        if (!File.Exists(urlDDBB))
-        {
-            Debug.LogError("Database file not found at path: " + urlDDBB);
-        }
-        else
-        {
-            Debug.Log("Database file found at path: " + urlDDBB);
-        }
         IDbConnection connection = new SqliteConnection("Data Source="+urlDDBB);
         
         return connection;

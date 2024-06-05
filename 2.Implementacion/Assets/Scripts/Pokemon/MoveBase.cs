@@ -3,8 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using UnityEngine;
-[CreateAssetMenu (fileName = "Move", menuName = "Pokemon/Create new move")]
-public class MoveBase : ScriptableObject
+// [CreateAssetMenu (fileName = "Move", menuName = "Pokemon/Create new move")]
+// public class MoveBase : ScriptableObject
+public class MoveBase
 {
     [SerializeField] string name;
     [SerializeField] string description;

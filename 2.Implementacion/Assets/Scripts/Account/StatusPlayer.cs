@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading;
 using UnityEngine;
 
@@ -14,8 +15,9 @@ public class StatusPlayer
     private String name;
     // TODO Para implementrae a futuro
     //private GameObject genero;
+    private int money;
+    Stopwatch time;
     private bool[] medallas;
-    private String place;
     private Vector3 ubicationWorld;
 
     private StatusPlayer(){
@@ -23,9 +25,10 @@ public class StatusPlayer
         name = "";
         myPokemons = new List<Pokemon>();
         medallas = new bool[3]{false,false,false};
-        place = "";
         ubicationWorld = new Vector3(5.5f,-34.7f,0f);
         Rival = null;
+        money = 0;
+        time = new Stopwatch();
     }
 
     public static StatusPlayer getInstance(){

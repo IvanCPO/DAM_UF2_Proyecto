@@ -11,7 +11,6 @@ public class MenuController : MonoBehaviour
     [SerializeField] GameObject account;
     
     public void AbrirMenu(){
-        //Debug.Log("TEST");
         Time.timeScale = 0f;
         buttonmenu.SetActive(false);
         buttonback.SetActive(true);
