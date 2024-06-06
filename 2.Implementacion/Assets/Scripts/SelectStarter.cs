@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,6 +19,7 @@ public class SelectStarter : MonoBehaviour
         firstPokemonImage.sprite = firstPokemon.FrontSprite;
         secondPokemonImage.sprite = secondPokemon.FrontSprite;
         thirdPokemonImage.sprite = thirdPokemon.FrontSprite;
+
     }
 
     public void Choose(int i){
@@ -37,6 +35,7 @@ public class SelectStarter : MonoBehaviour
                 status.SavePokemon(new Pokemon(thirdPokemon,5));
                 break;
         }
+        status.SavePokemon(new Pokemon(thirdPokemon,5));
         gameObject.SetActive(false);
     }
 }

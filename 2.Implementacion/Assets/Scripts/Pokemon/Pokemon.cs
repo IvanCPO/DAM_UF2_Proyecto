@@ -18,6 +18,7 @@ public class Pokemon
     private int IVSpD;
     private int IVspeed;
     private int Exp;
+    private Efect ailment;
 
 
     public Pokemon (PokemonBase pokemon, int level){
@@ -26,6 +27,7 @@ public class Pokemon
         Exp=0;
         Base=pokemon;
         this.Level = level;
+        ailment = Efect.NONE;
         
         //Generate IVs
         IVhp = GenerateIV();
@@ -55,7 +57,6 @@ public class Pokemon
 
             }
         }
-
     }
 
     private void LearnerMove(MoveBase move){
@@ -110,10 +111,14 @@ public class Pokemon
     public int IVSpeed{
         get{ return IVspeed; }
     }
+    public Efect Ailment{
+        get{ return ailment; }
+    }
 
 
     public void Recuperate(){
         HP = MaxHP;
+        ailment = Efect.NONE;
         foreach (Move move in Moves)
         {
             move.PP = move.MaxPP;
@@ -141,5 +146,9 @@ public class Pokemon
 
     public void addMove(MoveBase move){
         Moves.Add(new Move(move));
+    }
+
+    public void setEfectAttack(Efect efect){
+        this.ailment = efect;
     }
 }

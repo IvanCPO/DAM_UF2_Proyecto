@@ -11,7 +11,16 @@ public class HPBar : MonoBehaviour
     
 
     public void SetHP(Pokemon pokemon){
-        health.transform.localScale = new Vector3((float)pokemon.HP/pokemon.MaxHP,1f);
+        var percent = (float)pokemon.HP/pokemon.MaxHP;
+        health.transform.localScale = new Vector3(percent,1f);
         hpText.text = $"HP:{pokemon.HP}/{pokemon.MaxHP}";
+        if (percent<0.2f)
+        {
+            health.GetComponent<Image>().color = new Color(186,0,0);
+        }else if (percent<0.5f)
+        {
+            health.GetComponent<Image>().color = Color.yellow;
+        }else
+            health.GetComponent<Image>().color = Color.green;
     }
 }

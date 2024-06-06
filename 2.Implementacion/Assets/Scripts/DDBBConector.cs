@@ -1,15 +1,13 @@
-using System;
 using System.Data;
-using System.Data.Common;
 using System.IO;
 using Mono.Data.Sqlite;
 using UnityEngine;
 
 public class DDBBConector
 {
-    private String urlDDBB;
-    private String userName;
-    private String password;
+    private string urlDDBB;
+    private string userName;
+    private string password;
     private static DDBBConector connector;
 
     private DDBBConector(){

@@ -10,6 +10,7 @@ public class InfoTextController : MonoBehaviour
     [SerializeField] Text acierto;
     [SerializeField] InsertPictureDamage classDamage;
     [SerializeField] PictureTypeController typePicture;
+    [SerializeField] PictureEfectController efectPicture;
 
     // Update is called once per frame
     void Update()
@@ -24,6 +25,7 @@ public class InfoTextController : MonoBehaviour
         power.text = move.Base.Power.ToString();
         acierto.text = move.Base.Accuracy.ToString();
         typePicture.UpdatePictureType(move.Base.Type);
+        efectPicture.UpdatePictureEfect(move.Base.GetEfect);
         classDamage.UpdatePictureDamage(move);
         
     }

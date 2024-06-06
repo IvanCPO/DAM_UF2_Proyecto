@@ -69,6 +69,15 @@ public class StatusPlayer
     }*/
 
     public Pokemon FirstPokemon(){
+        Pokemon pokemon;
+        foreach (Pokemon p in GetTeam())
+        {
+            if (p.HP!=0)
+            {
+                pokemon = p;
+                break;
+            }
+        }
         return myTeam[0];
     }
     public List<Pokemon> GetTeam(){

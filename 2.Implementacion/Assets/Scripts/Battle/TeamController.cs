@@ -1,20 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TeamController : MonoBehaviour
 {
-    [SerializeField] DataPokemonController pokemon1;
-    [SerializeField] DataPokemonController pokemon2;
-    [SerializeField] DataPokemonController pokemon3;
-    [SerializeField] DataPokemonController pokemon4;
-    [SerializeField] DataPokemonController pokemon5;
-    [SerializeField] DataPokemonController pokemon6;
+    [SerializeField] List<DataPokemonController> pokemons;
     [SerializeField] GameObject listPokemon;
     [SerializeField] GameObject confirmPanel;
+    [SerializeField] GameObject optionsPanel;
     [SerializeField] GameObject statsPanel;
     private StatusPlayer status;
     private int pokemonConfirmIndex;
+    private Pokemon pokemonSelected;
     void Start()
     {
         status = StatusPlayer.getInstance();
@@ -22,6 +20,7 @@ public class TeamController : MonoBehaviour
     
     public void OpenList(){
         gameObject.SetActive(true);
+        pokemonSelected =null;
         Invoke("UpdatePokemons",0.0001f);
     }
     
@@ -35,6 +34,10 @@ public class TeamController : MonoBehaviour
             {
                 confirmPanel.SetActive(false);
             }else
+            if (optionsPanel.active)
+            {
+                optionsPanel.SetActive(false);
+            }else
             {
                 gameObject.SetActive(false);
             }
@@ -43,13 +46,27 @@ public class TeamController : MonoBehaviour
     }
     
     public void OpenInfoMenu(int pokemon){
-        confirmPanel.SetActive(true);
-        pokemonConfirmIndex = pokemon;
-        Invoke("SetPokemonBasicData",0.000000001f);
+        if (pokemonSelected == null)
+        {
+            if (SceneManager.GetActiveScene().buildIndex==4)
+            {
+                confirmPanel.SetActive(true);
+            }else{
+                optionsPanel.SetActive(true);
+            }
+            pokemonConfirmIndex = pokemon;
+            Invoke("SetPokemonBasicData",0.000000001f);
+        }else{
+            status.GetTeam()[pokemonConfirmIndex] = status.GetTeam()[pokemon];
+            status.GetTeam()[pokemon] = pokemonSelected;
+            ChangePokemon();
+        }
     }
 
     public void OpenPokemonInfo(){
         statsPanel.SetActive(true);
+        confirmPanel.SetActive(false);
+        optionsPanel.SetActive(false);
         Invoke("SetPokemonStats",0.000000001f);
     }
     private void SetPokemonStats(){
@@ -61,32 +78,29 @@ public class TeamController : MonoBehaviour
 
     private void SetPokemonBasicData(){
         confirmPanel.GetComponent<ConfirmPokemonController>().OpenMenu(status.GetTeam()[pokemonConfirmIndex]);
+
+    }
+    public void ChangePokemon(){
+        if (pokemonSelected==null)
+        {
+            pokemons[pokemonConfirmIndex].isSelected();
+            pokemonSelected = status.GetTeam()[pokemonConfirmIndex];
+            Close();
+        }else{
+            pokemons[pokemonConfirmIndex].isSelected();
+            UpdatePokemons();
+            pokemonSelected = null;
+        }
     }
 
     private void UpdatePokemons(){
-        if (status.GetTeam().Count>=1)
+        Debug.Log("El numero de pokemons es de = "+status.GetTeam().Count);
+        for (int i = 0; pokemons.Count < 6; i++)
         {
-            pokemon1.AddPokemon(status.FirstPokemon());
-        }
-        if (status.GetTeam().Count>=2)
-        {
-            pokemon2.AddPokemon(status.GetTeam()[1]);
-        }
-        if (status.GetTeam().Count>=3)
-        {
-            pokemon2.AddPokemon(status.GetTeam()[2]);
-        }
-        if (status.GetTeam().Count>=4)
-        {
-            pokemon2.AddPokemon(status.GetTeam()[3]);
-        }
-        if (status.GetTeam().Count>=5)
-        {
-            pokemon2.AddPokemon(status.GetTeam()[4]);
-        }
-        if (status.GetTeam().Count==6)
-        {
-            pokemon2.AddPokemon(status.GetTeam()[5]);
+            if (status.GetTeam().Count>=(i+1))
+            {
+                pokemons[i].AddPokemon(status.GetTeam()[i]);
+            }
         }
     }
 }
