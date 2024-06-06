@@ -12,6 +12,6 @@ public class HPBar : MonoBehaviour
 
     public void SetHP(Pokemon pokemon){
         health.transform.localScale = new Vector3((float)pokemon.HP/pokemon.MaxHP,1f);
-        hpText.text = $"ExpT= {pokemon.MaxExp}";
+        hpText.text = $"HP:{pokemon.HP}/{pokemon.MaxHP}";
     }
 }

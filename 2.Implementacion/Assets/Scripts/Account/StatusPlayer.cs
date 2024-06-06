@@ -13,19 +13,17 @@ public class StatusPlayer
     // TODO Para implementrae a futuro
     //private GameObject genero;
     private int money;
-    private Stopwatch time;
     private bool[] medallas;
     private Vector3 ubicationWorld;
 
     private StatusPlayer(){
         myTeam = new List<Pokemon>();
-        name = "";
+        name = "Iván";
         myPokemons = new List<Pokemon>();
         medallas = new bool[3]{false,false,false};
         ubicationWorld = new Vector3(5.5f,-34.7f,0f);
         Rival = new List<Pokemon>();
         money = 0;
-        time = new Stopwatch();
     }
 
     public static StatusPlayer getInstance(){
@@ -42,6 +40,11 @@ public class StatusPlayer
     public string GetName(){
         return name;
     }
+
+    public int GetMoney(){
+        return money;
+    }
+
     public void SavePokemon(Pokemon pokemon){
         if (myTeam.Count<6)
             myTeam.Add(pokemon);

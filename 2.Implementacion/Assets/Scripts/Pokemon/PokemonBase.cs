@@ -47,10 +47,11 @@ public class PokemonBase
         int speed;
         byte[] spriteFront;
         byte[] spriteBack;
+        int expBase;
 
         IDbCommand command = connection.CreateCommand();
         
-        query = "SELECT NAME, WEIGHT, DESCRIPTION, TYPE_ID, HP, ATTACK, DEFENSE, SP_ATTACK, SP_DEFENSE, SPEED, SPRITE_FRONT, SPRITE_BACK FROM POKEMON WHERE POKEDEX_ID = "+pokedex_id;
+        query = "SELECT NAME, WEIGHT, DESCRIPTION, TYPE_ID, HP, ATTACK, DEFENSE, SP_ATTACK, SP_DEFENSE, SPEED, SPRITE_FRONT, SPRITE_BACK, BASE_EXPERIENCE FROM POKEMON WHERE POKEDEX_ID = "+pokedex_id;
         command.CommandText = query;
         using (IDataReader reader = command.ExecuteReader())
             {
@@ -67,6 +68,7 @@ public class PokemonBase
                 speed = reader.GetInt32(9);
                 spriteFront = (byte[])reader.GetValue(10);
                 spriteBack = (byte[])reader.GetValue(11);
+                expBase = reader.GetInt32(12);
                 reader.Close();
             }
         int secondType;
@@ -90,11 +92,11 @@ public class PokemonBase
             query = "SELECT EVOLUTION_ID FROM POKEMON WHERE POKEDEX_ID = "+pokedex_id;
             int evolutionId = ExecuteScalarInt(command, query);
 
-            pokemon = new PokemonBase(pokedex_id, name, description, weight, type1, type2, hp, attack, defense, spAttack, spDefense, speed, spriteFront, spriteBack, levelEvolution, evolutionId);
+            pokemon = new PokemonBase(pokedex_id, name, description, weight, type1, type2, hp, attack, defense, spAttack, spDefense, speed, spriteFront, spriteBack, expBase, levelEvolution, evolutionId);
         }
         catch (Exception)
         {
-            pokemon = new PokemonBase(pokedex_id, name, description, weight, type1, type2, hp, attack, defense, spAttack, spDefense, speed, spriteFront, spriteBack);
+            pokemon = new PokemonBase(pokedex_id, name, description, weight, type1, type2, hp, attack, defense, spAttack, spDefense, speed, spriteFront, spriteBack, expBase);
         }
         
         query = "SELECT MOVE_ID, LEVEL_UP FROM MOVELEARNER WHERE POKEMON_ID = "+pokedex_id;
@@ -131,7 +133,7 @@ public class PokemonBase
         }
         return moves;
     }
-    public PokemonBase(int pokedex_id, string namePokemon, string description, int weight, PokemonType type1, PokemonType type2, int maxHP, int attack, int defense, int spAttack, int spDefense, int speed, byte[] frontSprite, byte[] backSprite, int levelPokemon, int evolutionId){
+    public PokemonBase(int pokedex_id, string namePokemon, string description, int weight, PokemonType type1, PokemonType type2, int maxHP, int attack, int defense, int spAttack, int spDefense, int speed, byte[] frontSprite, byte[] backSprite, int expBase, int levelPokemon, int evolutionId){
         this.pokedex_id = pokedex_id;
         this.namePokemon = namePokemon;
         this.description = description;
@@ -149,10 +151,10 @@ public class PokemonBase
         this.levelPokemon = levelPokemon;
         this.evolutionId = evolutionId;
         // Cambiar cuando implemente la informacion de la experiencia base
-        this.expBase = 143;
+        this.expBase = expBase;
         learnableMoves = new List<LearnableMove>();
     }
-    public PokemonBase(int pokedex_id, string namePokemon, string description, int weight, PokemonType type1, PokemonType type2, int maxHP, int attack, int defense, int spAttack, int spDefense, int speed, byte[] frontSprite, byte[] backSprite){
+    public PokemonBase(int pokedex_id, string namePokemon, string description, int weight, PokemonType type1, PokemonType type2, int maxHP, int attack, int defense, int spAttack, int spDefense, int speed, byte[] frontSprite, byte[] backSprite, int expBase){
         this.pokedex_id = pokedex_id;
         this.namePokemon = namePokemon;
         this.description = description;
@@ -168,6 +170,7 @@ public class PokemonBase
         this.frontSprite = ConvertSprite(frontSprite);
         this.backSprite = ConvertSprite(backSprite);
         learnableMoves = new List<LearnableMove>();
+        this.expBase = expBase;
     }
     
     private Sprite ConvertSprite(byte[] picture){

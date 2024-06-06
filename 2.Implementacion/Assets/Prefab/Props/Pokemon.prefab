@@ -92,6 +92,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: {fileID: 8957587522038982244}
+  hpText: {fileID: 0}
 --- !u!1 &238852366001211318
 GameObject:
   m_ObjectHideFlags: 0
@@ -203,11 +204,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 2097079667661325149}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.01361084, y: 0.057001114}
-  m_SizeDelta: {x: -0.193, y: -0.584}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: 0.11010742, y: 0.05699699}
+  m_SizeDelta: {x: -0.193, y: 27.386}
+  m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &1371258891665712026
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -236,11 +237,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 62631579, guid: 2139d622366226f44a902f80157061bb, type: 3}
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
+  m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
@@ -641,6 +642,7 @@ GameObject:
   - component: {fileID: 2486309675695655252}
   - component: {fileID: 7299971084987114467}
   - component: {fileID: 8378656304415358513}
+  - component: {fileID: 9012367057314392126}
   m_Layer: 5
   m_Name: Experience
   m_TagString: Untagged
@@ -707,6 +709,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &9012367057314392126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4424985926182900213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6d0f050b86007244a92bc3435ae8d90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  experience: {fileID: 547079288427554245}
 --- !u!1 &6337860139356330801
 GameObject:
   m_ObjectHideFlags: 0
@@ -806,7 +821,7 @@ MonoBehaviour:
   levelPokemon: {fileID: 1559403375834213274}
   hpCount: {fileID: 384494029938824083}
   hpBar: {fileID: 3047378217945969976}
-  expBar: {fileID: 0}
+  expBar: {fileID: 9012367057314392126}
 --- !u!114 &5576076101976221064
 MonoBehaviour:
   m_ObjectHideFlags: 0

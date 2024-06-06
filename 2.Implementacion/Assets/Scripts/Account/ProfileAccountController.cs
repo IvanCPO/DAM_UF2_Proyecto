@@ -1,18 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ProfileAccountController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] Text name;
+    [SerializeField] Text money;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void SetData(StatusPlayer status){
+        name.text = status.GetName();
+        money.text = status.GetMoney()+"€";
     }
 }

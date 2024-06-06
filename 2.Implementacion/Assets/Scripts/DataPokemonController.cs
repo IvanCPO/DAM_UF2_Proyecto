@@ -9,7 +9,7 @@ public class DataPokemonController : MonoBehaviour
     [SerializeField] Text levelPokemon;
     [SerializeField] Text hpCount;
     [SerializeField] HPBar hpBar;
-    [SerializeField] GameObject expBar;
+    [SerializeField] ExpBarController expBar;
     private Pokemon pokemon;
     // Start is called before the first frame update
     void Start()
@@ -25,6 +25,7 @@ public class DataPokemonController : MonoBehaviour
             namePokemon.text = pokemon.Base.Name;
             levelPokemon.text = "Lvl. "+pokemon.Level;
             hpCount.text = "HP "+pokemon.HP+"/"+pokemon.MaxHP;
+            expBar.SetExp(pokemon);
         }else
         {
             Debug.Log("El pokemon no existe.");

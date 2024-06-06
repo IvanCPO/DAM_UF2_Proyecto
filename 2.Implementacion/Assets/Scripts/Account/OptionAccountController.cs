@@ -11,6 +11,7 @@ public class OptionAccountController : MonoBehaviour
 
     public void SetDataPlayer(){
         var status = StatusPlayer.getInstance();
+        account.SetData(status);
         team.SetDataTeam(status);
         for (int i = 0; i < status.Medallas.Length; i++)
         {
