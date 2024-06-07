@@ -2588,7 +2588,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7266298090653176998}
         m_TargetAssemblyTypeName: TeamController, Assembly-CSharp
-        m_MethodName: OpenPokemonInfo
+        m_MethodName: ChangePokemon
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

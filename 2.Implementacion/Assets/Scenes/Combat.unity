@@ -4647,6 +4647,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TeamPokemon
       objectReference: {fileID: 0}
+    - target: {fileID: 5797582453375263801, guid: 6233d15e03a4de442810a206ce3d8a06, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6994505120766770029, guid: 6233d15e03a4de442810a206ce3d8a06, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

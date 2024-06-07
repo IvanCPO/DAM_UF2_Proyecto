@@ -13,15 +13,26 @@ public class OptionsController : MonoBehaviour
     private BattleSystem system;
     private DialogCombat dialog;
     private bool decide;
+    private bool attack;
     private HitsController hitsController;
     private void Start(){
         dialog = GameObject.FindGameObjectWithTag("DialogMessage").GetComponent<DialogCombat>();
         reproductor = GetComponent<AudioSource>();
         system = GameObject.FindGameObjectWithTag("GameController").GetComponent<BattleSystem>();
         decide = false;
+        attack = false;
         hitsController = HitsController.GetInstance();
     }
 
+    void Update(){
+        if (teamController.PokChange()!=null)
+        {
+            pokemon = teamController.PokChange();
+            teamController.Reset();
+            decide = true;
+            attack = false;
+        }
+    }
     public void OpenFight()
     {
         Invoke("ChangeDialog", 0.8f);
@@ -35,7 +46,7 @@ public class OptionsController : MonoBehaviour
     }
 
     private void OpenList(){
-        teamController.OpenList();
+        teamController.OpenList(pokemon);
     }
 
 
@@ -89,7 +100,7 @@ public class OptionsController : MonoBehaviour
 
     public void Atack(int option){
         hitsController.MovePlayer= hitsController.Player.Moves[option-1];
-        
+        Debug.Log("Active attack "+hitsController.MovePlayer.Base.Name);
         ReproducirTimbre();
         Invoke("Fight",1f);
         
@@ -97,6 +108,7 @@ public class OptionsController : MonoBehaviour
 
     private void Fight(){
         decide = true;
+        attack = true;
     }
     internal void SetMoves(Pokemon pokemon)
     {
@@ -105,6 +117,12 @@ public class OptionsController : MonoBehaviour
     }
     public bool IsTake(){
         return decide;
+    }
+    public bool IsAttack(){
+        return attack;
+    }
+    public Pokemon GetPokemonChange(){
+        return pokemon;
     }
 
     private void ReproducirTimbre(){

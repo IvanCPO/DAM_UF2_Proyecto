@@ -47,11 +47,7 @@ public class DialogCombat : MonoBehaviour
         system.FinishDialog();
     }
     public void OcultarMostrarDialog(){
-        if (gameObject.active)
-        {
-            gameObject.SetActive(false);
-        }else
-            gameObject.SetActive(true);
+        gameObject.SetActive(!gameObject.active);
     }
 
 

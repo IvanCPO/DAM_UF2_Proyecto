@@ -35,6 +35,16 @@ public class PictureBattle : MonoBehaviour
         StopAnimation();
         Invoke("StopAnimation",0.5f);
     }
+
+    public void ThrowAnimationGo(){
+        StopAnimation();
+        Invoke("StopAnimation",0.5f);
+    }
+
+    public void ThrowAnimationReturn(){
+        StopAnimation();
+        Invoke("StopAnimation",0.5f);
+    }
     private void StopAnimation(){
         var isAttack = gameObject.GetComponent<Animator>().GetBool("isAttack");
         gameObject.GetComponent<Animator>().SetBool("isAttack",!isAttack);

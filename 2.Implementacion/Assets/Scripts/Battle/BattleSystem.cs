@@ -19,16 +19,18 @@ public class BattleSystem : MonoBehaviour
     private bool timeText;
     private bool firstTurn;
     private bool timeAttack;
+    private bool changePokemon;
     private bool invokeOptions;
     private HitsController hitsController;
 
     void Start()
     {
         hitsController = HitsController.GetInstance();
-        invokeOptions=true;
-        timeText=true;
-        timeAttack=false;
-        firstTurn=true;
+        invokeOptions = true;
+        timeText = true;
+        timeAttack = false;
+        changePokemon = false;
+        firstTurn = true;
         playerStatus = StatusPlayer.getInstance();
         SetupBattle();
     }
@@ -63,13 +65,27 @@ public class BattleSystem : MonoBehaviour
                 options.OcultAllDialog();
                 DecideTurnHit(firstTurn);
             }
+            if (changePokemon)
+            {
+                invokeOptions = true;
+                changePokemon = false;
+                options.OcultAllDialog();
+                ChangePokemonHit();
+            }
         }
 
     }
 
     private void TakeDecision()
     {
-        timeAttack = true;
+        if (options.IsAttack())
+        {
+            Debug.Log("GOLPEA");
+            timeAttack = true;
+        }else
+        {
+            changePokemon = true;
+        }
         timeText = true;
     }
 
@@ -84,36 +100,50 @@ public class BattleSystem : MonoBehaviour
             }
             else
             {
-                hitsController.GenerateMoveRandom();
-                Debug.Log("Golpe enemigo");
-                messageCombat.GenerateTextEnemy(hitsController.Rival.Base.Name+" ha utilizado "+ hitsController.GetMoveRival().Base.Name +" contra ti!!!");
-                enemy.ThrowAnimationAttack();
-                Invoke("HitRival",3.00f);
+                MakeEnemyAttack();
             }
-        }else
+        }
+        else
         {
             if (hitsController.Player.HP!=0 && hitsController.Rival.HP!=0)
             {
                 if (pokemon.Speed<rival.Speed)
                 {
-                    Debug.Log("Golpe jugador");
+                    Debug.Log("Decision player");
                     messageCombat.GenerateTextPlayer("Tu "+hitsController.Player.Base.Name+" ha utilizado "+ hitsController.MovePlayer.Base.Name +" contra el rival!!!");
                     player.ThrowAnimationAttack();
                     Invoke("HitPlayer",3.00f);
                 }
                 else
                 {
-                    hitsController.GenerateMoveRandom();
-                    Debug.Log("Golpe enemigo");
-                    messageCombat.GenerateTextEnemy(hitsController.Rival.Base.Name+" ha utilizado "+ hitsController.GetMoveRival().Base.Name +" contra ti!!!");
-                    enemy.ThrowAnimationAttack();
-                    Invoke("HitRival",3.00f);
+                    MakeEnemyAttack();
                 }
             }else
                 ChangeTurn();
         }
     }
 
+    private void ChangePokemonHit()
+    {
+        Debug.Log("Decision player (change pokemon)");
+        string valueMessage = "VUELVE JEFE! TE TOCA A TI!! [Has cambiado de "+hitsController.Player.Base.Name;
+        hitsController.Player = options.GetPokemonChange();
+        valueMessage+= " por tu "+hitsController.Player.Base.Name+"]";
+        messageCombat.GenerateTextPlayer(valueMessage);
+        Invoke("UpdateData",2f);
+
+        Invoke("MakeEnemyAttack",2f);
+        firstTurn=false;
+    }
+
+    private void MakeEnemyAttack()
+    {
+        hitsController.GenerateMoveRandom();
+        Debug.Log("Decision enemy");
+        messageCombat.GenerateTextEnemy(hitsController.Rival.Base.Name + " ha utilizado " + hitsController.GetMoveRival().Base.Name + " contra ti!!!");
+        enemy.ThrowAnimationAttack();
+        Invoke("HitRival", 3.00f);
+    }
 
     private void HitPlayer(){
         pokemon = hitsController.HitPlayer();
@@ -132,7 +162,7 @@ public class BattleSystem : MonoBehaviour
         }else{
             timeText = false;
             firstTurn = true;
-            timeAttack = true;
+            timeAttack = false;
         }
         messageCombat.OcultarMostrarDialog();
         UpdateData();
@@ -151,7 +181,7 @@ public class BattleSystem : MonoBehaviour
         if (rival.HP==0)
         {
             pokemon.LevelUp(ObtenerExperience());
-            messageCombat.GenerateTextPlayer("El pokemon ha sido debilitado");
+            messageCombat.GenerateTextPlayer("El rival ha sido debilitado");
         }
         else
         {

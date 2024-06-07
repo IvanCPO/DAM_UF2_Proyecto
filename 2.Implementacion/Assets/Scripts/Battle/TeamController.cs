@@ -13,15 +13,29 @@ public class TeamController : MonoBehaviour
     private StatusPlayer status;
     private int pokemonConfirmIndex;
     private Pokemon pokemonSelected;
+    private Pokemon pokemonChange;
+
     void Start()
     {
         status = StatusPlayer.getInstance();
+        pokemonChange = null;
     }
     
     public void OpenList(){
         gameObject.SetActive(true);
-        pokemonSelected =null;
+        pokemonSelected = null;
+        pokemonChange = null;
         Invoke("UpdatePokemons",0.0001f);
+
+    }
+    
+    public void OpenList(Pokemon pokemon){
+        gameObject.SetActive(true);
+        pokemonSelected = pokemon;
+        pokemonChange = null;
+        Invoke("UpdatePokemons",0.0001f);
+        Invoke("CheckSelected",0.0001f);
+
     }
     
     public void Close(){
@@ -39,27 +53,26 @@ public class TeamController : MonoBehaviour
                 optionsPanel.SetActive(false);
             }else
             {
+                CheckSelected();
                 gameObject.SetActive(false);
             }
         }
-        
     }
     
     public void OpenInfoMenu(int pokemon){
-        if (pokemonSelected == null)
+        pokemonConfirmIndex = pokemon;
+        if (SceneManager.GetActiveScene().buildIndex==4)
         {
-            if (SceneManager.GetActiveScene().buildIndex==4)
-            {
-                confirmPanel.SetActive(true);
-            }else{
-                optionsPanel.SetActive(true);
-            }
-            pokemonConfirmIndex = pokemon;
+            confirmPanel.SetActive(true);
             Invoke("SetPokemonBasicData",0.000000001f);
-        }else{
-            status.GetTeam()[pokemonConfirmIndex] = status.GetTeam()[pokemon];
-            status.GetTeam()[pokemon] = pokemonSelected;
-            ChangePokemon();
+        }
+        else{
+            if (pokemonSelected == null)
+                optionsPanel.SetActive(true);
+            else
+            {
+                ChangePokemon();
+            }
         }
     }
 
@@ -81,21 +94,70 @@ public class TeamController : MonoBehaviour
 
     }
     public void ChangePokemon(){
-        if (pokemonSelected==null)
+        if (SceneManager.GetActiveScene().buildIndex!=4)
         {
-            pokemons[pokemonConfirmIndex].isSelected();
-            pokemonSelected = status.GetTeam()[pokemonConfirmIndex];
-            Close();
-        }else{
-            pokemons[pokemonConfirmIndex].isSelected();
-            UpdatePokemons();
-            pokemonSelected = null;
+            if (pokemonSelected==null)
+            {
+                pokemons[pokemonConfirmIndex].isSelected();
+                pokemonSelected = status.GetTeam()[pokemonConfirmIndex];
+                Close();
+            }else
+            {
+                CheckSelected();
+                Invert();
+                UpdatePokemons();
+                pokemonSelected = null;
+            }
+        }
+        else
+        {
+            if(pokemonSelected==status.GetTeam()[pokemonConfirmIndex])
+                Close();
+            else{
+                pokemonChange = status.GetTeam()[pokemonConfirmIndex];
+                Close();
+                Close();
+            }
+        }
+    }
+
+    private void Invert()
+    {
+        for (int i = 0; i < status.GetTeam().Count; i++)
+        {
+            if (status.GetTeam()[i] == pokemonSelected)
+            {
+                status.GetTeam()[i] = status.GetTeam()[pokemonConfirmIndex];
+                status.GetTeam()[pokemonConfirmIndex] = pokemonSelected;
+                break;
+            }
+        }
+    }
+
+    public Pokemon PokChange(){
+        return pokemonChange;
+    }
+
+    public void Reset(){
+        pokemonChange = null;
+    }
+
+    private void CheckSelected(){
+        // Debug.Log("El numero de pokemons es de = "+status.GetTeam().Count);
+        for (int i = 0; i < status.GetTeam().Count; i++)
+        {
+            // Debug.Log("Compare "+status.GetTeam()[i].Base.Name+" is like "+pokemonSelected.Base.Name+"? "+(status.GetTeam()[i]==pokemonSelected));
+            if (status.GetTeam()[i]==pokemonSelected)
+            {
+                pokemons[i].isSelected();
+                break;
+            }
         }
     }
 
     private void UpdatePokemons(){
         Debug.Log("El numero de pokemons es de = "+status.GetTeam().Count);
-        for (int i = 0; pokemons.Count < 6; i++)
+        for (int i = 0; i < 6; i++)
         {
             if (status.GetTeam().Count>=(i+1))
             {
@@ -103,4 +165,5 @@ public class TeamController : MonoBehaviour
             }
         }
     }
+    
 }
