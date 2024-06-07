@@ -143,6 +143,30 @@ public class Pokemon
         }
         return false;
     }
+    public MoveBase isLearning(){
+        MoveBase newMove = null;
+        foreach (var move in Base.LearnableMoves)
+        {
+
+            if (move.Level == Level)
+            {
+                newMove=move.Base;
+            }
+            if (move.Level>Level)
+            {
+                break;
+            }
+        }
+        return newMove;
+    }
+    public bool LearnAlone(MoveBase move){
+        if (Moves.Count<4)
+        {
+            addMove(move);
+            return true;
+        }
+        return false;
+    }
 
     public void addMove(MoveBase move){
         Moves.Add(new Move(move));

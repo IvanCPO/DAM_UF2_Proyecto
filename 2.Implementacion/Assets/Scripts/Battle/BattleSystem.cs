@@ -12,6 +12,7 @@ public class BattleSystem : MonoBehaviour
     [SerializeField] BattleHud enemyLive;
     [SerializeField] OptionsController options;
     [SerializeField] DialogCombat messageCombat;
+    [SerializeField] NewMoveController newMove;
 
     StatusPlayer playerStatus;
     private Pokemon rival;
@@ -36,6 +37,10 @@ public class BattleSystem : MonoBehaviour
     }
 
     private void Update(){
+        if (true)
+        {
+            
+        }
         
         if (!timeText)
         {
@@ -126,7 +131,7 @@ public class BattleSystem : MonoBehaviour
     private void ChangePokemonHit()
     {
         Debug.Log("Decision player (change pokemon)");
-        string valueMessage = "VUELVE JEFE! TE TOCA A TI!! [Has cambiado de "+hitsController.Player.Base.Name;
+        string valueMessage = "VUELVE JEFE! AHORA PELEA!! [Has cambiado de "+hitsController.Player.Base.Name;
         hitsController.Player = options.GetPokemonChange();
         valueMessage+= " por tu "+hitsController.Player.Base.Name+"]";
         messageCombat.GenerateTextPlayer(valueMessage);
@@ -160,14 +165,61 @@ public class BattleSystem : MonoBehaviour
             firstTurn=false;
             timeAttack = true;
         }else{
-            timeText = false;
-            firstTurn = true;
-            timeAttack = false;
+            if (hitsController.Rival.HP==0)
+            {
+                NextPokemonRival();
+            }else{
+                timeText = false;
+                firstTurn = true;
+                timeAttack = false;
+            }
         }
         messageCombat.OcultarMostrarDialog();
         UpdateData();
     }
 
+    private int exp = 0;
+    private void NextPokemonRival()
+    {
+        exp = ObtenerExperience();
+        rival = null;
+        foreach (Pokemon p in playerStatus.Rival)
+        {
+            // Debug.Log("The pokemon enemy "+rival.Base.Name+" is like "+p.Base.Name+" of her team? "+(rival==p));
+            if (p.HP>0)
+            {
+                rival = p;
+                break;
+            }
+        }
+        DeathNote();
+    }
+
+    private void DeathNote()
+    {
+        if (rival!=null)
+        {
+            messageCombat.GenerateTextInfo("Has debilitado al enemigo. Enhorabuena!!");
+            
+        }
+        if(pokemon.LevelUp(exp)){
+            messageCombat.GenerateTextInfo("Tu Pokemon ha subido de nivel");
+            MoveBase move = pokemon.isLearning();
+            if (move!=null)
+            {
+                LearnMoves(move);
+            }
+        }
+    }
+
+    private void LearnMoves(MoveBase move){
+        if (pokemon.LearnAlone(move))
+        {
+            messageCombat.GenerateTextInfo("Tu "+pokemon.Base.Name+" ha aprendido "+move.Name);
+        }else{
+            newMove.LearnMove(pokemon, move);
+        }
+    }
     private void UpdateData(){
         
         player.Setup(hitsController.Player);
@@ -204,10 +256,13 @@ public class BattleSystem : MonoBehaviour
         if (playerStatus.GetTeam().Count==0)
         {
             pokemon = new Pokemon(PokemonBase.GetPokemonBase(4),6);
+            pokemon.LevelUp(pokemon.MaxExp-4);
             playerStatus.GetTeam().Add(pokemon);
             pokemon = new Pokemon(PokemonBase.GetPokemonBase(1),6);
             playerStatus.GetTeam().Add(pokemon);
-            rival = new Pokemon(PokemonBase.GetPokemonBase(7),6);
+            rival = new Pokemon(PokemonBase.GetPokemonBase(7),3);
+            playerStatus.Rival.Add(rival);
+            rival = new Pokemon(PokemonBase.GetPokemonBase(14),3);
             playerStatus.Rival.Add(rival);
         }
 
