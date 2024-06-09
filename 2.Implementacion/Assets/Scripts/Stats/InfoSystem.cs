@@ -22,6 +22,8 @@ public class InfoSystem : MonoBehaviour, InterfaceData
         gameObject.SetActive(false);
     }
     public void CheckMoveInfo(int move){
+        moves.ClearMovesSelected();
+        moves.GetMoves()[move].ChangeSelected();
         moveInfo.InsertDataMove(pokemon.Moves[move]);
     }
 

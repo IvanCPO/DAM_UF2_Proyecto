@@ -58,6 +58,49 @@ public class Pokemon
             }
         }
     }
+    public Pokemon (Pokemon preEvolution, PokemonBase pokemon){
+
+        random = new System.Random();
+        Exp=preEvolution.Exp;
+        Base=pokemon;
+        this.Level = preEvolution.Level;
+        ailment = Efect.NONE;
+        
+        //Generate IVs
+        IVhp = preEvolution.IVhp;
+        IVattack = preEvolution.IVattack;
+        IVdefense = preEvolution.IVdefense;
+        IVSpA = preEvolution.IVSpA;
+        IVSpD = preEvolution.IVSpD;
+        IVspeed = preEvolution.IVspeed;
+
+        HP = Ajust(preEvolution, pokemon);
+        Moves = preEvolution.Moves;
+        // if (Base.LearnableMoves!=null)
+        // {
+        //     foreach (var move in Base.LearnableMoves)
+        //     {
+
+        //         if (move.Level <= Level)
+        //         {
+        //             if (Moves.Count==4)
+        //             {
+        //                 LearnerMove(move.Base);
+        //             }else
+        //                 Moves.Add(new Move(move.Base));
+        //         }
+
+        //     }
+        // }
+    }
+
+    private int Ajust(Pokemon preEvolution, PokemonBase pokemon)
+    {
+        int sum = pokemon.MaxHP;
+        sum -= preEvolution.MaxHP;
+        sum += preEvolution.HP;
+        return sum;
+    }
 
     private void LearnerMove(MoveBase move){
         if (random.Next(3)==0)
@@ -125,11 +168,13 @@ public class Pokemon
         }
     }
 
-
     public int Expirience{
         get{return Exp;}
     }
+
+
     public bool LevelUp(int experience){
+        var sum = this.MaxHP;
         Exp+=experience;
         if (Exp>=MaxExp)
         {
@@ -138,6 +183,8 @@ public class Pokemon
                 Exp = Exp-MaxExp;
             }
             Level++;
+            sum-=this.MaxHP;
+            this.HP -=sum;
             
             return true;
         }
@@ -145,17 +192,15 @@ public class Pokemon
     }
     public MoveBase isLearning(){
         MoveBase newMove = null;
+        // Debug.Log("The level of the pokemon is " + Level);
         foreach (var move in Base.LearnableMoves)
         {
-
-            if (move.Level == Level)
+            
+            if (move.Level == this.Level)
             {
                 newMove=move.Base;
             }
-            if (move.Level>Level)
-            {
-                break;
-            }
+            
         }
         return newMove;
     }
@@ -170,6 +215,11 @@ public class Pokemon
 
     public void addMove(MoveBase move){
         Moves.Add(new Move(move));
+    }
+
+
+    public void ChangeMove(Move move, int index){
+        Moves[index]= move;
     }
 
     public void setEfectAttack(Efect efect){

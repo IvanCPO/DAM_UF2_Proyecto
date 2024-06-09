@@ -23,5 +23,20 @@ public class BattleMoves : MonoBehaviour
             
         }
     }
+    public List<OptionMoveController> GetMoves(){
+        return movesButton;
+    }
+
+    public bool IsSelected(int index){
+        return movesButton[index].IsSelected();
+    }
+    
+    public void ClearMovesSelected(){
+        foreach (OptionMoveController moveController in movesButton)
+        {
+            if(moveController.IsSelected())
+                moveController.ChangeSelected();
+        }
+    }
     
 }

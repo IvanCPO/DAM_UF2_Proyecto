@@ -75,8 +75,24 @@ public class HitsController
     }
 
     private int Hit(Pokemon kicker, Move m, Pokemon enemy){
-        int res = (int)(((2*kicker.Level/5+2)* 1 * kicker.Attack/enemy.Defense)* m.Base.Power / 50 * 1 + 2 * Stab(kicker,m) * GetValueRandom()* Critical());
+        int res = (int)((2*kicker.Level/5+2)* 1 * kicker.Attack/enemy.Defense* m.Base.Power / 50 * 1 + 2 * Stab(kicker,m) * Eficaz(m,enemy) * GetValueRandom() * Critical());
         return res;
+    }
+
+    private float Eficaz(Move m, Pokemon enemy)
+    {
+        float efectividad = 1.0f;
+
+        if (TableTypeController.efectivos.TryGetValue((m.Base.Type, enemy.Base.Type1), out double valorPrimario))
+        {
+            efectividad *= (float)valorPrimario;
+        }
+
+        if (enemy.Base.Type2 == PokemonType.None && TableTypeController.efectivos.TryGetValue((m.Base.Type, enemy.Base.Type2), out double valorSecundario))
+        {
+            efectividad *= (float)valorSecundario;
+        }
+        return efectividad;
     }
 
     private int Critical()

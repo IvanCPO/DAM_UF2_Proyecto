@@ -8,6 +8,7 @@ public class OptionMoveController : MonoBehaviour
     [SerializeField] Text nameMove;
     [SerializeField] Text ppMove;
     [SerializeField] PictureTypeController type;
+    [SerializeField] GameObject selected;
     private Move move;
 
     public void SetDataMove(Move move){
@@ -25,5 +26,13 @@ public class OptionMoveController : MonoBehaviour
     public void RemoveAPP(){
         move.PP--;
         ppMove.text = "PP "+move.PP+"/"+move.Base.PP;
+    }
+
+    public bool IsSelected(){
+        return selected.activeSelf;
+    }
+    
+    public void ChangeSelected(){
+        selected.SetActive(!selected.activeSelf);
     }
 }
