@@ -39,7 +39,7 @@ public class OptionsInitialController : MonoBehaviour
     }
     public void IntroduceName(Text nameValue){
         ReproduceSong();
-        player.SaveUserPlayer(nameValue.text);
+        player.GiveNamePlayer(nameValue.text);
         Invoke("IsSure",1f);
     }
     private void IsSure(){
@@ -75,6 +75,7 @@ public class OptionsInitialController : MonoBehaviour
 
     private void StartGame(){
         SceneManager.LoadScene(2);
+        
     }
 
     private void ReturnInicio(){

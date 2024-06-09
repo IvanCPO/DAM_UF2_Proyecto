@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Diagnostics;
 using UnityEngine;
 
 [System.Serializable]
@@ -14,16 +13,20 @@ public class StatusPlayer
     //private GameObject genero;
     private int money;
     private bool[] medallas;
-    private Vector3 ubicationWorld;
+    private Ubication world;
+    private Ubication actual;
+    private Ubication restUbi;
 
     private StatusPlayer(){
         myTeam = new List<Pokemon>();
         name = "Iván";
         myPokemons = new List<Pokemon>();
         medallas = new bool[3]{false,false,false};
-        ubicationWorld = new Vector3(5.5f,-34.7f,0f);
         Rival = new List<Pokemon>();
         money = 0;
+        world = new Ubication(new Vector3(5.5f,-34.7f,0f),"Layer 1",3);
+        world = new Ubication(new Vector3(0f,0f,0f),"Layer 1",2);
+
     }
 
     public static StatusPlayer getInstance(){
@@ -39,6 +42,11 @@ public class StatusPlayer
 
     public string GetName(){
         return name;
+    }
+
+    public void GiveNamePlayer(string name){
+        this.name = name;
+        
     }
 
     public int GetMoney(){
@@ -57,11 +65,6 @@ public class StatusPlayer
     } */
     public bool[] Medallas{
         get{return medallas;}
-    }
-
-    public void SaveUserPlayer(string name){
-        this.name = name;
-        
     }
 
     /*public GameObject GetPlayerGenere(){
@@ -90,13 +93,6 @@ public class StatusPlayer
         }
     }
 
-    public void SaveOldUbication(Vector3 vector3){
-        ubicationWorld = vector3;
-    }
-    public Vector3 getUbicationWorld(){
-        return ubicationWorld;
-    }
-
     internal int GetTotalHPTeam()
     {
         int count = 0;
@@ -119,6 +115,30 @@ public class StatusPlayer
             count+=pokemon.HP;
         }
         return count;
+    }
+
+    public void SaveUbication(Vector3 ubication, string layout, int scene){
+        Ubication u = new Ubication(ubication, layout, scene);
+        if (scene == 3){
+            world = u;
+        }
+        actual = u;
+    }
+
+    public void SaveRestUbication(Vector3 ubication, string layout, int scene){
+        restUbi = new Ubication(ubication, layout, scene);
+    }
+    
+    public Ubication getUbicationWorld(){
+        return world;
+    }
+    
+    public Ubication getUbicationActual(){
+        return world;
+    }
+    
+    public Ubication getUbicationRest(){
+        return world;
     }
 
 }

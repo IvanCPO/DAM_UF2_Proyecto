@@ -13,11 +13,15 @@ public class ChangeSceneController : MonoBehaviour
         // Comprueba si el objeto que entra en contacto es el jugador
         if (other.gameObject.CompareTag("Player"))
         {
+            game = other.gameObject.GetComponent<GameManager>();
+            Debug.Log("Name game controller = " + game.ToString());
             if(SceneManager.GetActiveScene().buildIndex == 3){
-                game = other.gameObject.GetComponent<GameManager>();
+                Debug.Log(game.ToString());
                 Vector3 loc = new Vector3(other.gameObject.transform.position.x,
                 other.gameObject.transform.position.y-0.1f,other.gameObject.transform.position.z);
-                game.SaveUbication(loc);
+                string layout = LayerMask.LayerToName(other.gameObject.layer);
+                Debug.Log("nombre del layout = "+layout);
+                game.SaveUbication(loc, layout);
             }
             
             // Cambia a la escena especificada
