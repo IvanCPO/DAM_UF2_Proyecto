@@ -28,14 +28,15 @@ public class DialogCombat : MonoBehaviour
         text.text = dialog;
         border.text = dialog;
     }
-
-    public void StartGame(List<Pokemon> rival){
+    private StatusRival rivalStatus;
+    public void StartGame(){
+        rivalStatus = StatusRival.GetRival();
         string messageStart;
-        if (rival.Count==1)
+        if (rivalStatus.IsWild)
         {
-            messageStart = "HA APARECIDO UN "+rival[0].Base.Name.ToUpper()+" SALVAJE!!!! A PELEAR!!!";
+            messageStart = "Un pokemon salvaje ha aparecido. ES "+rivalStatus.Team[0].Base.Name.ToUpper()+"!!!! A PELEAR!!!";
         }else{
-            messageStart = "El combate contra este rival comienza con "+rival[0].Base.Name.ToUpper()+". A PELEAR!!!";
+            messageStart = rivalStatus.NameRival+" te a desafiado a un combate. Lanza a "+rivalStatus.Team[0].Base.Name.ToUpper()+". A PELEAR!!!";
         }
         GenerateTextInfo(messageStart);
         Invoke("InitializeCombat",4f);

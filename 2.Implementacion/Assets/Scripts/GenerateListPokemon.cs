@@ -6,8 +6,13 @@ using UnityEngine;
 public class GenerateListPokemon : MonoBehaviour
 {
     [SerializeField] List<RivalTeam> rival;
+    [SerializeField] string nameRival;
+    [SerializeField] bool isWild;
+    [SerializeField] int money;
+    StatusRival rivalStatus;
     StatusPlayer player;
     private void Start(){
+        rivalStatus = StatusRival.GetRival();
         player = StatusPlayer.getInstance();
     }
     void OnCollisionEnter2D(Collision2D other)
@@ -18,11 +23,16 @@ public class GenerateListPokemon : MonoBehaviour
             if(player.GetTeam().Count>0){
                 // Cambia a la escena especificada
                 Debug.Log("Que empiece el combate");
+                List<Pokemon> list = new List<Pokemon>();
                 foreach (RivalTeam pokemon in rival)
                 {
-                    player.Rival.Add(pokemon.GeneratePokemon());
+                    list.Add(pokemon.GeneratePokemon());
                 }
-                // player.Rival = new Pokemon(PokemonBase.GetPokemonBase(4),levelr);
+                if (isWild)
+                {
+                    rivalStatus.SetDataWild(list[0]);
+                }else
+                    rivalStatus.SetData(list,name,money);
             }
         }
     }

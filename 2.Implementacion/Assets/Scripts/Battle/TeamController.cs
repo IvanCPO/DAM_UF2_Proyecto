@@ -39,16 +39,16 @@ public class TeamController : MonoBehaviour
     }
     
     public void Close(){
-        if (statsPanel.active)
+        if (statsPanel.activeSelf)
         {
             CloseInfoTextMove();
             statsPanel.SetActive(false);
         }else{
-            if (confirmPanel.active)
+            if (confirmPanel.activeSelf)
             {
                 confirmPanel.SetActive(false);
             }else
-            if (optionsPanel.active)
+            if (optionsPanel.activeSelf)
             {
                 optionsPanel.SetActive(false);
             }else
@@ -111,11 +111,16 @@ public class TeamController : MonoBehaviour
         }
         else
         {
-            if(pokemonSelected==status.GetTeam()[pokemonConfirmIndex])
-                Close();
-            else{
-                pokemonChange = status.GetTeam()[pokemonConfirmIndex];
-                Close();
+            if (status.GetTeam()[pokemonConfirmIndex].HP>0)
+            {
+                if(pokemonSelected==status.GetTeam()[pokemonConfirmIndex])
+                    Close();
+                else{
+                    pokemonChange = status.GetTeam()[pokemonConfirmIndex];
+                    Close();
+                    Close();
+                }
+            }else{
                 Close();
             }
         }

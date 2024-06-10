@@ -10,9 +10,10 @@ public class HitsController
     public Pokemon Rival{get;set;}
     private Move moveRival;
     public Move MovePlayer{get;set;}
+    private int countEscape;
 
     private HitsController(){
-
+        countEscape = 1;
     }
 
     public static HitsController GetInstance(){
@@ -66,6 +67,7 @@ public class HitsController
         Rival = null;
         MovePlayer = null;
         moveRival = null;
+        countEscape = 1;
     }
 
     public Move GenerateMoveRandom(){
@@ -116,5 +118,16 @@ public class HitsController
             return 1.5f;
         }
         return 1f;
+    }
+
+    public bool TryEscape(){
+        var p = Player.Speed*32/Rival.Speed+countEscape*30;
+        int r = Random.Range(0,255);
+        Debug.Log("El numero generado es igual a "+p+" y el random es "+r);
+        return p > r;
+    }
+
+    public void IncreaseTry(){
+        countEscape++;
     }
 }

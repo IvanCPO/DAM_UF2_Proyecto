@@ -15,12 +15,14 @@ public class OptionsController : MonoBehaviour
     private bool decide;
     private bool attack;
     private HitsController hitsController;
+    public bool Exit{get;private set;}
     private void Start(){
         dialog = GameObject.FindGameObjectWithTag("DialogMessage").GetComponent<DialogCombat>();
         reproductor = GetComponent<AudioSource>();
         system = GameObject.FindGameObjectWithTag("GameController").GetComponent<BattleSystem>();
         decide = false;
         attack = false;
+        Exit = false;
         hitsController = HitsController.GetInstance();
     }
 
@@ -31,6 +33,7 @@ public class OptionsController : MonoBehaviour
             teamController.Reset();
             decide = true;
             attack = false;
+            Exit = false;
         }
     }
     public void OpenFight()
@@ -53,7 +56,7 @@ public class OptionsController : MonoBehaviour
     public void ChangeDialog()
     {
         decide=false;
-        if (initial.active==true)
+        if (initial.activeSelf==true)
         {
             initial.SetActive(false);
             fightOptions.SetActive(true);
@@ -72,30 +75,23 @@ public class OptionsController : MonoBehaviour
     
 
     public void ExitButton(){
-        if (fightOptions.active==true)
+        if (fightOptions.activeSelf==true)
         {
             Debug.Log("Se cierra opciones Batalla");
             Invoke("ChangeDialog",1f);
-        }else{
-            int val =(int) Random.Range(1f,3f);
-                OcultAllDialog();
-            if(val == 1){
-                dialog.GenerateTextInfo("Has HUIDO");
-                Invoke("RunCombat",1f);
-            }else{
-                dialog.GenerateTextInfo("Careces del suficiente intelecto como para escapar en este momento");
-                Invoke("FalleRun",4f);
-            }
+        }else
+        {
+            Debug.Log("Ubuntu?");
+            Invoke("Run",1f);
         }
         ReproducirTimbre();
     }
 
-    private void RunCombat(){
-        SceneManager.LoadScene(3);
-    }
-    private void FalleRun(){
-        ChangeDialog();
-        dialog.OcultarMostrarDialog();
+    private void Run()
+    {
+        decide = true;
+        Exit = true;
+        attack = false;
     }
 
     public void Atack(int option){
@@ -109,6 +105,7 @@ public class OptionsController : MonoBehaviour
     private void Fight(){
         decide = true;
         attack = true;
+        Exit = false;
     }
     internal void SetMoves(Pokemon pokemon)
     {
@@ -127,5 +124,9 @@ public class OptionsController : MonoBehaviour
 
     private void ReproducirTimbre(){
         reproductor.PlayOneShot(timbre);
+    }
+
+    public bool CheckActiveInitial(){
+        return initial.gameObject.activeSelf;
     }
 }

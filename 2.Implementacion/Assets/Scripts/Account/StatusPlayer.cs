@@ -6,7 +6,6 @@ public class StatusPlayer
 {
     private static StatusPlayer instance;
     private List<Pokemon> myTeam;
-    public List<Pokemon> Rival{get;set;}
     private List<Pokemon> myPokemons;
     private string name;
     // TODO Para implementrae a futuro
@@ -22,7 +21,6 @@ public class StatusPlayer
         name = "Iván";
         myPokemons = new List<Pokemon>();
         medallas = new bool[3]{false,false,false};
-        Rival = new List<Pokemon>();
         money = 0;
         world = new Ubication(new Vector3(5.5f,-34.7f,0f),"Layer 1",3);
         world = new Ubication(new Vector3(0f,0f,0f),"Layer 1",2);
@@ -53,6 +51,18 @@ public class StatusPlayer
         return money;
     }
 
+    public void AddMoney(int money){
+        this.money+=money;
+    }
+
+    public void RemoveMoney(int money){
+        this.money-=money;
+        if (money<0)
+        {
+            money = 0;
+        }
+    }
+
     public void SavePokemon(Pokemon pokemon){
         if (myTeam.Count<6)
             myTeam.Add(pokemon);
@@ -72,7 +82,7 @@ public class StatusPlayer
     }*/
 
     public Pokemon FirstPokemon(){
-        Pokemon pokemon;
+        Pokemon pokemon = GetTeam()[0];
         foreach (Pokemon p in GetTeam())
         {
             if (p.HP!=0)
@@ -81,7 +91,7 @@ public class StatusPlayer
                 break;
             }
         }
-        return myTeam[0];
+        return pokemon;
     }
     public List<Pokemon> GetTeam(){
         return myTeam;
@@ -103,19 +113,6 @@ public class StatusPlayer
         return count;
     }
 
-    public void ClearRival(){
-        Rival = new List<Pokemon>();
-    }
-
-    public int GetRivalHPTeam()
-    {
-        int count = 0;
-        foreach (Pokemon pokemon in Rival)
-        {
-            count+=pokemon.HP;
-        }
-        return count;
-    }
 
     public void SaveUbication(Vector3 ubication, string layout, int scene){
         Ubication u = new Ubication(ubication, layout, scene);
