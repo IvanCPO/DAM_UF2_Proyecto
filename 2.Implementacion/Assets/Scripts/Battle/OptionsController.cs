@@ -16,6 +16,7 @@ public class OptionsController : MonoBehaviour
     private bool attack;
     private HitsController hitsController;
     public bool Exit{get;private set;}
+    public bool Capture{get;private set;}
     private void Start(){
         dialog = GameObject.FindGameObjectWithTag("DialogMessage").GetComponent<DialogCombat>();
         reproductor = GetComponent<AudioSource>();
@@ -23,6 +24,7 @@ public class OptionsController : MonoBehaviour
         decide = false;
         attack = false;
         Exit = false;
+        Capture = false;
         hitsController = HitsController.GetInstance();
     }
 
@@ -34,6 +36,7 @@ public class OptionsController : MonoBehaviour
             decide = true;
             attack = false;
             Exit = false;
+            Capture = false;
         }
     }
     public void OpenFight()
@@ -77,11 +80,11 @@ public class OptionsController : MonoBehaviour
     public void ExitButton(){
         if (fightOptions.activeSelf==true)
         {
-            Debug.Log("Se cierra opciones Batalla");
+            Debug.Log("Close attacks interface");
             Invoke("ChangeDialog",1f);
         }else
         {
-            Debug.Log("Ubuntu?");
+            Debug.Log("Try run");
             Invoke("Run",1f);
         }
         ReproducirTimbre();
@@ -92,6 +95,7 @@ public class OptionsController : MonoBehaviour
         decide = true;
         Exit = true;
         attack = false;
+        Capture = false;
     }
 
     public void Atack(int option){
@@ -106,7 +110,25 @@ public class OptionsController : MonoBehaviour
         decide = true;
         attack = true;
         Exit = false;
+        Capture = false;
     }
+    
+
+    public void TryCapturePokemon()
+    {
+        ReproducirTimbre();
+        Invoke("CaptureBall",1f);
+
+    }
+
+    private void CaptureBall()
+    {
+        decide = true;
+        attack = false;
+        Exit = false;
+        Capture = true;
+    }
+
     internal void SetMoves(Pokemon pokemon)
     {
         this.pokemon = pokemon;
