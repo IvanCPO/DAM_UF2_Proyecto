@@ -1,24 +1,23 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
+[Serializable]
 public class Pokemon
 {
-    public PokemonBase Base{get;set;}
-    public int Level{get;set;}
-    public int HP { get; set;}
-    public List<Move> Moves { get; set;}
+    public PokemonBase Base;
+    public int Level;
+    public int HP;
+    public List<Move> Moves;
     private System.Random random;
-    private int IVhp;
-    private int IVattack;
-    private int IVdefense;
-    private int IVSpA;
-    private int IVSpD;
-    private int IVspeed;
-    private int Exp;
-    private Efect ailment;
+    public int IVhp;
+    public int IVattack;
+    public int IVdefense;
+    public int IVSpA;
+    public int IVSpD;
+    public int IVspeed;
+    public int Exp;
+    public Efect ailment;
 
 
     public Pokemon (PokemonBase pokemon, int level){

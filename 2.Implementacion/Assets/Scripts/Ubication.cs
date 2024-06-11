@@ -1,11 +1,12 @@
-using System;
+
 using UnityEngine;
-[Serializable]
+
+[System.Serializable]
 public class Ubication
 {
-    public Vector3 Ubica{get; set;}
-    public string Layout{get; set;}
-    public int SceneId{get; set;}
+    public Vector3 Ubica;
+    public string Layout;
+    public int SceneId;
 
     public Ubication()
     {

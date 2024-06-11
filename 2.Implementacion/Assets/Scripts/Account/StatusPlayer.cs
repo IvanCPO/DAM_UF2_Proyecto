@@ -1,30 +1,36 @@
+using System;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 [System.Serializable]
 public class StatusPlayer
 {
-    private static StatusPlayer instance;
-    private List<Pokemon> myTeam;
-    private List<Pokemon> myPokemons;
-    private string name;
+    [System.NonSerialized] private static StatusPlayer instance;
+    public List<Pokemon> myTeam;
+    public List<Pokemon> myPokemons;
+    public string userName;
     // TODO Para implementrae a futuro
-    //private GameObject genero;
-    private int money;
-    private bool[] medallas;
-    private Ubication world;
-    private Ubication actual;
-    private Ubication restUbi;
+    //public GameObject genero;
+    public int money;
+    public bool[] medallas;
+
+    
+    public Ubication world;
+    public Ubication actual;
+    public Ubication restUbi;
+    private string path;
 
     private StatusPlayer(){
         myTeam = new List<Pokemon>();
-        name = "Iván";
+        userName = "Iván";
         myPokemons = new List<Pokemon>();
         medallas = new bool[3]{false,false,false};
         money = 0;
         world = new Ubication(new Vector3(5.5f,-34.7f,0f),"Layer 1",3);
-        world = new Ubication(new Vector3(0f,0f,0f),"Layer 1",2);
-
+        actual = new Ubication(new Vector3(0f,0f,0f),"Layer 1",2);
+        restUbi = new Ubication(new Vector3(0f,0f,0f),"Layer 1",2);
+        path = Application.streamingAssetsPath + "/GameStatus.json";
     }
 
     public static StatusPlayer getInstance(){
@@ -39,12 +45,11 @@ public class StatusPlayer
     }
 
     public string GetName(){
-        return name;
+        return userName;
     }
 
     public void GiveNamePlayer(string name){
-        this.name = name;
-        
+        this.userName = name;
     }
 
     public int GetMoney(){
@@ -116,10 +121,10 @@ public class StatusPlayer
 
     public void SaveUbication(Vector3 ubication, string layout, int scene){
         Ubication u = new Ubication(ubication, layout, scene);
+        actual = u;
         if (scene == 3){
             world = u;
         }
-        actual = u;
     }
 
     public void SaveRestUbication(Vector3 ubication, string layout, int scene){
@@ -131,11 +136,36 @@ public class StatusPlayer
     }
     
     public Ubication getUbicationActual(){
-        return world;
+        return actual;
     }
     
     public Ubication getUbicationRest(){
-        return world;
+        return restUbi;
+    }
+
+    public void SaveData(){
+        string json = JsonUtility.ToJson(this);
+        
+        File.WriteAllText(path, json);
+        Debug.Log("JSON guardado en: " + path);
+    }
+
+    public void LoadData(){
+        try
+        {
+            if (ExistJSONFileSave())
+            {
+                string loadedJson = File.ReadAllText(path);
+                instance = JsonUtility.FromJson<StatusPlayer>(loadedJson);
+            }
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("Error al leer el archivo JSON: " + e.Message);
+        }
+    }
+    public bool ExistJSONFileSave(){
+        return File.Exists(path);
     }
 
 }

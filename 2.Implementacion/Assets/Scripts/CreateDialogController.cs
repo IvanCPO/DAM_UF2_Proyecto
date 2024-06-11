@@ -1,17 +1,14 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.WSA;
 
 public class CreateDialogController : MonoBehaviour
 {
     [SerializeField] GameObject panelDialog;
-    [SerializeField] Text name;
+    [SerializeField] Text entityName;
     [SerializeField] Text textDialog;
-    private List<String> dialog;
+    private List<string> dialog;
     private int letterPerSecond = 33;
     private bool writeNow = false;
     private int takeP;
@@ -60,7 +57,7 @@ public class CreateDialogController : MonoBehaviour
     }
     
 
-    public void SetDialogs(String name, List<String> dialog){
+    public void SetDialogs(string name, List<string> dialog){
         for (int i = 0; i < dialog.Count; i++)
         {
             if (dialog[i].Contains("$user"))
@@ -69,7 +66,7 @@ public class CreateDialogController : MonoBehaviour
             }
         }
         this.dialog = dialog;
-        this.name.text = name+":";
+        entityName.text = name+":";
         activate=true;
         panelDialog.SetActive(true);
         StartCoroutine("InsertTextDialog",dialog[takeP]);
@@ -77,13 +74,13 @@ public class CreateDialogController : MonoBehaviour
     }
     private void CloseDialog(){
         textDialog.text="";
-        name.text="";
+        entityName.text="";
         panelDialog.SetActive(false);
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().ChangeMove();
         activate = false;
     }
 
-    private IEnumerator InsertTextDialog(String info){
+    private IEnumerator InsertTextDialog(string info){
         textDialog.text="";
         // Debug.Log(info);
         foreach (char letter in info.ToCharArray())

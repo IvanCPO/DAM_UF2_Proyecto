@@ -1,12 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using System;
 
+[Serializable]
 public class Move
 {
-    public MoveBase Base { get; set; }
-    public int PP {get; set;}
-    public int MaxPP{get; set;}
+    public MoveBase Base;
+    public int PP;
+    public int MaxPP;
 
     public Move( MoveBase moveBase){
         Base = moveBase;

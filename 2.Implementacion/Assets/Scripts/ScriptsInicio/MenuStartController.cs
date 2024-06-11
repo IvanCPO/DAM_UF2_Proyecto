@@ -1,31 +1,28 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using Unity.VisualScripting.Dependencies.Sqlite;
-using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MenuStartController : MonoBehaviour
 {
     [SerializeField] AudioClip song;
-    [SerializeField] GameObject firstPanel;
+    [SerializeField] Button buttonStart;
     private AudioSource reproductor;
+    private StatusPlayer status;
 
     public void Start(){
+        status = StatusPlayer.getInstance();
         reproductor = gameObject.GetComponent<AudioSource>();
+        buttonStart.gameObject.SetActive(status.ExistJSONFileSave());
+        status.LoadData();
+        status = StatusPlayer.getInstance();
     }
 
     public void StartGame()
     {
-        if (SaveGameController.generateSaveController().ExistGame())
-        {
-            AudioSource audio = gameObject.GetComponent<AudioSource>();
-            audio.Stop();
-            ReproduceSong();
-            Invoke("StartSceneGame",1f);
-        }
+        AudioSource audio = gameObject.GetComponent<AudioSource>();
+        audio.Stop();
+        ReproduceSong();
+        Invoke("StartSceneGame",1f);
     }
 
     public void NewGame()
@@ -44,7 +41,9 @@ public class MenuStartController : MonoBehaviour
 
     private void StartSceneGame()
     {
-        SceneManager.LoadScene(2);
+        Debug.Log("Escena de la ubicación actual: "+status.actual.SceneId+" | ubi: "+status.actual.Ubica);
+        Debug.Log("Escena de la ubicación del mundo: "+status.world.SceneId+" | ubi: "+status.world.Ubica);
+        SceneManager.LoadScene(status.getUbicationActual().SceneId);
     }
 
     private void InitializeSceneGame()

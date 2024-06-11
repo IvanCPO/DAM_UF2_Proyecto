@@ -26,6 +26,13 @@ public class GameManager : MonoBehaviour
                 Debug.Log("Bienvenido a casa jefe");
                 gameObject.transform.position= status.getUbicationWorld().Ubica;
             }
+        }else{
+            if (status.getUbicationActual()!=null)
+            {
+                gameObject.layer = LayerMask.NameToLayer(status.actual.Layout);
+                gameObject.GetComponent<SpriteRenderer>().sortingLayerName = status.actual.Layout;
+                gameObject.transform.position= status.actual.Ubica;
+            }
         }
     }
 
@@ -39,7 +46,8 @@ public class GameManager : MonoBehaviour
         gameObject.GetComponent<SpriteRenderer>().sortingLayerName = status.getUbicationRest().Layout;
     }
 
-    public void SaveUbication(Vector3 vector, string layer){
-        status.SaveUbication(vector, layer,SceneManager.GetActiveScene().buildIndex);
+    public void SaveUbication(Vector3 vector, string layer, int scene){
+        status.SaveUbication(vector, layer, scene);
+        status.actual = null;
     }
 }

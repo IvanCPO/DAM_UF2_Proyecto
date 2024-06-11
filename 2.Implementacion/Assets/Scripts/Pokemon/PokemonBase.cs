@@ -6,28 +6,26 @@ using System.Data;
 
 
 
-
+[Serializable]
 public class PokemonBase
 {
 
-    private int pokedex_id;
-    private string namePokemon;
-    private string description;
-    private int weight;
-    private Sprite frontSprite;
-    private Sprite backSprite;
-    private PokemonType type1;
-    private PokemonType type2;
-    private int maxHP;
-    private int attack;
-    private int defense;
-    private int spAttack;
-    private int spDefense;
-    private int speed;
-    private int levelPokemon;
-    private int evolutionId;
-    private int expBase;
-    private List<LearnableMove> learnableMoves;
+    public int pokedex_id;
+    public string namePokemon;
+    public string description;
+    public int weight;
+    public PokemonType type1;
+    public PokemonType type2;
+    public int maxHP;
+    public int attack;
+    public int defense;
+    public int spAttack;
+    public int spDefense;
+    public int speed;
+    public int levelPokemon;
+    public int evolutionId;
+    public int expBase;
+    public List<LearnableMove> learnableMoves;
 
 
 
@@ -45,13 +43,11 @@ public class PokemonBase
         int spAttack;
         int spDefense;
         int speed;
-        byte[] spriteFront;
-        byte[] spriteBack;
         int expBase;
 
         IDbCommand command = connection.CreateCommand();
         
-        query = "SELECT NAME, WEIGHT, DESCRIPTION, TYPE_ID, HP, ATTACK, DEFENSE, SP_ATTACK, SP_DEFENSE, SPEED, SPRITE_FRONT, SPRITE_BACK, BASE_EXPERIENCE FROM POKEMON WHERE POKEDEX_ID = "+pokedex_id;
+        query = "SELECT NAME, WEIGHT, DESCRIPTION, TYPE_ID, HP, ATTACK, DEFENSE, SP_ATTACK, SP_DEFENSE, SPEED, BASE_EXPERIENCE FROM POKEMON WHERE POKEDEX_ID = "+pokedex_id;
         command.CommandText = query;
         using (IDataReader reader = command.ExecuteReader())
             {
@@ -66,9 +62,7 @@ public class PokemonBase
                 spAttack = reader.GetInt32(7);
                 spDefense = reader.GetInt32(8);
                 speed = reader.GetInt32(9);
-                spriteFront = (byte[])reader.GetValue(10);
-                spriteBack = (byte[])reader.GetValue(11);
-                expBase = reader.GetInt32(12);
+                expBase = reader.GetInt32(10);
                 reader.Close();
             }
         int secondType;
@@ -92,11 +86,11 @@ public class PokemonBase
             query = "SELECT EVOLUTION_ID FROM POKEMON WHERE POKEDEX_ID = "+pokedex_id;
             int evolutionId = ExecuteScalarInt(command, query);
 
-            pokemon = new PokemonBase(pokedex_id, name, description, weight, type1, type2, hp, attack, defense, spAttack, spDefense, speed, spriteFront, spriteBack, expBase, levelEvolution, evolutionId);
+            pokemon = new PokemonBase(pokedex_id, name, description, weight, type1, type2, hp, attack, defense, spAttack, spDefense, speed, expBase, levelEvolution, evolutionId);
         }
         catch (Exception)
         {
-            pokemon = new PokemonBase(pokedex_id, name, description, weight, type1, type2, hp, attack, defense, spAttack, spDefense, speed, spriteFront, spriteBack, expBase);
+            pokemon = new PokemonBase(pokedex_id, name, description, weight, type1, type2, hp, attack, defense, spAttack, spDefense, speed, expBase);
         }
         
         query = "SELECT MOVE_ID, LEVEL_UP FROM MOVELEARNER WHERE POKEMON_ID = "+pokedex_id;
@@ -133,7 +127,7 @@ public class PokemonBase
         }
         return moves;
     }
-    public PokemonBase(int pokedex_id, string namePokemon, string description, int weight, PokemonType type1, PokemonType type2, int maxHP, int attack, int defense, int spAttack, int spDefense, int speed, byte[] frontSprite, byte[] backSprite, int expBase, int levelPokemon, int evolutionId){
+    public PokemonBase(int pokedex_id, string namePokemon, string description, int weight, PokemonType type1, PokemonType type2, int maxHP, int attack, int defense, int spAttack, int spDefense, int speed, int expBase, int levelPokemon, int evolutionId){
         this.pokedex_id = pokedex_id;
         this.namePokemon = namePokemon;
         this.description = description;
@@ -146,15 +140,13 @@ public class PokemonBase
         this.spAttack = spAttack;
         this.spDefense = spDefense;
         this.speed = speed;
-        this.frontSprite = ConvertSprite(frontSprite);
-        this.backSprite = ConvertSprite(backSprite);
         this.levelPokemon = levelPokemon;
         this.evolutionId = evolutionId;
         // Cambiar cuando implemente la informacion de la experiencia base
         this.expBase = expBase;
         learnableMoves = new List<LearnableMove>();
     }
-    public PokemonBase(int pokedex_id, string namePokemon, string description, int weight, PokemonType type1, PokemonType type2, int maxHP, int attack, int defense, int spAttack, int spDefense, int speed, byte[] frontSprite, byte[] backSprite, int expBase){
+    public PokemonBase(int pokedex_id, string namePokemon, string description, int weight, PokemonType type1, PokemonType type2, int maxHP, int attack, int defense, int spAttack, int spDefense, int speed, int expBase){
         this.pokedex_id = pokedex_id;
         this.namePokemon = namePokemon;
         this.description = description;
@@ -167,8 +159,6 @@ public class PokemonBase
         this.spAttack = spAttack;
         this.spDefense = spDefense;
         this.speed = speed;
-        this.frontSprite = ConvertSprite(frontSprite);
-        this.backSprite = ConvertSprite(backSprite);
         learnableMoves = new List<LearnableMove>();
         this.expBase = expBase;
     }
@@ -196,10 +186,44 @@ public class PokemonBase
         get{ return weight;}
     }
     public Sprite FrontSprite {
-        get{ return frontSprite;}
+        get{
+            var connection = DDBBConector.GenerateConnection().GetConnection();
+            connection.Open();
+            byte[] spriteFront;
+            IDbCommand command = connection.CreateCommand();
+            
+            string query = "SELECT SPRITE_FRONT FROM POKEMON WHERE POKEDEX_ID = "+pokedex_id;
+            command.CommandText = query;
+            using (IDataReader reader = command.ExecuteReader())
+            {
+                reader.Read();
+                
+                spriteFront = (byte[])reader.GetValue(0);
+                reader.Close();
+            }
+            
+            
+             return ConvertSprite(spriteFront);}
     }
     public Sprite BackSprite {
-        get{ return backSprite;}
+        get{
+            var connection = DDBBConector.GenerateConnection().GetConnection();
+            connection.Open();
+            byte[] spriteBack;
+
+            IDbCommand command = connection.CreateCommand();
+            
+            string query = "SELECT SPRITE_BACK FROM POKEMON WHERE POKEDEX_ID = "+pokedex_id;
+            command.CommandText = query;
+            using (IDataReader reader = command.ExecuteReader())
+            {
+                reader.Read();
+                spriteBack = (byte[])reader.GetValue(0);
+                reader.Close();
+            }
+            
+            
+             return ConvertSprite(spriteBack);}
     }
     public PokemonType Type1 {
         get{ return type1;}
@@ -233,11 +257,11 @@ public class PokemonBase
     }
 }
 
-[System.Serializable]
+[Serializable]
 public class LearnableMove{
 
-    [SerializeField] MoveBase moveBase;
-    [SerializeField] int level;
+    public MoveBase moveBase;
+    public int level;
     
     public LearnableMove(MoveBase moveBase, int level){
         this.moveBase = moveBase;

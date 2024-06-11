@@ -1,5 +1,5 @@
-using UnityEngine;
-
+using System;
+[Serializable]
 public enum PokemonType{
     None,
     Normal,

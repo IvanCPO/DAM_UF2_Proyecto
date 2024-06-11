@@ -1,21 +1,20 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Data;
 using UnityEngine;
-// [CreateAssetMenu (fileName = "Move", menuName = "Pokemon/Create new move")]
-// public class MoveBase : ScriptableObject
+
+
+[Serializable]
 public class MoveBase
 {
-    [SerializeField] string name;
-    [SerializeField] string description;
-    [SerializeField] PokemonType type;
-    [SerializeField] int power;
-    [SerializeField] int accuracy;
-    [SerializeField] int pp;
-    Efect efect;
-    int chance_efect;
-    ClassDamage classDamage;
+    public string name;
+    public string description;
+    public PokemonType type;
+    public int power;
+    public int accuracy;
+    public int pp;
+    public Efect efect;
+    public int chance_efect;
+    public ClassDamage classDamage;
 
     public static MoveBase GetMoveBase(int move_id){
         var connection = DDBBConector.GenerateConnection().GetConnection();

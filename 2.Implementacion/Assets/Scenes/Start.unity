@@ -336,7 +336,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   song: {fileID: 8300000, guid: e3652413e49026348a0d8208df158c56, type: 3}
-  firstPanel: {fileID: 747229777}
+  buttonStart: {fileID: 443876711}
 --- !u!82 &427234918
 AudioSource:
   m_ObjectHideFlags: 0

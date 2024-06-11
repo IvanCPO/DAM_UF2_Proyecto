@@ -11,7 +11,7 @@ public class DDBBConector
     private static DDBBConector connector;
 
     private DDBBConector(){
-        urlDDBB = Application.dataPath+"/DDBB/dbPokemon";
+        urlDDBB = Path.Combine(Application.streamingAssetsPath, "dbPokemon");
         userName = "";
         password = "";
 
