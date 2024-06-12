@@ -52,13 +52,21 @@ public class BattleSystem : MonoBehaviour
             if (newMove.IsChange())
             {
                 Debug.Log("It's log correct");
-                UpdateData();
+                if (!timeNewPokemon)
+                {
+                    UpdateData();
+                }
+                
             }else{
                 Debug.Log("It's log correct. You don't change nothing");
             }
             newMove.Clear();
             messageCombat.OcultarMostrarDialog();
-            ChangeTurn();
+            if (timeNewPokemon)
+            {
+                ReturnWorld();
+            }else
+                ChangeTurn();
         }
     }
 
@@ -307,6 +315,9 @@ public class BattleSystem : MonoBehaviour
             Invoke("MakeEnemyAttack", delayInvoke+0.2f);
             firstTurn = false;
         }
+        else{
+            playerStatus.GetTeam().Add(rival);
+        }
     }
 
     private void TryCapturePokemon(){
@@ -329,8 +340,9 @@ public class BattleSystem : MonoBehaviour
         }
         for (float i = 2; i <= hitsController.GetCountMoveBall(); i++)
         {
-            if(i==4)
+            if(i==4){
                 Invoke("CaptureFinish",i);
+            }
             else
                 Invoke("MoveBall",i);
         }
@@ -351,8 +363,6 @@ public class BattleSystem : MonoBehaviour
         string valueMessage = "Has capturado al pokemon salvaje "+hitsController.Rival.Base.Name;
         exp = ObtenerExperience()/2;
         Invoke("DeathNote",3f);
-        hitsController.Rival.HP = 0;
-        rival.HP = 0;
         timeNewPokemon = true;
         messageCombat.GenerateTextPlayer(valueMessage);
     }
@@ -405,63 +415,7 @@ public class BattleSystem : MonoBehaviour
         else{
             if (timeNewPokemon)
             {
-                
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                ReturnWorld();
                 
             }else{
                 ChangeTurn();
@@ -547,7 +501,7 @@ public class BattleSystem : MonoBehaviour
 
             // Si quiero testear un pokemon salvaje: 
             rival = new Pokemon(PokemonBase.GetPokemonBase(10),3);
-            rival.HP = 1;
+            // rival.HP = 1;
             rivalStatus.SetDataWild(rival);
         }
 

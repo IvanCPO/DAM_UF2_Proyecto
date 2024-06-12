@@ -34,6 +34,7 @@ public class GenerateListPokemon : MonoBehaviour
                 }else
                     rivalStatus.SetData(list,name,money);
             }
+            
         }
     }
 }

@@ -35,7 +35,6 @@ public class SelectStarter : MonoBehaviour
                 status.SavePokemon(new Pokemon(thirdPokemon,5));
                 break;
         }
-        status.SavePokemon(new Pokemon(thirdPokemon,5));
         gameObject.SetActive(false);
     }
 }

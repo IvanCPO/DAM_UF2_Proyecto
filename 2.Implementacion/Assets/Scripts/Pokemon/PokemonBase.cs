@@ -25,6 +25,7 @@ public class PokemonBase
     public int levelPokemon;
     public int evolutionId;
     public int expBase;
+    public int capture_rate;
     public List<LearnableMove> learnableMoves;
 
 
@@ -44,10 +45,11 @@ public class PokemonBase
         int spDefense;
         int speed;
         int expBase;
+        int capture_rate;
 
         IDbCommand command = connection.CreateCommand();
         
-        query = "SELECT NAME, WEIGHT, DESCRIPTION, TYPE_ID, HP, ATTACK, DEFENSE, SP_ATTACK, SP_DEFENSE, SPEED, BASE_EXPERIENCE FROM POKEMON WHERE POKEDEX_ID = "+pokedex_id;
+        query = "SELECT NAME, WEIGHT, DESCRIPTION, TYPE_ID, HP, ATTACK, DEFENSE, SP_ATTACK, SP_DEFENSE, SPEED, BASE_EXPERIENCE, CAPTURE_RATE FROM POKEMON WHERE POKEDEX_ID = "+pokedex_id;
         command.CommandText = query;
         using (IDataReader reader = command.ExecuteReader())
             {
@@ -63,6 +65,7 @@ public class PokemonBase
                 spDefense = reader.GetInt32(8);
                 speed = reader.GetInt32(9);
                 expBase = reader.GetInt32(10);
+                capture_rate = reader.GetInt32(11);
                 reader.Close();
             }
         int secondType;
@@ -86,11 +89,11 @@ public class PokemonBase
             query = "SELECT EVOLUTION_ID FROM POKEMON WHERE POKEDEX_ID = "+pokedex_id;
             int evolutionId = ExecuteScalarInt(command, query);
 
-            pokemon = new PokemonBase(pokedex_id, name, description, weight, type1, type2, hp, attack, defense, spAttack, spDefense, speed, expBase, levelEvolution, evolutionId);
+            pokemon = new PokemonBase(pokedex_id, name, description, weight, type1, type2, hp, attack, defense, spAttack, spDefense, speed, expBase, levelEvolution, evolutionId, capture_rate);
         }
         catch (Exception)
         {
-            pokemon = new PokemonBase(pokedex_id, name, description, weight, type1, type2, hp, attack, defense, spAttack, spDefense, speed, expBase);
+            pokemon = new PokemonBase(pokedex_id, name, description, weight, type1, type2, hp, attack, defense, spAttack, spDefense, speed, expBase, capture_rate);
         }
         
         query = "SELECT MOVE_ID, LEVEL_UP FROM MOVELEARNER WHERE POKEMON_ID = "+pokedex_id;
@@ -127,7 +130,7 @@ public class PokemonBase
         }
         return moves;
     }
-    public PokemonBase(int pokedex_id, string namePokemon, string description, int weight, PokemonType type1, PokemonType type2, int maxHP, int attack, int defense, int spAttack, int spDefense, int speed, int expBase, int levelPokemon, int evolutionId){
+    public PokemonBase(int pokedex_id, string namePokemon, string description, int weight, PokemonType type1, PokemonType type2, int maxHP, int attack, int defense, int spAttack, int spDefense, int speed, int expBase, int levelPokemon, int evolutionId, int capture_rate){
         this.pokedex_id = pokedex_id;
         this.namePokemon = namePokemon;
         this.description = description;
@@ -145,8 +148,9 @@ public class PokemonBase
         // Cambiar cuando implemente la informacion de la experiencia base
         this.expBase = expBase;
         learnableMoves = new List<LearnableMove>();
+        this.capture_rate = capture_rate;
     }
-    public PokemonBase(int pokedex_id, string namePokemon, string description, int weight, PokemonType type1, PokemonType type2, int maxHP, int attack, int defense, int spAttack, int spDefense, int speed, int expBase){
+    public PokemonBase(int pokedex_id, string namePokemon, string description, int weight, PokemonType type1, PokemonType type2, int maxHP, int attack, int defense, int spAttack, int spDefense, int speed, int expBase, int capture_rate){
         this.pokedex_id = pokedex_id;
         this.namePokemon = namePokemon;
         this.description = description;
@@ -161,6 +165,7 @@ public class PokemonBase
         this.speed = speed;
         learnableMoves = new List<LearnableMove>();
         this.expBase = expBase;
+        this.capture_rate = capture_rate;
     }
     
     private Sprite ConvertSprite(byte[] picture){
@@ -252,8 +257,13 @@ public class PokemonBase
     public List<LearnableMove> LearnableMoves{
         get{ return learnableMoves; }
     }
+
     public int ExpBase {
         get{ return speed;}
+    }
+    
+    public int CaptureRate {
+        get{ return capture_rate;}
     }
 }
 

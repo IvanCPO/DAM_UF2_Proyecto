@@ -21,7 +21,7 @@ public class ChangeSceneController : MonoBehaviour
                 other.gameObject.transform.position.y-0.1f,other.gameObject.transform.position.z);
                 string layout = LayerMask.LayerToName(other.gameObject.layer);
                 Debug.Log("nombre del layout = "+layout);
-                game.SaveUbication(loc, layout, SceneManager.GetActiveScene().buildIndex);
+                game.SaveUbication(loc, layout, SceneManager.GetActiveScene().buildIndex, scene);
                 
             }
             

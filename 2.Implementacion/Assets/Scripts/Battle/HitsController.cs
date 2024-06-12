@@ -127,7 +127,7 @@ public class HitsController
 
     public void TryCap(){
         countCapMoves = 0;
-        var x = ((3*Rival.MaxHP)-(2*Rival.HP))*255*1/(3*Rival.MaxHP);
+        var x = ((3*Rival.MaxHP)-(2*Rival.HP))*Rival.Base.CaptureRate*1/(3*Rival.MaxHP);
         Debug.Log("Variable x = "+x);
         int y = (int)(1048560/System.Math.Sqrt( System.Math.Sqrt(16711680/x)));
         intento.Add(Random.Range(0,65535));

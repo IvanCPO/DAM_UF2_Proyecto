@@ -46,8 +46,10 @@ public class GameManager : MonoBehaviour
         gameObject.GetComponent<SpriteRenderer>().sortingLayerName = status.getUbicationRest().Layout;
     }
 
-    public void SaveUbication(Vector3 vector, string layer, int scene){
-        status.SaveUbication(vector, layer, scene);
-        status.actual = null;
+    public void SaveUbication(Vector3 vector, string layer, int old_scene, int new_scene){
+        status.SaveUbication(vector, layer, old_scene);
+        if (new_scene!=4){
+            status.actual = null;
+        }
     }
 }
