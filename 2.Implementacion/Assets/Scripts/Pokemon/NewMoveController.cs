@@ -64,5 +64,10 @@ public class NewMoveController : MonoBehaviour
         changeMove = false;
     }
 
+    public void LearnAlone(){
+        decision = true;
+        changeMove = true;
+    }
+
 
 }

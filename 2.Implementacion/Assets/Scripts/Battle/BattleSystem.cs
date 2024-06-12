@@ -25,6 +25,7 @@ public class BattleSystem : MonoBehaviour
     private bool timeText;
     private bool firstTurn;
     private bool timeAttack;
+    private bool timeNewPokemon;
     private bool changePokemon;
     private bool capturePokemon;
     private bool invokeOptions;
@@ -38,6 +39,7 @@ public class BattleSystem : MonoBehaviour
         timeAttack = false;
         changePokemon = false;
         capturePokemon = false;
+        timeNewPokemon = false;
         firstTurn = true;
         playerStatus = StatusPlayer.getInstance();
         rivalStatus = StatusRival.GetRival();
@@ -54,7 +56,6 @@ public class BattleSystem : MonoBehaviour
             }else{
                 Debug.Log("It's log correct. You don't change nothing");
             }
-            Debug.Log("Ayudame dios");
             newMove.Clear();
             messageCombat.OcultarMostrarDialog();
             ChangeTurn();
@@ -253,6 +254,18 @@ public class BattleSystem : MonoBehaviour
         Invoke("HitRival", 3.00f);
     }
 
+    private void HitPlayer(){
+        pokemon = hitsController.HitPlayer();
+        ChangeTurn();
+    }
+
+    private void HitRival(){
+        hitsController.HitRival();
+        ChangeTurn();
+    }
+
+
+
     private void ChangePokemonHit()
     {
         ChangePokemon();
@@ -283,11 +296,12 @@ public class BattleSystem : MonoBehaviour
 
     private void CapturePokemonHit()
     {
+        Debug.Log ("CaptureMoment");
         float delayInvoke = 3f;
         hitsController.TryCap();
         delayInvoke += hitsController.GetCountMoveBall();
         TryCapturePokemon();
-        if (hitsController.GetCountMoveBall()<4)
+        if (hitsController.GetCountMoveBall()!=4)
         {
             Invoke("UpdateData", delayInvoke+0.2f);
             Invoke("MakeEnemyAttack", delayInvoke+0.2f);
@@ -337,8 +351,9 @@ public class BattleSystem : MonoBehaviour
         string valueMessage = "Has capturado al pokemon salvaje "+hitsController.Rival.Base.Name;
         exp = ObtenerExperience()/2;
         Invoke("DeathNote",3f);
-        hitsController.Rival = null;
-        rival = null;
+        hitsController.Rival.HP = 0;
+        rival.HP = 0;
+        timeNewPokemon = true;
         messageCombat.GenerateTextPlayer(valueMessage);
     }
 
@@ -360,21 +375,12 @@ public class BattleSystem : MonoBehaviour
 
 
 
-    private void HitPlayer(){
-        pokemon = hitsController.HitPlayer();
-        ChangeTurn();
-    }
-
-    private void HitRival(){
-        hitsController.HitRival();
-        ChangeTurn();
-    }
 
     private int exp = 0;
     private void NextPokemonRival()
     {
         exp = ObtenerExperience();
-        messageCombat.GenerateTextInfo("Debilitaste a tu rival, "+hitsController.Player.Base.Name);
+        messageCombat.GenerateTextInfo("Debilitaste a tu rival, "+hitsController.Rival.Base.Name);
         rival = null;
         Invoke("DeathNote",3f);
         messageCombat.OcultarMostrarDialog();
@@ -397,28 +403,93 @@ public class BattleSystem : MonoBehaviour
             { Invoke("ChangeTurn",3f); }
         }
         else{
-            ChangeTurn();
+            if (timeNewPokemon)
+            {
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+            }else{
+                ChangeTurn();
+            }
         }
         if (rival != null)
         {
             hitsController.Rival = rival;
         }
     }
-
+    private bool learn;
     private void LearnMoves(){
-        if (pokemon.LearnAlone(move))
-        {
-            // Debug.Log("The rival is death. you obtein "+exp+" of experience");
+        learn = pokemon.LearnAlone(move);
+        if (learn)
             messageCombat.GenerateTextInfo("Tu "+pokemon.Base.Name+" ha aprendido "+move.Name);
-        }else{
+        else
             messageCombat.GenerateTextInfo("Tu pokemon, intenta aprender "+move.Name);
-            Invoke("LearnMove",3f);
-        }
+        Invoke("LearnMove",3f);
     }
 
     private void LearnMove(){
-        newMove.LearnMove(pokemon, move);
-        messageCombat.OcultarMostrarDialog();
+        if (learn)
+        {
+            newMove.LearnAlone();
+        }else{
+            newMove.LearnMove(pokemon, move);
+            messageCombat.OcultarMostrarDialog();
+        }
     }
 
     private void NextPokemonPlayer()
@@ -459,7 +530,7 @@ public class BattleSystem : MonoBehaviour
     {
         if (playerStatus.GetTeam().Count==0)
         {
-            pokemon = new Pokemon(PokemonBase.GetPokemonBase(4),14);
+            pokemon = new Pokemon(PokemonBase.GetPokemonBase(4),8);
             pokemon.LevelUp(pokemon.MaxExp-4);
             // pokemon.HP = 1;
             playerStatus.GetTeam().Add(pokemon);
@@ -543,7 +614,7 @@ public class BattleSystem : MonoBehaviour
             }else
                 messageCombat.GenerateTextInfo("Todos tus pokemons están debilitados. Vuelves llorando a casa");
         }
-            Invoke("ReturnWorld",3f);
+        Invoke("ReturnWorld",3f);
     }
 
     private void ReturnWorld(){
