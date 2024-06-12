@@ -1,4 +1,4 @@
-using System.Collections;
+
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,9 +11,13 @@ public class HitsController
     private Move moveRival;
     public Move MovePlayer{get;set;}
     private int countEscape;
+    private int countCapMoves;
+    private List<int> intento;
 
     private HitsController(){
         countEscape = 1;
+        countCapMoves = 0;
+        intento = new List<int>();
     }
 
     public static HitsController GetInstance(){
@@ -68,6 +72,7 @@ public class HitsController
         MovePlayer = null;
         moveRival = null;
         countEscape = 1;
+        countCapMoves = 0;
     }
 
     public Move GenerateMoveRandom(){
@@ -118,6 +123,31 @@ public class HitsController
             return 1.5f;
         }
         return 1f;
+    }
+
+    public void TryCap(){
+        countCapMoves = 0;
+        var x = ((3*Rival.MaxHP)-(2*Rival.HP))*255*1/(3*Rival.MaxHP);
+        Debug.Log("Variable x = "+x);
+        int y = (int)(1048560/System.Math.Sqrt( System.Math.Sqrt(16711680/x)));
+        intento.Add(Random.Range(0,65535));
+        intento.Add(Random.Range(0,65535));
+        intento.Add(Random.Range(0,65535));
+        intento.Add(Random.Range(0,65535));
+        intento.Sort();
+        foreach (int capture in intento)
+        {
+            Debug.Log("El exito de captura es = "+y+" || El intento = "+capture);
+            if (capture<=y)
+            {
+                countCapMoves++;
+            }
+        }
+        intento = new List<int>();
+    }
+
+    public int GetCountMoveBall(){
+        return countCapMoves;
     }
 
     public bool TryEscape(){

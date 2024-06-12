@@ -1,11 +1,12 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class BattleSystem : MonoBehaviour
 {
-    
-    
+
+
     [SerializeField] PictureBattle player;
     [SerializeField] BattleHud playerLive;
     [SerializeField] PictureBattle enemy;
@@ -15,6 +16,7 @@ public class BattleSystem : MonoBehaviour
     [SerializeField] NewMoveController newMove;
     [SerializeField] LostPokemonController lostPokemon;
     [SerializeField] PictureVieiraController barVieira;
+    [SerializeField] BallController ballController;
 
     StatusPlayer playerStatus;
     StatusRival rivalStatus;
@@ -115,7 +117,6 @@ public class BattleSystem : MonoBehaviour
                 {
                     if (invokeOptions)
                     {
-                        Debug.Log("Invoke Options SUUUUUUU");
                         options.ChangeDialog();
                         invokeOptions = false;
                     }
@@ -269,7 +270,6 @@ public class BattleSystem : MonoBehaviour
         valueMessage += " por tu " + hitsController.Player.Base.Name + "]";
         messageCombat.GenerateTextPlayer(valueMessage);
     }
-    
 
 
 
@@ -279,31 +279,86 @@ public class BattleSystem : MonoBehaviour
 
 
 
-    
+
+
     private void CapturePokemonHit()
     {
+        float delayInvoke = 3f;
+        hitsController.TryCap();
+        delayInvoke += hitsController.GetCountMoveBall();
         TryCapturePokemon();
-        Invoke("UpdateData", 2f);
-
-        Invoke("MakeEnemyAttack", 2f);
-        firstTurn = false;
+        if (hitsController.GetCountMoveBall()<4)
+        {
+            Invoke("UpdateData", delayInvoke+0.2f);
+            Invoke("MakeEnemyAttack", delayInvoke+0.2f);
+            firstTurn = false;
+        }
     }
-    
 
-
-
-
-
-
-
-
-
-
-    public void TryCapturePokemon(){
+    private void TryCapturePokemon(){
+        ballController.AnimationThrowBall();
         Debug.Log("Decision player (capture pokemon)");
         string valueMessage = "Lanza PokeVieira!!";
         messageCombat.GenerateTextPlayer(valueMessage);
+        Invoke("PictureCloseOpen",2.3f);
     }
+
+    private void PictureCloseOpen(){
+        ballController.StopAnimationThrow();
+        Debug.Log("Quitar Pokemon");
+        enemy.ActiveDisact();
+        ballController.BallMoveActivation();
+        if ( hitsController.GetCountMoveBall()>=1){
+            MoveBall();
+            string valueMessage = "Intento";
+            messageCombat.GenerateTextPlayer(valueMessage);
+        }
+        for (float i = 2; i <= hitsController.GetCountMoveBall(); i++)
+        {
+            if(i==4)
+                Invoke("CaptureFinish",i);
+            else
+                Invoke("MoveBall",i);
+        }
+        Invoke("DisactiveBall",hitsController.GetCountMoveBall());
+        if(hitsController.GetCountMoveBall()!=4){
+            Invoke("WildPokemonEscape",hitsController.GetCountMoveBall());
+        }
+    }
+
+    private void MoveBall(){
+        Debug.Log("Move ball Vieira");
+        ballController.AnimationMoveBall();
+    }
+
+    private void CaptureFinish(){
+        Debug.Log("Decision player (capture pokemon)");
+        ballController.Stop();
+        string valueMessage = "Has capturado al pokemon salvaje "+hitsController.Rival.Base.Name;
+        exp = ObtenerExperience()/2;
+        Invoke("DeathNote",3f);
+        hitsController.Rival = null;
+        rival = null;
+        messageCombat.GenerateTextPlayer(valueMessage);
+    }
+
+    private void DisactiveBall(){
+        ballController.BallMoveActivation();
+    }
+
+    private void WildPokemonEscape(){
+        string valueMessage = "El pokemon salvaje, "+hitsController.Rival.Base.Name+", ha escapado";
+        messageCombat.GenerateTextPlayer(valueMessage);
+    }
+
+
+
+
+
+
+
+
+
 
     private void HitPlayer(){
         pokemon = hitsController.HitPlayer();
@@ -323,21 +378,13 @@ public class BattleSystem : MonoBehaviour
         rival = null;
         Invoke("DeathNote",3f);
         messageCombat.OcultarMostrarDialog();
-        foreach (Pokemon p in rivalStatus.Team)
-        {
-            // Debug.Log("The pokemon enemy "+rival.Base.Name+" is like "+p.Base.Name+" of her team? "+(rival==p));
-            if (p.HP>0)
-            {
-                rival = p;
-                break;
-            }
-        }
+        rival = rivalStatus.FirstPokemonLive();
     }
 
     MoveBase move;
     private void DeathNote()
     {
-        
+
         if(pokemon.LevelUp(exp)){
             // messageCombat.OcultarMostrarDialog();
             // Debug.Log("The rival is death. you obtein "+exp+" of experience");
@@ -398,7 +445,7 @@ public class BattleSystem : MonoBehaviour
 
 
     private void UpdateData(){
-        
+
         player.Setup(hitsController.Player);
         enemy.Setup(hitsController.Rival);
         playerLive.SetData(hitsController.Player);
@@ -417,17 +464,25 @@ public class BattleSystem : MonoBehaviour
             // pokemon.HP = 1;
             playerStatus.GetTeam().Add(pokemon);
             pokemon = new Pokemon(PokemonBase.GetPokemonBase(1),6);
-            pokemon.HP = 1;
             playerStatus.GetTeam().Add(pokemon);
-            rival = new Pokemon(PokemonBase.GetPokemonBase(7),3);
-            rivalStatus.SetDataWild(rival);
-            rival = new Pokemon(PokemonBase.GetPokemonBase(14),3);
+
+            // Si quiero testear el entrenador: 
+            // rival = new Pokemon(PokemonBase.GetPokemonBase(10),3);
+            // rival.HP = 1;
+            // var list = new List<Pokemon>();
+            // list.Add(rival);
+            // list.Add(new Pokemon(PokemonBase.GetPokemonBase(14),3));
+            // rivalStatus.SetData(list,"Jose",400);
+
+            // Si quiero testear un pokemon salvaje: 
+            rival = new Pokemon(PokemonBase.GetPokemonBase(10),3);
+            rival.HP = 1;
             rivalStatus.SetDataWild(rival);
         }
 
         // JUEGO PREPARADO
         pokemon = playerStatus.FirstPokemon();
-        rival = rivalStatus.Team[0];
+        rival = rivalStatus.FirstPokemonLive();
 
         player.Setup(pokemon);
         playerLive.SetData(pokemon);
@@ -436,7 +491,7 @@ public class BattleSystem : MonoBehaviour
         options.SetMoves(pokemon);
         barVieira.ActiveBar(rivalStatus.IsWild);
         barVieira.SetData(rivalStatus.Team);
-        
+
         messageCombat.StartGame();
         hitsController.Rival = rival;
         hitsController.Player = pokemon;
@@ -468,7 +523,7 @@ public class BattleSystem : MonoBehaviour
             MakeEnemyAttack();
         }
     }
-    
+
     private void FinishGame(){
         if (rivalStatus.TotalRivalHP()==0)
         {

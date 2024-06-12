@@ -52,4 +52,15 @@ public class StatusRival
         }
         return count;
     }
+
+    public Pokemon FirstPokemonLive(){
+        foreach (Pokemon pokemon in Team)
+        {
+            if (pokemon.HP>0)
+            {
+                return pokemon;
+            }
+        }
+        return null;
+    }
 }

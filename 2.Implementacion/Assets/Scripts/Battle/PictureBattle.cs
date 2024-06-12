@@ -49,4 +49,7 @@ public class PictureBattle : MonoBehaviour
         var isAttack = gameObject.GetComponent<Animator>().GetBool("isAttack");
         gameObject.GetComponent<Animator>().SetBool("isAttack",!isAttack);
     }
+    public void ActiveDisact(){
+        gameObject.SetActive(!gameObject.activeSelf);
+    }
 }

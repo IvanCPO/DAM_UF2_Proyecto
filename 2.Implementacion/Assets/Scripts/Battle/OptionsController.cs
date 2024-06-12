@@ -17,6 +17,7 @@ public class OptionsController : MonoBehaviour
     private HitsController hitsController;
     public bool Exit{get;private set;}
     public bool Capture{get;private set;}
+    
     private void Start(){
         dialog = GameObject.FindGameObjectWithTag("DialogMessage").GetComponent<DialogCombat>();
         reproductor = GetComponent<AudioSource>();
@@ -123,10 +124,13 @@ public class OptionsController : MonoBehaviour
 
     private void CaptureBall()
     {
-        decide = true;
-        attack = false;
-        Exit = false;
-        Capture = true;
+        if (StatusRival.GetRival().IsWild)
+        {
+            decide = true;
+            attack = false;
+            Exit = false;
+            Capture = true;
+        }
     }
 
     internal void SetMoves(Pokemon pokemon)
