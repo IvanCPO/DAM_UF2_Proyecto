@@ -2134,6 +2134,7 @@ MonoBehaviour:
   buttonback: {fileID: 3608553978816684699}
   menu: {fileID: 6895338391497182943}
   pokemonList: {fileID: 3242741899033697825}
+  pokedex: {fileID: 784165678135546087}
   account: {fileID: 9043166362007932293}
 --- !u!1 &3608553978816684699
 GameObject:

@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MenuController : MonoBehaviour
 {
@@ -8,6 +7,7 @@ public class MenuController : MonoBehaviour
     [SerializeField] GameObject buttonback;
     [SerializeField] GameObject menu;
     [SerializeField] GameObject pokemonList;
+    [SerializeField] PokedexController pokedex;
     [SerializeField] GameObject account;
     
     public void AbrirMenu(){
@@ -24,20 +24,30 @@ public class MenuController : MonoBehaviour
         menu.SetActive(false);
     }
     public void Cerrar(){
-        if(pokemonList.active){
+        if(pokemonList.activeSelf){
             pokemonList.GetComponent<TeamController>().Close();
         }else
-        if(account.active){
+        if(account.activeSelf){
             account.SetActive(false);
         }else{
             CerrarMenu();
         }
     }
+    
     public void OpenList(){
         pokemonList.GetComponent<TeamController>().OpenList();
     }
+    
+    public void OpenPokedex(){
+        pokemonList.GetComponent<TeamController>().OpenList();
+    }
+
     public void OpenAccount(){
         account.SetActive(true);
         account.GetComponent<OptionAccountController>().SetDataPlayer();
+    }
+
+    public void ExitInit(){
+        SceneManager.LoadScene(0);
     }
 }
