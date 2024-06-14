@@ -19,6 +19,9 @@ public class SelectStarter : MonoBehaviour
         firstPokemonImage.sprite = firstPokemon.FrontSprite;
         secondPokemonImage.sprite = secondPokemon.FrontSprite;
         thirdPokemonImage.sprite = thirdPokemon.FrontSprite;
+        status.MeetPokemon(firstPokemon.PokedexID);
+        status.MeetPokemon(secondPokemon.PokedexID);
+        status.MeetPokemon(thirdPokemon.PokedexID);
 
     }
 

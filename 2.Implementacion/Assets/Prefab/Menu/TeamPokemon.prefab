@@ -1086,7 +1086,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   picture: {fileID: 3528540772613094363}
-  name: {fileID: 6333422469632593358}
+  PokemonName: {fileID: 6333422469632593358}
   type1: {fileID: 4138668996647547745}
   type2: {fileID: 9110260107131530772}
 --- !u!1 &2487575294788755228

@@ -423,6 +423,7 @@ public class BattleSystem : MonoBehaviour
         }
         if (rival != null)
         {
+            playerStatus.MeetPokemon(rival.Base.PokedexID);
             hitsController.Rival = rival;
         }
     }
@@ -492,17 +493,17 @@ public class BattleSystem : MonoBehaviour
             playerStatus.GetTeam().Add(pokemon);
 
             // Si quiero testear el entrenador: 
-            // rival = new Pokemon(PokemonBase.GetPokemonBase(10),3);
-            // rival.HP = 1;
-            // var list = new List<Pokemon>();
-            // list.Add(rival);
-            // list.Add(new Pokemon(PokemonBase.GetPokemonBase(14),3));
-            // rivalStatus.SetData(list,"Jose",400);
+            rival = new Pokemon(PokemonBase.GetPokemonBase(10),3);
+            rival.HP = 1;
+            var list = new List<Pokemon>();
+            list.Add(rival);
+            list.Add(new Pokemon(PokemonBase.GetPokemonBase(14),3));
+            rivalStatus.SetData(list,"Jose",400);
 
             // Si quiero testear un pokemon salvaje: 
-            rival = new Pokemon(PokemonBase.GetPokemonBase(10),3);
-            // rival.HP = 1;
-            rivalStatus.SetDataWild(rival);
+            // rival = new Pokemon(PokemonBase.GetPokemonBase(10),3);
+            // // rival.HP = 1;
+            // rivalStatus.SetDataWild(rival);
         }
 
         // JUEGO PREPARADO
@@ -520,6 +521,7 @@ public class BattleSystem : MonoBehaviour
         messageCombat.StartGame();
         hitsController.Rival = rival;
         hitsController.Player = pokemon;
+        playerStatus.MeetPokemon(rival.Base.PokedexID);
     }
 
     public void Exit(){

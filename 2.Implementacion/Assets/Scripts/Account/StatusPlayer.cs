@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-[System.Serializable]
+[Serializable]
 public class StatusPlayer
 {
-    [System.NonSerialized] private static StatusPlayer instance;
+    private static StatusPlayer instance;
     public List<Pokemon> myTeam;
     public List<Pokemon> myPokemons;
+    public List<int> meetPokemons;
     public string userName;
     // TODO Para implementrae a futuro
     //public GameObject genero;
@@ -26,6 +27,7 @@ public class StatusPlayer
         myTeam = new List<Pokemon>();
         userName = "Iván";
         myPokemons = new List<Pokemon>();
+        meetPokemons = new List<int>();
         medallas = new bool[3]{false,false,false};
         money = 0;
         bag = new Bag();
@@ -76,6 +78,12 @@ public class StatusPlayer
         myPokemons.Add(pokemon);
     }
 
+    public void MeetPokemon(int idPokemon){
+        if (!meetPokemons.Contains(idPokemon))
+            meetPokemons.Add(idPokemon);
+        meetPokemons.Sort();
+    }
+
     /* public void SaveUserPlayer(String name, GameObject prefab){
         this.name = name;
         this.genero = prefab;
@@ -103,6 +111,16 @@ public class StatusPlayer
     public List<Pokemon> GetTeam(){
         return myTeam;
     }
+    
+    public List<int> GetMeets(){
+        return meetPokemons;
+    }
+    
+    public List<Pokemon> GetCaptures(){
+        
+        return myPokemons;
+    }
+
     public void RestaureAll(){
         foreach (Pokemon pokemon in myTeam)
         {

@@ -29,6 +29,9 @@ public class MenuController : MonoBehaviour
         }else
         if(account.activeSelf){
             account.SetActive(false);
+        }else
+        if(pokedex.gameObject.activeSelf){
+            pokedex.gameObject.SetActive(false);
         }else{
             CerrarMenu();
         }
@@ -39,7 +42,7 @@ public class MenuController : MonoBehaviour
     }
     
     public void OpenPokedex(){
-        pokemonList.GetComponent<TeamController>().OpenList();
+        pokedex.OpenPokedex();
     }
 
     public void OpenAccount(){
