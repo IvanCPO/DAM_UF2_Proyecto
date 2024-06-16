@@ -7,10 +7,11 @@ using UnityEngine;
 public class StatusRival
 {
     private static StatusRival status;
-    public string NameRival{get;set;}
+    public int IDTrainer{get; private set;}
+    public string NameRival{get; private set;}
     public List<Pokemon> Team{get;set;}
-    public bool IsWild{get;set;}
-    public int Money{get;set;}
+    public bool IsWild{get; private set;}
+    public int Money{get; private set;}
 
 
     private StatusRival(){
@@ -30,9 +31,10 @@ public class StatusRival
         Team.Add(pokemon);
     }
 
-    public void SetData(List<Pokemon> team, string name, int money){
+    public void SetData(List<Pokemon> team, int id, string name, int money){
         IsWild = false;
         this.Team = team;
+        IDTrainer = id;
         NameRival = name;
         this.Money = money;
     }

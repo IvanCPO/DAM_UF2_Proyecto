@@ -499,7 +499,7 @@ public class BattleSystem : MonoBehaviour
             var list = new List<Pokemon>();
             list.Add(rival);
             list.Add(new Pokemon(PokemonBase.GetPokemonBase(14),3));
-            rivalStatus.SetData(list,"Jose",400);
+            rivalStatus.SetData(list,3333333,"Jose",400);
 
             // Si quiero testear un pokemon salvaje: 
             // rival = new Pokemon(PokemonBase.GetPokemonBase(10),3);
@@ -559,6 +559,7 @@ public class BattleSystem : MonoBehaviour
             {
                 messageCombat.GenerateTextInfo(rivalStatus.NameRival+" ha perdido. Ganas "+rivalStatus.Money+"€");
                 playerStatus.AddMoney(rivalStatus.Money);
+                playerStatus.AddIdTrainer(rivalStatus.IDTrainer);
             }else
                 messageCombat.GenerateTextInfo("El rival ha sido debilitado");
         }

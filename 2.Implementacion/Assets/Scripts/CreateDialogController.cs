@@ -9,21 +9,19 @@ public class CreateDialogController : MonoBehaviour
     [SerializeField] Text entityName;
     [SerializeField] Text textDialog;
     private List<string> dialog;
-    private int letterPerSecond = 33;
+    private int letterPerSecond = 50;
     private bool writeNow = false;
     private int takeP;
-    private bool activate;
     private int pulsation;
-    private string nameUser;
+    public bool FinishConversation{get;set;}
 
     private void Start(){
-        activate = false;
+        FinishConversation = false;
         takeP = 0;
         pulsation = 0;
-        nameUser= StatusPlayer.getInstance().GetName();
     }
     private void Update(){
-        if (activate)
+        if (panelDialog.activeSelf)
         {
             if(Input.GetKeyDown(KeyCode.Space)){
                 DialogChange();
@@ -38,7 +36,7 @@ public class CreateDialogController : MonoBehaviour
     private void DialogChange(){
         if (pulsation==0)
         {
-            pulsation = 1;
+            pulsation++;
             Invoke("RetomePulsations",0.3f);
             if (!writeNow && dialog.Count>takeP){
                 writeNow=true;
@@ -58,26 +56,29 @@ public class CreateDialogController : MonoBehaviour
     
 
     public void SetDialogs(string name, List<string> dialog){
+        Invoke("StopPlayer",0.5f);
+        this.dialog = new List<string>();
         for (int i = 0; i < dialog.Count; i++)
         {
             if (dialog[i].Contains("$user"))
-            {
-                dialog[i] = dialog[i].Replace("$user",nameUser);
-            }
+                dialog[i] =dialog[i].Replace("$user",StatusPlayer.getInstance().GetName());
         }
         this.dialog = dialog;
         entityName.text = name+":";
-        activate=true;
         panelDialog.SetActive(true);
         StartCoroutine("InsertTextDialog",dialog[takeP]);
         writeNow = true;
     }
     private void CloseDialog(){
+        FinishConversation = true;
         textDialog.text="";
         entityName.text="";
         panelDialog.SetActive(false);
+        StopPlayer();
+    }
+
+    private void StopPlayer(){
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().ChangeMove();
-        activate = false;
     }
 
     private IEnumerator InsertTextDialog(string info){

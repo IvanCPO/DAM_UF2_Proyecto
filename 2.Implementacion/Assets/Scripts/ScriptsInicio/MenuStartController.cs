@@ -6,6 +6,7 @@ public class MenuStartController : MonoBehaviour
 {
     [SerializeField] AudioClip song;
     [SerializeField] Button buttonStart;
+    [SerializeField] GameObject panelNormative;
     private AudioSource reproductor;
     private StatusPlayer status;
 
@@ -58,5 +59,17 @@ public class MenuStartController : MonoBehaviour
 
     private void ReproduceSong(){
         reproductor.PlayOneShot(song);
+    }
+
+    public void OpenNormative(){
+        ReproduceSong();
+        Invoke("NormativePanel",1f);
+    }
+
+    private void NormativePanel(){
+        panelNormative.SetActive(!panelNormative.activeSelf);
+    }
+    public void CloseNormative(){
+        NormativePanel();
     }
 }

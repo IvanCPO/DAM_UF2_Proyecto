@@ -22,13 +22,9 @@ public class InteractiveNPCController : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Player"))
         {
-            Invoke("StopPlayer", 0.5f);
             dialog.SetDialogs(name,messages);
         }
     }
 
-    private void StopPlayer () {
-        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().ChangeMove();
-    }
 
 }

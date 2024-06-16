@@ -17,8 +17,7 @@ public class WildPokemonController : MonoBehaviour
         {
             if(player.GetTeam().Count>0){
                 // Cambia a la escena especificada
-                Debug.Log("Que empiece el combate");
-                rivalStatus.SetDataWild(rival.GeneratePokemon());
+                StartFight(rival);
             }
             
         }

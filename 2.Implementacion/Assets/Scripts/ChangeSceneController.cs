@@ -7,10 +7,18 @@ public class ChangeSceneController : MonoBehaviour
     private GameManager game;
     void OnCollisionEnter2D(Collision2D other)
     {
-        // Comprueba si el objeto que entra en contacto es el jugador
+            // Comprueba si el objeto que entra en contacto es el jugador
         if (other.gameObject.CompareTag("Player"))
         {
-            Saver(this.scene);
+            
+            try
+            {
+                gameObject.GetComponent<TrainerController>().ExistThis();
+            }
+            catch (System.NullReferenceException)
+            {
+                    Saver(this.scene);
+            }
         }
     }
 

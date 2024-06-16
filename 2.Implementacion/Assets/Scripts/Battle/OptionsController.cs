@@ -124,8 +124,9 @@ public class OptionsController : MonoBehaviour
 
     private void CaptureBall()
     {
-        if (StatusRival.GetRival().IsWild)
+        if (StatusRival.GetRival().IsWild && StatusPlayer.getInstance().CheckBalls()>0)
         {
+            StatusPlayer.getInstance().RemoveBall();
             decide = true;
             attack = false;
             Exit = false;

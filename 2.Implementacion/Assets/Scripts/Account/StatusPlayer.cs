@@ -14,8 +14,8 @@ public class StatusPlayer
     public string userName;
     public int money;
     public bool[] medallas;
-
-    public Bag bag;
+    public int numVieiraball;
+    public int numEstrellaG;
 
     public Ubication world;
     public Ubication actual;
@@ -31,7 +31,8 @@ public class StatusPlayer
         idTrainersWork = new List<int>();
         medallas = new bool[3]{false,false,false};
         money = 0;
-        bag = new Bag();
+        numVieiraball = 5;
+        numEstrellaG = 10;
         world = new Ubication(new Vector3(5.5f,-34.7f,0f),"Layer 1",3);
         actual = new Ubication(new Vector3(0f,0f,0f),"Layer 1",2);
         restUbi = new Ubication(new Vector3(0f,0f,0f),"Layer 1",2);
@@ -64,6 +65,31 @@ public class StatusPlayer
 
     public void AddMoney(int money){
         this.money+=money;
+    }
+
+    public void AddItem(string item, int cant){
+        switch(item.ToLower()){
+            case "vieira":
+                numVieiraball+=cant;
+            break;
+            
+            case "estrella":
+                numEstrellaG+=cant;
+            break;
+            
+        }
+    }
+
+    public int CheckBalls(){
+        return numVieiraball;
+    }
+
+    public void RemoveBall(){
+        numVieiraball--;
+    }
+
+    public void RemoveEstrella(){
+        numEstrellaG--;
     }
 
     public void RemoveMoney(int money){
