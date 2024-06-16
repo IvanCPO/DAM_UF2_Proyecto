@@ -3267,7 +3267,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sure: {fileID: 723701236}
-  name: {fileID: 891725670}
+  namePanel: {fileID: 891725670}
   start: {fileID: 2051677042}
   controls: {fileID: 1811579038}
   song: {fileID: 8300000, guid: e3652413e49026348a0d8208df158c56, type: 3}

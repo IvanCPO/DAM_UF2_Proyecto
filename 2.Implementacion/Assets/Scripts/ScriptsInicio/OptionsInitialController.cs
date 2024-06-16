@@ -10,7 +10,7 @@ public class OptionsInitialController : MonoBehaviour
     //[SerializeField] GameObject man;
     //[SerializeField] GameObject girl;
     [SerializeField] GameObject sure;
-    [SerializeField] GameObject name;
+    [SerializeField] GameObject namePanel;
     [SerializeField] GameObject start;
     [SerializeField] GameObject controls;
     [SerializeField] AudioClip song;
@@ -23,13 +23,13 @@ public class OptionsInitialController : MonoBehaviour
         reproductor = gameObject.GetComponent<AudioSource>();
     }
     private void ChangeDialog(){
-        if (!start.active)
+        if (!start.activeSelf)
         {
             start.SetActive(true);
-            name.SetActive(false);
+            namePanel.SetActive(false);
         }else{
             start.SetActive(false);
-            name.SetActive(true);
+            namePanel.SetActive(true);
         }
     }
 
@@ -43,7 +43,7 @@ public class OptionsInitialController : MonoBehaviour
         Invoke("IsSure",1f);
     }
     private void IsSure(){
-        if (!sure.active)
+        if (!sure.activeSelf)
         {
             sure.SetActive(true);
         }else{
@@ -83,7 +83,7 @@ public class OptionsInitialController : MonoBehaviour
     }
 
     private void ChangeViewControls(){
-        if (!controls.active)
+        if (!controls.activeSelf)
         {
             controls.SetActive(true);
         }else

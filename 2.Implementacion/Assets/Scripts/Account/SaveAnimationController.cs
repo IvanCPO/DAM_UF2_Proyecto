@@ -10,6 +10,8 @@ public class SaveAnimationController : MonoBehaviour
     [SerializeField] GameObject player;
 
     private bool save;
+    private bool cure;
+    public bool FinishCure{get; set;}
     float count = 0.00000f;
     private StatusPlayer status;
 
@@ -29,12 +31,30 @@ public class SaveAnimationController : MonoBehaviour
                 confirm.fillAmount = count;
             }
         }
+        if (cure)
+        {
+            if (count >= 1f)
+            {
+                cure = false;
+                CureGame();
+            }else{
+                count+=0.0005f;
+                gameObject.GetComponent<Image>().fillAmount = count;
+                confirm.fillAmount = count;
+            }
+        }
     }
 
-    public void ActivateAnimation(StatusPlayer status){
+    public void ActivateAnimationSave(StatusPlayer status){
         this.status = status;
         gameObject.SetActive(true);
         save = true;
+    }
+
+    public void ActivateAnimationCure(StatusPlayer status){
+        this.status = status;
+        gameObject.SetActive(true);
+        cure = true;
     }
 
     private void SaveGame()
@@ -43,9 +63,19 @@ public class SaveAnimationController : MonoBehaviour
         gameObject.SetActive(false);
         gameObject.GetComponent<Image>().fillAmount = count;
         confirm.fillAmount = count;
-        status.SaveUbication(player.transform.position, LayerMask.LayerToName(player.layer), player.scene.buildIndex);
+        status.SaveUbication(player.transform.position, player.GetComponent<SpriteRenderer>().sortingLayerName, player.scene.buildIndex);
         status.SaveData();
-        Debug.Log("Escena de la ubicación actual: "+status.actual.SceneId+" | ubi: "+status.actual.Ubica);
-        Debug.Log("Escena de la ubicación del mundo: "+status.world.SceneId+" | ubi: "+status.world.Ubica);
+        
+    }
+
+    private void CureGame()
+    {
+        count = 0.00000f;
+        gameObject.SetActive(false);
+        gameObject.GetComponent<Image>().fillAmount = count;
+        confirm.fillAmount = count;
+        status.RestaureAll();
+        FinishCure = true;
+        status.SaveRestUbication(player.transform.position, LayerMask.LayerToName(player.layer), player.scene.buildIndex);
     }
 }

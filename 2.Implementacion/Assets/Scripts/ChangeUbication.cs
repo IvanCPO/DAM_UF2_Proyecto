@@ -7,15 +7,28 @@ public class ChangeUbication : MonoBehaviour
 {
     [SerializeField] float ubicationX;
     [SerializeField] float ubicationY;
+    [SerializeField] string city;
 
+    CityController cityController;
 
-    private void OnTriggerEnter2D(Collider2D other)
+    void Start(){
+        GameObject canvas = GameObject.FindGameObjectWithTag("Canvas");
+        cityController = canvas.GetComponent<CityController>();
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
     {
-        // Comprueba si el objeto que entra en contacto es el jugador
         if (other.CompareTag("Player"))
         {
             other.GameObject().transform.position = new Vector3(ubicationX,ubicationY,0f);
-            
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.CompareTag("Player"))
+        {
+            cityController.ActivateQuestion(city, ubicationX, ubicationY);
         }
     }
 }

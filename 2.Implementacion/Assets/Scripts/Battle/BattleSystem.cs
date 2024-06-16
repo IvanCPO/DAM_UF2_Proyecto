@@ -441,6 +441,7 @@ public class BattleSystem : MonoBehaviour
         if (learn)
         {
             newMove.LearnAlone();
+            messageCombat.OcultarMostrarDialog();
         }else{
             newMove.LearnMove(pokemon, move);
             messageCombat.OcultarMostrarDialog();
@@ -485,15 +486,15 @@ public class BattleSystem : MonoBehaviour
     {
         if (playerStatus.GetTeam().Count==0)
         {
-            pokemon = new Pokemon(PokemonBase.GetPokemonBase(4),8);
+            pokemon = new Pokemon(PokemonBase.GetPokemonBase(4),2);
             pokemon.LevelUp(pokemon.MaxExp-4);
-            // pokemon.HP = 1;
+            pokemon.HP = 1;
             playerStatus.GetTeam().Add(pokemon);
-            pokemon = new Pokemon(PokemonBase.GetPokemonBase(1),6);
-            playerStatus.GetTeam().Add(pokemon);
+            // pokemon = new Pokemon(PokemonBase.GetPokemonBase(1),6);
+            // playerStatus.GetTeam().Add(pokemon);
 
             // Si quiero testear el entrenador: 
-            rival = new Pokemon(PokemonBase.GetPokemonBase(10),3);
+            rival = new Pokemon(PokemonBase.GetPokemonBase(10),6);
             rival.HP = 1;
             var list = new List<Pokemon>();
             list.Add(rival);
@@ -575,7 +576,11 @@ public class BattleSystem : MonoBehaviour
 
     private void ReturnWorld(){
         rivalStatus.Clear();
-        SceneManager.LoadScene(playerStatus.getUbicationActual().SceneId);
+        if (playerStatus.GetTotalHPTeam()!=0)
+            SceneManager.LoadScene(playerStatus.getUbicationActual().SceneId);
+        else{
+            SceneManager.LoadScene(playerStatus.getUbicationRest().SceneId);
+        }
     }
 
     public void FinishDialog(){

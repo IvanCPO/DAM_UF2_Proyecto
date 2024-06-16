@@ -10,24 +10,25 @@ public class StatusPlayer
     public List<Pokemon> myTeam;
     public List<Pokemon> myPokemons;
     public List<int> meetPokemons;
+    public List<int> idTrainersWork;
     public string userName;
-    // TODO Para implementrae a futuro
-    //public GameObject genero;
     public int money;
     public bool[] medallas;
 
     public Bag bag;
-    
+
     public Ubication world;
     public Ubication actual;
     public Ubication restUbi;
-    private string path;
+    public Ubication restUbiWorld;
+    private static string path;
 
     private StatusPlayer(){
         myTeam = new List<Pokemon>();
         userName = "Iván";
         myPokemons = new List<Pokemon>();
         meetPokemons = new List<int>();
+        idTrainersWork = new List<int>();
         medallas = new bool[3]{false,false,false};
         money = 0;
         bag = new Bag();
@@ -54,6 +55,7 @@ public class StatusPlayer
 
     public void GiveNamePlayer(string name){
         this.userName = name;
+        restUbiWorld = world;
     }
 
     public int GetMoney(){
@@ -84,10 +86,19 @@ public class StatusPlayer
         meetPokemons.Sort();
     }
 
+    public void AddIdTrainer(int idTrainer){
+        idTrainersWork.Add(idTrainer);
+    }
+
     /* public void SaveUserPlayer(String name, GameObject prefab){
         this.name = name;
         this.genero = prefab;
     } */
+
+    public bool CheckTrainer(int idTrainer){
+        return idTrainersWork.Contains(idTrainer);
+    }
+
     public bool[] Medallas{
         get{return medallas;}
     }
@@ -111,13 +122,13 @@ public class StatusPlayer
     public List<Pokemon> GetTeam(){
         return myTeam;
     }
-    
+
     public List<int> GetMeets(){
         return meetPokemons;
     }
-    
+
     public List<Pokemon> GetCaptures(){
-        
+
         return myPokemons;
     }
 
@@ -149,42 +160,47 @@ public class StatusPlayer
 
     public void SaveRestUbication(Vector3 ubication, string layout, int scene){
         restUbi = new Ubication(ubication, layout, scene);
+        restUbiWorld = world;
     }
-    
+
     public Ubication getUbicationWorld(){
         return world;
     }
-    
+
     public Ubication getUbicationActual(){
         return actual;
     }
-    
+
     public Ubication getUbicationRest(){
+        world = restUbiWorld;
         return restUbi;
     }
 
     public void SaveData(){
         string json = JsonUtility.ToJson(this);
-        
+
         File.WriteAllText(path, json);
         Debug.Log("JSON guardado en: " + path);
     }
 
-    public void LoadData(){
+    public static StatusPlayer LoadData(){
+
         try
         {
             if (ExistJSONFileSave())
             {
                 string loadedJson = File.ReadAllText(path);
                 instance = JsonUtility.FromJson<StatusPlayer>(loadedJson);
-            }
+            }else
+                instance = new StatusPlayer();
         }
         catch (Exception e)
         {
             Debug.LogError("Error al leer el archivo JSON: " + e.Message);
         }
+        return instance;
     }
-    public bool ExistJSONFileSave(){
+    public static bool ExistJSONFileSave(){
         return File.Exists(path);
     }
 

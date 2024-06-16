@@ -9,6 +9,7 @@ public class MenuController : MonoBehaviour
     [SerializeField] GameObject pokemonList;
     [SerializeField] PokedexController pokedex;
     [SerializeField] GameObject account;
+    [SerializeField] GameObject cure;
     
     public void AbrirMenu(){
         Time.timeScale = 0f;
@@ -32,6 +33,9 @@ public class MenuController : MonoBehaviour
         }else
         if(pokedex.gameObject.activeSelf){
             pokedex.gameObject.SetActive(false);
+        }else
+        if(cure.gameObject.activeSelf){
+            cure.gameObject.SetActive(false);
         }else{
             CerrarMenu();
         }

@@ -16,18 +16,15 @@ public class GameManager : MonoBehaviour
         {
             gameObject.layer = LayerMask.NameToLayer(status.getUbicationWorld().Layout);
             gameObject.GetComponent<SpriteRenderer>().sortingLayerName = status.getUbicationWorld().Layout;
-
+            gameObject.transform.position= status.getUbicationWorld().Ubica;
+            
+        }else{
+            
             if (status.GetTotalHPTeam()==0 && status.GetTeam().Count>0)
             {
                 RestPokemons();
             }
-            else
-            {
-                Debug.Log("Bienvenido a casa jefe");
-                gameObject.transform.position= status.getUbicationWorld().Ubica;
-            }
-        }else{
-            if (status.getUbicationActual()!=null)
+            else if (status.getUbicationActual()!=null)
             {
                 gameObject.layer = LayerMask.NameToLayer(status.actual.Layout);
                 gameObject.GetComponent<SpriteRenderer>().sortingLayerName = status.actual.Layout;
@@ -38,7 +35,6 @@ public class GameManager : MonoBehaviour
 
     private void RestPokemons()
     {
-        SceneManager.LoadScene(status.getUbicationRest().SceneId);
         Debug.Log("Restaura la vida jefe");
         status.RestaureAll();
         gameObject.transform.position = status.getUbicationRest().Ubica;

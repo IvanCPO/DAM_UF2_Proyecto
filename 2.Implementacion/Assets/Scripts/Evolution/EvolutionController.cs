@@ -10,7 +10,6 @@ public class EvolutionController : MonoBehaviour
     public void Start(){
         status = StatusPlayer.getInstance();
         reproductor = gameObject.GetComponent<AudioSource>();
-        status.LoadData();
         status = StatusPlayer.getInstance();
     }
 }

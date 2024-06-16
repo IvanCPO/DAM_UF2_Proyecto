@@ -1,0 +1,1097 @@
+fileFormatVersion: 2
+guid: 8cec6aaab99c5444a8afc2c7ba042865
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 30
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Edificios Santiago_0
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 895
+        width: 418
+        height: 320
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 80cb3307b3741b64c8043c00f492162d
+      internalID: -1117848784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Edificios Santiago_1
+      rect:
+        serializedVersion: 2
+        x: 544
+        y: 959
+        width: 185
+        height: 214
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ecdd97df4b50ea944b24b96980c8dcd3
+      internalID: -1930376802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Edificios Santiago_2
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 959
+        width: 225
+        height: 224
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 763016da6b4a681478ba3a7c6eb961f8
+      internalID: -1414400720
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Edificios Santiago_3
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 511
+        width: 321
+        height: 658
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e86e0cda8437cc64e8a9a2031b5e9891
+      internalID: 1686295673
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Edificios Santiago_4
+      rect:
+        serializedVersion: 2
+        x: 1375
+        y: 859
+        width: 514
+        height: 387
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 734d5371aff934c44aeca92aeefa881e
+      internalID: -1121777301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Edificios Santiago_5
+      rect:
+        serializedVersion: 2
+        x: 1919
+        y: 901
+        width: 226
+        height: 264
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e168479f7536ea74989ea10e8e9c8b16
+      internalID: -1006910868
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Edificios Santiago_6
+      rect:
+        serializedVersion: 2
+        x: 2175
+        y: 887
+        width: 326
+        height: 352
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54429c40830b9b749abbc02d1600c69e
+      internalID: -1205642179
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Edificios Santiago_9
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 449
+        width: 385
+        height: 416
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b02d75b171ff7f498e2522cb6f3a816
+      internalID: -1558907681
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Edificios Santiago_10
+      rect:
+        serializedVersion: 2
+        x: 449
+        y: 575
+        width: 274
+        height: 226
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9720d03f73cbe7f4b8234a4e4279156a
+      internalID: 1224018633
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Edificios Santiago_11
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 559
+        width: 225
+        height: 294
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76415c7943658cb4a92033adc594ff00
+      internalID: -1413959847
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Edificios Santiago_12
+      rect:
+        serializedVersion: 2
+        x: 1488
+        y: 799
+        width: 65
+        height: 66
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0bc5b0f5e562c1f4d9f0105425e81b71
+      internalID: -140867043
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Edificios Santiago_13
+      rect:
+        serializedVersion: 2
+        x: 1599
+        y: 439
+        width: 447
+        height: 362
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e00439ecc2dbf44dac5672913e6abce
+      internalID: 1672354399
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Edificios Santiago_14
+      rect:
+        serializedVersion: 2
+        x: 2261
+        y: 548
+        width: 254
+        height: 265
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 82febfa7f9ebbea4ca79f1287c08b874
+      internalID: -622398564
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Edificios Santiago_15
+      rect:
+        serializedVersion: 2
+        x: 694
+        y: 95
+        width: 491
+        height: 361
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b6446e0285804a84ba8ca95d6862c0c0
+      internalID: 1755751014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Edificios Santiago_16
+      rect:
+        serializedVersion: 2
+        x: 1375
+        y: 431
+        width: 194
+        height: 302
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8af65e3f885828468e01ddd2d6529c4
+      internalID: -1298460644
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Edificios Santiago_17
+      rect:
+        serializedVersion: 2
+        x: 2079
+        y: 319
+        width: 130
+        height: 194
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b97617c89fa84149ad93130f5b7fe82
+      internalID: 293957438
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Edificios Santiago_18
+      rect:
+        serializedVersion: 2
+        x: 2239
+        y: 319
+        width: 162
+        height: 162
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6cc69165d2d283144a6ac74e9c5b972e
+      internalID: -1289753650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Edificios Santiago_19
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 159
+        width: 594
+        height: 267
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c3e25aca8c5600b4ba7fdfb08c53b86f
+      internalID: 629633179
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Edificios Santiago_20
+      rect:
+        serializedVersion: 2
+        x: 1234
+        y: 155
+        width: 189
+        height: 230
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dfcf1aa8da58c79499e6961e2c367017
+      internalID: -654455141
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Edificios Santiago_21
+      rect:
+        serializedVersion: 2
+        x: 1479
+        y: 81
+        width: 434
+        height: 304
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 188ab460bebb5c24684c12b07e735cba
+      internalID: -1848123665
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Edificios Santiago_22
+      rect:
+        serializedVersion: 2
+        x: 2079
+        y: 128
+        width: 130
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8df151cc51cfe8f4391e28700d264d74
+      internalID: -957579390
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Edificios Santiago_23
+      rect:
+        serializedVersion: 2
+        x: 2239
+        y: 224
+        width: 6
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 050d1f35d20c9fc4c8fdd0248209380e
+      internalID: -1147448903
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Edificios Santiago_24
+      rect:
+        serializedVersion: 2
+        x: 2251
+        y: 224
+        width: 10
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 68d40e0c84332bf47938666cd21cebe0
+      internalID: 2040463912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Edificios Santiago_25
+      rect:
+        serializedVersion: 2
+        x: 2284
+        y: 224
+        width: 9
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95a413822ab510640bdb018a998bf240
+      internalID: -1468400426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Edificios Santiago_26
+      rect:
+        serializedVersion: 2
+        x: 2299
+        y: 224
+        width: 6
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d42d793a1b518b84090d371502d49aad
+      internalID: 1846482536
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Edificios Santiago_27
+      rect:
+        serializedVersion: 2
+        x: 2315
+        y: 159
+        width: 10
+        height: 130
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df5c35e66668890419e311b98787abaa
+      internalID: 1354235586
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Edificios Santiago_28
+      rect:
+        serializedVersion: 2
+        x: 2348
+        y: 224
+        width: 31
+        height: 65
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 56eab1bcae456904fa78b7284a66d245
+      internalID: -1571022140
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Edificios Santiago_29
+      rect:
+        serializedVersion: 2
+        x: 2411
+        y: 191
+        width: 74
+        height: 98
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42d3150223316db4f847f34eb1cf9c6c
+      internalID: -1291150794
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Edificios Santiago_30
+      rect:
+        serializedVersion: 2
+        x: 1929
+        y: 125
+        width: 46
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 071ffa47c59596d4eae4a6c2ec3d2f71
+      internalID: 1135153892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Edificios Santiago_31
+      rect:
+        serializedVersion: 2
+        x: 2251
+        y: 128
+        width: 10
+        height: 91
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c0a9f7fb0ba47448b4755665dfdd938
+      internalID: -159878037
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Edificios Santiago_32
+      rect:
+        serializedVersion: 2
+        x: 2271
+        y: 159
+        width: 5
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd75238f6f6b1ec44926b16c2dd7c1f1
+      internalID: -738635489
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Edificios Santiago_33
+      rect:
+        serializedVersion: 2
+        x: 2284
+        y: 164
+        width: 9
+        height: 37
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 69e8c2b253ab76842b7c99010aa666cb
+      internalID: 2078126041
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Edificios Santiago_34
+      rect:
+        serializedVersion: 2
+        x: 2348
+        y: 159
+        width: 31
+        height: 54
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e1dafaab16acc0d41a0d095d5f9c16c0
+      internalID: 197695527
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Edificios Santiago_35
+      rect:
+        serializedVersion: 2
+        x: 2399
+        y: 111
+        width: 27
+        height: 78
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57e4929ad23a2e3468dcf10bced273e4
+      internalID: 2117201358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Edificios Santiago_36
+      rect:
+        serializedVersion: 2
+        x: 2469
+        y: 111
+        width: 27
+        height: 78
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c1d9a25a77911a498357055a7715cfd
+      internalID: -1563944849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Edificios Santiago_37
+      rect:
+        serializedVersion: 2
+        x: 2284
+        y: 131
+        width: 9
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f52fd739fa8ba1e46a797996366cfd89
+      internalID: -1094495743
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Edificios Santiago_38
+      rect:
+        serializedVersion: 2
+        x: 2299
+        y: 128
+        width: 6
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4830ca85196b2324c8f2f0135eca16d8
+      internalID: -1750979476
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Edificios Santiago_39
+      rect:
+        serializedVersion: 2
+        x: 2358
+        y: 95
+        width: 31
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0baccdddfc105243b2b774c6b1f0bc1
+      internalID: 49986621
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Edificios Santiago_40
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 31
+        width: 1058
+        height: 34
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36ea5e8dfbfd9594c817ba51419d67b0
+      internalID: -1579215792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Edificios Santiago_41
+      rect:
+        serializedVersion: 2
+        x: 2251
+        y: 64
+        width: 10
+        height: 59
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5b918fee2a4d3e4fad97393ddd96309
+      internalID: 2008605082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Edificios Santiago_42
+      rect:
+        serializedVersion: 2
+        x: 2268
+        y: 64
+        width: 41
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf1fb51512c7edc4dbfacd941eac2881
+      internalID: 1355232069
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Edificios Santiago_43
+      rect:
+        serializedVersion: 2
+        x: 2315
+        y: 64
+        width: 10
+        height: 59
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd93d201f683b1f46bcdd06af3fc3822
+      internalID: -370665231
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Edificios Santiago_44
+      rect:
+        serializedVersion: 2
+        x: 2358
+        y: 31
+        width: 31
+        height: 54
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 211181a1fd3e1a14a8e6856db734667d
+      internalID: 864794500
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Edificios Santiago_45
+      rect:
+        serializedVersion: 2
+        x: 2399
+        y: 64
+        width: 97
+        height: 37
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1677d96cda522894e91627b380cd8fc9
+      internalID: 2120630734
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Edificios Santiago_0: -1117848784
+      Edificios Santiago_1: -1930376802
+      Edificios Santiago_10: 1224018633
+      Edificios Santiago_11: -1413959847
+      Edificios Santiago_12: -140867043
+      Edificios Santiago_13: 1672354399
+      Edificios Santiago_14: -622398564
+      Edificios Santiago_15: 1755751014
+      Edificios Santiago_16: -1298460644
+      Edificios Santiago_17: 293957438
+      Edificios Santiago_18: -1289753650
+      Edificios Santiago_19: 629633179
+      Edificios Santiago_2: -1414400720
+      Edificios Santiago_20: -654455141
+      Edificios Santiago_21: -1848123665
+      Edificios Santiago_22: -957579390
+      Edificios Santiago_23: -1147448903
+      Edificios Santiago_24: 2040463912
+      Edificios Santiago_25: -1468400426
+      Edificios Santiago_26: 1846482536
+      Edificios Santiago_27: 1354235586
+      Edificios Santiago_28: -1571022140
+      Edificios Santiago_29: -1291150794
+      Edificios Santiago_3: 1686295673
+      Edificios Santiago_30: 1135153892
+      Edificios Santiago_31: -159878037
+      Edificios Santiago_32: -738635489
+      Edificios Santiago_33: 2078126041
+      Edificios Santiago_34: 197695527
+      Edificios Santiago_35: 2117201358
+      Edificios Santiago_36: -1563944849
+      Edificios Santiago_37: -1094495743
+      Edificios Santiago_38: -1750979476
+      Edificios Santiago_39: 49986621
+      Edificios Santiago_4: -1121777301
+      Edificios Santiago_40: -1579215792
+      Edificios Santiago_41: 2008605082
+      Edificios Santiago_42: 1355232069
+      Edificios Santiago_43: -370665231
+      Edificios Santiago_44: 864794500
+      Edificios Santiago_45: 2120630734
+      Edificios Santiago_5: -1006910868
+      Edificios Santiago_6: -1205642179
+      Edificios Santiago_7: 766981715
+      Edificios Santiago_8: 940650264
+      Edificios Santiago_9: -1558907681
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

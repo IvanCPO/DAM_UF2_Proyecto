@@ -14,6 +14,6 @@ public class ProfileAccountController : MonoBehaviour
         this.status = status;
     }
     public void SaveGame(){
-        save.ActivateAnimation(status);
+        save.ActivateAnimationSave(status);
     }
 }

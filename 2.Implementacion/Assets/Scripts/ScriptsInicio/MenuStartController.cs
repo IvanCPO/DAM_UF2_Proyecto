@@ -10,11 +10,9 @@ public class MenuStartController : MonoBehaviour
     private StatusPlayer status;
 
     public void Start(){
-        status = StatusPlayer.getInstance();
         reproductor = gameObject.GetComponent<AudioSource>();
-        buttonStart.gameObject.SetActive(status.ExistJSONFileSave());
-        status.LoadData();
-        status = StatusPlayer.getInstance();
+        buttonStart.gameObject.SetActive(StatusPlayer.ExistJSONFileSave());
+        status = StatusPlayer.LoadData();
     }
 
     public void StartGame()
@@ -41,8 +39,8 @@ public class MenuStartController : MonoBehaviour
 
     private void StartSceneGame()
     {
-        Debug.Log("Escena de la ubicación actual: "+status.actual.SceneId+" | ubi: "+status.actual.Ubica);
-        Debug.Log("Escena de la ubicación del mundo: "+status.world.SceneId+" | ubi: "+status.world.Ubica);
+        Debug.Log("Escena de la ubicación actual: "+status.getUbicationActual().SceneId+" | ubi: "+status.getUbicationActual().Ubica+" | layout: "+status.getUbicationActual().Layout);
+        Debug.Log("Escena de la ubicación del mundo: "+status.getUbicationWorld().SceneId+" | ubi: "+status.getUbicationWorld().Ubica+" | layout: "+status.getUbicationWorld().Layout);
         SceneManager.LoadScene(status.getUbicationActual().SceneId);
     }
 
