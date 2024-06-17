@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -614,7 +613,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Tu pokemon quiere evolucionar. Le permites?
+  m_Text: Teu pokemon quere evolucionar. O permites?
 --- !u!222 &627193971
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1509,7 +1508,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: NO
+  m_Text: NON
 --- !u!222 &1897966880
 CanvasRenderer:
   m_ObjectHideFlags: 0
