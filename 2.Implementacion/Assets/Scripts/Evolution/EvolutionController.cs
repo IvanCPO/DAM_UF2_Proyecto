@@ -99,6 +99,7 @@ public class EvolutionController : MonoBehaviour
                 LearnMoves(move);
             }else{
                 status.GetTeam().Add(evolution);
+                status.GetMeets().Add(evolution.Base.PokedexID);
                 evolution = null;
                 ChangeEvolution();
             }
@@ -118,6 +119,7 @@ public class EvolutionController : MonoBehaviour
             dialMove.SetActive(true);
             textMove.text = "Tu pokemon ha aprendido "+move.Name;
             status.GetTeam().Add(evolution);
+            status.GetMeets().Add(evolution.Base.PokedexID);
             evolution=null;
             Invoke("ChangeEvolution",2.5f);
         }else
