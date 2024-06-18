@@ -11,6 +11,7 @@ public class StatusPlayer
     public List<Pokemon> myPokemons;
     public List<int> meetPokemons;
     public List<int> idTrainersWork;
+    public List<int> idItemRecolected;
     public string userName;
     public int money;
     public bool[] medallas;
@@ -29,6 +30,7 @@ public class StatusPlayer
         myPokemons = new List<Pokemon>();
         meetPokemons = new List<int>();
         idTrainersWork = new List<int>();
+        idItemRecolected = new List<int>();
         medallas = new bool[3]{false,false,false};
         money = 0;
         numVieiraball = 5;
@@ -67,7 +69,8 @@ public class StatusPlayer
         this.money+=money;
     }
 
-    public void AddItem(string item, int cant){
+    public void AddItem(int idItem, string item, int cant){
+        idItemRecolected.Add(idItem);
         switch(item.ToLower()){
             case "vieira":
                 numVieiraball+=cant;

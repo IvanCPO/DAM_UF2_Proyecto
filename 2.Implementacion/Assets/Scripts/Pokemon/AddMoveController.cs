@@ -18,6 +18,7 @@ public class AddMoveController : MonoBehaviour
 
     public void SetData(Pokemon pokemon, Move move){
         this.pokemon = pokemon;
+        HitsController.GetInstance().Player = pokemon;
         this.move = move;
         battleMoves.SetMoves(pokemon);
         newMove.SetDataMove(move);
@@ -30,12 +31,7 @@ public class AddMoveController : MonoBehaviour
         else{
             if (battleMoves.IsSelected(moveIndex))
             {
-                for (int i = 0; i < status.GetTeam().Count; i++)
-                {
-                    if(pokemon == status.GetTeam()[i]){
-                        HitsController.GetInstance().Player.ChangeMove(move,moveIndex);
-                    }
-                }
+                HitsController.GetInstance().Player.ChangeMove(move,moveIndex);
                 parent.Open();
             }else{
                 battleMoves.ClearMovesSelected();

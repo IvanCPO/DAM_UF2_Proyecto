@@ -24,6 +24,10 @@ public class TrainerController : MonoBehaviour
         dialog = canvas.GetComponent<CreateDialogController>();
     }
     private void Update(){
+        if (StatusPlayer.getInstance().GetTeam().Count == 0)
+        {
+            gameObject.SetActive(false);
+        }
         if (conversationCombat){
             if (dialog.FinishConversation)
             {
@@ -47,6 +51,11 @@ public class TrainerController : MonoBehaviour
                 {
                     dialog.SetDialogs(trainerName, messageLater);
                     messageLater = new List<string>();
+                    try{
+                        gameObject.GetComponent<Takebagde>().addBadge();
+                    }catch{
+                        Debug.Log("You win a trainer");
+                    }
                 }
             }
             

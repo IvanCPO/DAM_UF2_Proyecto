@@ -38,7 +38,7 @@ public class SaveAnimationController : MonoBehaviour
                 cure = false;
                 CureGame();
             }else{
-                count+=0.0005f;
+                count+=0.002f;
                 gameObject.GetComponent<Image>().fillAmount = count;
                 confirm.fillAmount = count;
             }

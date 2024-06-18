@@ -34,4 +34,8 @@ public class ListEvolutionsController
         RemovePokemon();
         return new Pokemon(pokemon,PokemonBase.GetPokemonBase(pokemon.Base.evolutionId));
     }
+
+    public List<Pokemon> GetPokemons(){
+        return pokemons;
+    }
 }

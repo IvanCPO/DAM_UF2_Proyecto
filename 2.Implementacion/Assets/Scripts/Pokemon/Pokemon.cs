@@ -73,7 +73,7 @@ public class Pokemon
         IVSpD = preEvolution.IVSpD;
         IVspeed = preEvolution.IVspeed;
 
-        HP = Ajust(preEvolution, pokemon);
+        HP = Ajust(preEvolution);
         Moves = preEvolution.Moves;
         // if (Base.LearnableMoves!=null)
         // {
@@ -93,9 +93,9 @@ public class Pokemon
         // }
     }
 
-    private int Ajust(Pokemon preEvolution, PokemonBase pokemon)
+    private int Ajust(Pokemon preEvolution)
     {
-        int sum = pokemon.MaxHP;
+        int sum = MaxHP;
         sum -= preEvolution.MaxHP;
         sum += preEvolution.HP;
         return sum;

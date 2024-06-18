@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -661,7 +660,7 @@ GameObject:
   - component: {fileID: 586955599}
   - component: {fileID: 586955598}
   m_Layer: 5
-  m_Name: Button(exit) (1)
+  m_Name: Button(normative)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -892,8 +891,8 @@ RectTransform:
   m_Children:
   - {fileID: 443876710}
   - {fileID: 1137007262}
-  - {fileID: 2141610974}
   - {fileID: 586955597}
+  - {fileID: 2141610974}
   m_Father: {fileID: 427234916}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2094,7 +2093,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 3331.08, y: 1794.08}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1460369283

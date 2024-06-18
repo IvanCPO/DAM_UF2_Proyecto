@@ -12,8 +12,8 @@ public class MenuStartController : MonoBehaviour
 
     public void Start(){
         reproductor = gameObject.GetComponent<AudioSource>();
-        buttonStart.gameObject.SetActive(StatusPlayer.ExistJSONFileSave());
         status = StatusPlayer.LoadData();
+        buttonStart.gameObject.SetActive(StatusPlayer.ExistJSONFileSave());
     }
 
     public void StartGame()

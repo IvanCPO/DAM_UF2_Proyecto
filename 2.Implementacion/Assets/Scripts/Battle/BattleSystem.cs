@@ -30,6 +30,7 @@ public class BattleSystem : MonoBehaviour
     private bool capturePokemon;
     private bool invokeOptions;
     private HitsController hitsController;
+    private ListEvolutionsController evolutionsList;
 
     void Start()
     {
@@ -44,6 +45,7 @@ public class BattleSystem : MonoBehaviour
         playerStatus = StatusPlayer.getInstance();
         rivalStatus = StatusRival.GetRival();
         SetupBattleInit();
+        evolutionsList = ListEvolutionsController.GetListInstance();
     }
 
     private void CheckSelectNewMove(){
@@ -248,7 +250,7 @@ public class BattleSystem : MonoBehaviour
     private void MakePlayerAttack()
     {
         Debug.Log("Decision player");
-        messageCombat.GenerateTextPlayer("Tu " + hitsController.Player.Base.Name + " ha utilizado " + hitsController.MovePlayer.Base.Name + " contra el rival!!!");
+        messageCombat.GenerateTextPlayer("Tu " + hitsController.Player.Base.Name + " utilizou " + hitsController.MovePlayer.Base.Name + " contra o rival!!!");
         player.ThrowAnimationAttack();
         Invoke("HitPlayer", 3.00f);
     }
@@ -257,7 +259,7 @@ public class BattleSystem : MonoBehaviour
     {
         hitsController.GenerateMoveRandom();
         Debug.Log("Decision enemy");
-        messageCombat.GenerateTextEnemy(hitsController.Rival.Base.Name + " ha utilizado " + hitsController.GetMoveRival().Base.Name + " contra ti!!!");
+        messageCombat.GenerateTextEnemy(hitsController.Rival.Base.Name + " utilizou " + hitsController.GetMoveRival().Base.Name + " contra ti!!!");
         enemy.ThrowAnimationAttack();
         Invoke("HitRival", 3.00f);
     }
@@ -286,9 +288,9 @@ public class BattleSystem : MonoBehaviour
     private void ChangePokemon()
     {
         Debug.Log("Decision player (change pokemon)");
-        string valueMessage = "VUELVE JEFE! AHORA PELEA!! [Has cambiado de " + hitsController.Player.Base.Name;
+        string valueMessage = "VOLVE COMPAÑEIRO! AGORA PELEA!! [Cambiaches de " + hitsController.Player.Base.Name;
         hitsController.Player = options.GetPokemonChange();
-        valueMessage += " por tu " + hitsController.Player.Base.Name + "]";
+        valueMessage += " polo teu " + hitsController.Player.Base.Name + "]";
         messageCombat.GenerateTextPlayer(valueMessage);
     }
 
@@ -360,7 +362,7 @@ public class BattleSystem : MonoBehaviour
     private void CaptureFinish(){
         Debug.Log("Decision player (capture pokemon)");
         ballController.Stop();
-        string valueMessage = "Has capturado al pokemon salvaje "+hitsController.Rival.Base.Name;
+        string valueMessage = "Capturaches ao pokemon salvaxe "+hitsController.Rival.Base.Name;
         exp = ObtenerExperience()/2;
         Invoke("DeathNote",3f);
         timeNewPokemon = true;
@@ -372,7 +374,7 @@ public class BattleSystem : MonoBehaviour
     }
 
     private void WildPokemonEscape(){
-        string valueMessage = "El pokemon salvaje, "+hitsController.Rival.Base.Name+", ha escapado";
+        string valueMessage = "O pokemon salvaxe, "+hitsController.Rival.Base.Name+", escapou";
         messageCombat.GenerateTextPlayer(valueMessage);
     }
 
@@ -390,7 +392,7 @@ public class BattleSystem : MonoBehaviour
     private void NextPokemonRival()
     {
         exp = ObtenerExperience();
-        messageCombat.GenerateTextInfo("Debilitaste a tu rival, "+hitsController.Rival.Base.Name);
+        messageCombat.GenerateTextInfo("Debilitaste ao teu rival, "+hitsController.Rival.Base.Name);
         rival = null;
         Invoke("DeathNote",3f);
         messageCombat.OcultarMostrarDialog();
@@ -404,7 +406,8 @@ public class BattleSystem : MonoBehaviour
         if(pokemon.LevelUp(exp)){
             // messageCombat.OcultarMostrarDialog();
             // Debug.Log("The rival is death. you obtein "+exp+" of experience");
-            messageCombat.GenerateTextInfo("Tu Pokemon ha subido de nivel");
+            messageCombat.GenerateTextInfo("Subiches de nivel");
+
             move = pokemon.isLearning();
             if (move!=null)
             {
@@ -431,9 +434,9 @@ public class BattleSystem : MonoBehaviour
     private void LearnMoves(){
         learn = pokemon.LearnAlone(move);
         if (learn)
-            messageCombat.GenerateTextInfo("Tu "+pokemon.Base.Name+" ha aprendido "+move.Name);
+            messageCombat.GenerateTextInfo("Teu "+pokemon.Base.Name+" aprendeu "+move.Name);
         else
-            messageCombat.GenerateTextInfo("Tu pokemon, intenta aprender "+move.Name);
+            messageCombat.GenerateTextInfo("Teu pokemon, intenta aprender "+move.Name);
         Invoke("LearnMove",3f);
     }
 
@@ -450,7 +453,7 @@ public class BattleSystem : MonoBehaviour
 
     private void NextPokemonPlayer()
     {
-        messageCombat.GenerateTextInfo("Tu pokemon ha sido debilitado.");
+        messageCombat.GenerateTextInfo("Teu pokemon foi debilitado.");
         messageCombat.OcultarMostrarDialog();
         Invoke("LostPokemon",3f);
     }
@@ -486,25 +489,25 @@ public class BattleSystem : MonoBehaviour
     {
         if (playerStatus.GetTeam().Count==0)
         {
-            pokemon = new Pokemon(PokemonBase.GetPokemonBase(4),2);
+            pokemon = new Pokemon(PokemonBase.GetPokemonBase(4),15);
             pokemon.LevelUp(pokemon.MaxExp-4);
-            pokemon.HP = 1;
+            Debug.Log("Level evolution pokemon "+pokemon.Base.levelPokemon);
             playerStatus.GetTeam().Add(pokemon);
             // pokemon = new Pokemon(PokemonBase.GetPokemonBase(1),6);
             // playerStatus.GetTeam().Add(pokemon);
 
             // Si quiero testear el entrenador: 
-            rival = new Pokemon(PokemonBase.GetPokemonBase(10),6);
-            rival.HP = 1;
-            var list = new List<Pokemon>();
-            list.Add(rival);
-            list.Add(new Pokemon(PokemonBase.GetPokemonBase(14),3));
-            rivalStatus.SetData(list,3333333,"Jose",400);
+            // rival = new Pokemon(PokemonBase.GetPokemonBase(10),5);
+            // rival.HP = 1;
+            // var list = new List<Pokemon>();
+            // list.Add(rival);
+            // list.Add(new Pokemon(PokemonBase.GetPokemonBase(14),3));
+            // rivalStatus.SetData(list,3333333,"Jose",400);
 
             // Si quiero testear un pokemon salvaje: 
-            // rival = new Pokemon(PokemonBase.GetPokemonBase(10),3);
-            // // rival.HP = 1;
-            // rivalStatus.SetDataWild(rival);
+            rival = new Pokemon(PokemonBase.GetPokemonBase(10),3);
+            rival.HP = 1;
+            rivalStatus.SetDataWild(rival);
         }
 
         // JUEGO PREPARADO
@@ -529,10 +532,10 @@ public class BattleSystem : MonoBehaviour
         options.OcultAllDialog();
         lostPokemon.gameObject.SetActive(false);
         if(hitsController.TryEscape()){
-            messageCombat.GenerateTextInfo("Has HUIDO");
+            messageCombat.GenerateTextInfo("ESCAPACHES");
             Invoke("ReturnWorld",1f);
         }else{
-            messageCombat.GenerateTextInfo("Careces del suficiente intelecto como para escapar en este momento");
+            messageCombat.GenerateTextInfo("Careces do suficiente intelecto como para escapar neste momento");
             Invoke("FalleRun",4f);
             hitsController.IncreaseTry();
             firstTurn = false;
@@ -553,33 +556,43 @@ public class BattleSystem : MonoBehaviour
     }
 
     private void FinishGame(){
+        foreach (Pokemon pokemon in playerStatus.GetTeam())
+        {
+            if (pokemon.Level >= pokemon.Base.levelPokemon)
+            {
+                evolutionsList.AddPokemon(pokemon);
+            }
+        }
         if (rivalStatus.TotalRivalHP()==0)
         {
             if (!rivalStatus.IsWild)
             {
-                messageCombat.GenerateTextInfo(rivalStatus.NameRival+" ha perdido. Ganas "+rivalStatus.Money+"€");
+                messageCombat.GenerateTextInfo(rivalStatus.NameRival+" perdeu. Gañaches "+rivalStatus.Money+"€");
                 playerStatus.AddMoney(rivalStatus.Money);
                 playerStatus.AddIdTrainer(rivalStatus.IDTrainer);
             }else
-                messageCombat.GenerateTextInfo("El rival ha sido debilitado");
+                messageCombat.GenerateTextInfo("O rival foi debilitado");
         }
         else
         {
             if (!rivalStatus.IsWild)
             {
-                messageCombat.GenerateTextInfo(rivalStatus.NameRival+" ha ganado. Pierdes "+rivalStatus.Money/2+"€");
+                messageCombat.GenerateTextInfo(rivalStatus.NameRival+" ganou. Perdes "+rivalStatus.Money/2+"€");
                 playerStatus.RemoveMoney(rivalStatus.Money);
             }else
-                messageCombat.GenerateTextInfo("Todos tus pokemons están debilitados. Vuelves llorando a casa");
+                messageCombat.GenerateTextInfo("Todos os teus pokemons foron debilitados. Volves chorando a casa");
         }
         Invoke("ReturnWorld",3f);
     }
 
     private void ReturnWorld(){
         rivalStatus.Clear();
-        if (playerStatus.GetTotalHPTeam()!=0)
-            SceneManager.LoadScene(playerStatus.getUbicationActual().SceneId);
-        else{
+        if (playerStatus.GetTotalHPTeam()!=0){
+            if (evolutionsList.GetPokemons().Count>0)
+                SceneManager.LoadScene(7);
+            else
+                SceneManager.LoadScene(playerStatus.getUbicationActual().SceneId);
+        }else{
             SceneManager.LoadScene(playerStatus.getUbicationRest().SceneId);
         }
     }

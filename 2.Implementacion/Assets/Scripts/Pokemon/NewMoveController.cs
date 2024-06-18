@@ -68,6 +68,7 @@ public class NewMoveController : MonoBehaviour
         decision = true;
         changeMove = true;
     }
+    
 
 
 }
